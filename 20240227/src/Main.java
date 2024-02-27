@@ -15,6 +15,8 @@ class Input {
             } catch (java.util.InputMismatchException e) {
                 sc.next();
                 System.out.println("Invalid input!!!");
+            } catch (Exception e) {
+                System.out.println(e);
             }
         }
     }
@@ -62,22 +64,43 @@ class MyMath {
                 "b² = c² - a²",
                 "a² = c² - b²"
             };
+            int inp, x, y;
 
             System.out.println("============================");
             for (int i = 0; i < lformula.length; i++) {
                 System.out.printf(" %d.%s\n",i + 1,lformula[i]);
             }
             System.out.println("============================");
-            int inp = Input.Int("Choose: ");
+            inp = Input.Int("Choose: ");
 
-            // int inp = 1;            
-            
-            int a = Input.Int(String.format(
+
+            x = Input.Int(String.format(
                 "Masukkan nilai %s: ", (inp == 2 || inp == 3) ? "c" : "b"
             ));
-            int b = Input.Int(String.format(
+            y = Input.Int(String.format(
                 "Masukkan nilai %s: ", (inp == 1 || inp == 2) ? "a" : "b"
             ));
+
+            // a = 3;
+            // b = 4;
+            // c = 5;    
+
+            switch (inp) {
+                case 1:
+                    System.out.printf("%d² + %d² = %.02f\n", x,y,Phytagoras.c(y,x));
+                    break;
+                    
+                case 2:
+                    System.out.printf("%d² - %d² = %.02f\n", x,y,Phytagoras.b(x,y));
+                    break;
+                    
+                case 3:
+                    System.out.printf("%d² - %d² = %.02f\n", x,y,Phytagoras.a(x,y));
+                    break;
+
+                default:
+                    break;
+            }
         }
     }
     

@@ -1,9 +1,13 @@
 import java.util.Scanner;
 
+class Var {
+    public static String block  = "========================================================";
+}
+
 class Input {
     static Scanner sc = new Scanner(System.in);
 
-    public static int Int(String text) {
+    public static int iint(String text) {
         while (true) {
             System.out.print(text);
             try {
@@ -20,24 +24,27 @@ class Input {
             }
         }
     }
+
+    public static double idouble(String text) {
+        while (true) {
+            System.out.print(text);
+            try {
+                if (sc.hasNextDouble()) {
+                    return sc.nextDouble();
+                } else {
+                    throw new java.util.InputMismatchException();
+                }
+            } catch (java.util.InputMismatchException e) {
+                sc.next();
+                System.out.println("Invalid input!!!");
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }
 }
 
 class MyMath {
-    static float gravity = 9.8f;
-
-    public class Energy {
-        // Kinetik Energi
-
-        public static double potential(double m, double h) {
-            // 
-            return MyMath.gravity * m * h;
-        }
-
-        public static double kinetic(double m, double v) {
-
-            return 0;
-        }
-    }
 
     public class Phytagoras {
         public static double c(double a, double b) {
@@ -57,82 +64,75 @@ class MyMath {
                 Math.pow(c, 2) - Math.pow(b, 2)
             );
         }
-        
+
         public static void main() {
+            System.out.printf(
+                "%s%n|                      Phytagoras                      |%n", Var.block,Var.block
+            );
+
+            double x, y;
+            int inp;
             String[] lformula = {
                 "c² = b² + a²",
                 "b² = c² - a²",
                 "a² = c² - b²"
-            };
-            int inp, x, y;
+            }; Main.view(lformula);
 
-            System.out.println("============================");
-            for (int i = 0; i < lformula.length; i++) {
-                System.out.printf(" %d.%s\n",i + 1,lformula[i]);
+            while (true) {
+                inp = Input.iint("Choose: ");
+
+                if (inp > lformula.length) {
+                    System.out.println("Invalid input!");
+                    continue;
+                } break;
             }
-            System.out.println("============================");
-            inp = Input.Int("Choose: ");
 
-
-            x = Input.Int(String.format(
+            x = Input.idouble(String.format(
                 "Masukkan nilai %s: ", (inp == 2 || inp == 3) ? "c" : "b"
             ));
-            y = Input.Int(String.format(
+            y = Input.idouble(String.format(
                 "Masukkan nilai %s: ", (inp == 1 || inp == 2) ? "a" : "b"
             ));
 
-            // a = 3;
-            // b = 4;
-            // c = 5;    
-
-            switch (inp) {
-                case 1:
-                    System.out.printf("%d² + %d² = %.02f\n", x,y,Phytagoras.c(y,x));
-                    break;
-                    
-                case 2:
-                    System.out.printf("%d² - %d² = %.02f\n", x,y,Phytagoras.b(x,y));
-                    break;
-                    
-                case 3:
-                    System.out.printf("%d² - %d² = %.02f\n", x,y,Phytagoras.a(x,y));
-                    break;
-
-                default:
-                    break;
-            }
+            System.out.printf(
+                "%.02f² %s %.02f² = %.03f\n", x, (inp == 1) ? "+" : "-", y,
+                switch (inp) {
+                    case 1 -> Phytagoras.c(y, x);
+                    case 2 -> Phytagoras.b(x, y);
+                    case 3 -> Phytagoras.a(x, y);
+                    default -> throw new IllegalArgumentException();
+                }
+            );
         }
     }
-    
 }
 
 class Main {
-    
-    public static void menu() {
-        String[] lmenu = {
-            "sssd",
-            "asdad"
-        };
-        
-        System.out.println("""
-            ============================
-            |        Main Menu         |
-            ============================""");
-            for (int i = 0; i < lmenu.length; i++) {
-                System.out.printf(" %d.%s\n",i + 1,lmenu[i]); // Change later > "Aku Atomik":^10
-            }
-            System.out.println("============================");
-            
-            while (true) {
-                switch (Input.Int("Choose: ")) {
-                    case 1:
-                        break;
+    // public static void view(String[] list_menu) {
+    //     System.out.println("""
+    //         ========================================================
+    //         |                       Main Menu                      |
+    //         ========================================================""");
+    //     for (int i = 0; i < list_menu.length; i++) {
+    //         System.out.printf("| %d | %-48s |%n", i+1, list_menu[i]);
+    //     } System.out.println("========================================================");
+    // }
 
-                    default:
-                        break;
-                }
-            }
-        }
+    public static void view(String[] list_menu) {
+        System.out.println("|------------------------------------------------------|");
+        for (int i = 0; i < list_menu.length; i++) {
+            System.out.printf("| %d | %-48s |%n", i+1, list_menu[i]);
+        } System.out.println(Var.block);
+    }
+
+    public static void menu() {
+        System.out.printf(
+            "%s%n|                       Main Menu                      |%n", Var.block,Var.block
+        );
+        view(new String[] {
+            "Phytagoras",
+        });
+    }
 
     public static void main(String[] args) {
         MyMath.Phytagoras.main();

@@ -1,7 +1,28 @@
 import java.util.Scanner;
 
-class Var {
-    public static String block  = "========================================================";
+// Debug
+import java.util.Arrays;
+
+class Util {
+    public static String block = "========================================================";
+
+    public static void view(String text, String[] list_menu) {
+        System.out.printf("%s%n%s%n",block,text);
+        System.out.println("|------------------------------------------------------|");
+        for (int i = 0; i < list_menu.length; i++) {
+            System.out.printf("| %d | %-48s |%n", i+1, list_menu[i]);
+        } System.out.println(block);
+    }
+
+    public static String[] merge_array(String[]... array) {
+        // System.out.println(Arrays.toString(array));
+        String [] tmp = new String[100];
+        
+        for (String[] arr : array) {       
+            
+        }
+        return array[0];
+    }
 }
 
 class Input {
@@ -66,21 +87,17 @@ class MyMath {
         }
 
         public static void main() {
-            System.out.printf(
-                "%s%n|                      Phytagoras                      |%n", Var.block,Var.block
-            );
-
+            String text = "|                      Phytagoras                      |";
             double x, y;
             int inp;
             String[] lformula = {
                 "c² = b² + a²",
                 "b² = c² - a²",
                 "a² = c² - b²"
-            }; Main.view(lformula);
+            }; Util.view(text, lformula);
 
             while (true) {
                 inp = Input.iint("Choose: ");
-
                 if (inp > lformula.length) {
                     System.out.println("Invalid input!");
                     continue;
@@ -105,6 +122,27 @@ class MyMath {
             );
         }
     }
+
+    public class Resistor {
+        public static double pararell() {
+            double out = 0;
+
+            for (int i = 0; i < Input.iint("Number of resistors: "); i++) {
+
+            }
+            
+            
+            return .5d;
+        }
+
+        public static void main() {
+            String text = "|                       Resistor                       |";
+            String[] list = {
+                "Pararell"
+            }; Util.view(text, list);
+
+        }
+    }
 }
 
 class Main {
@@ -118,24 +156,54 @@ class Main {
     //     } System.out.println("========================================================");
     // }
 
-    public static void view(String[] list_menu) {
-        System.out.println("|------------------------------------------------------|");
-        for (int i = 0; i < list_menu.length; i++) {
-            System.out.printf("| %d | %-48s |%n", i+1, list_menu[i]);
-        } System.out.println(Var.block);
-    }
-
     public static void menu() {
-        System.out.printf(
-            "%s%n|                       Main Menu                      |%n", Var.block,Var.block
-        );
-        view(new String[] {
+        String text = "|                       Main Menu                      |";
+        String[] list =  {
             "Phytagoras",
-        });
-    }
+            "Resistor"            
+        }; Util.view(text, list);
 
+        switch (Input.iint("Choose: ")) {
+            case 1:
+                MyMath.Phytagoras.main();
+                break;
+
+            case 2:
+                MyMath.Resistor.main();
+                break;
+            
+            case 0:
+                break;
+
+            default:
+                break;
+        }
+    }
+    
     public static void main(String[] args) {
-        MyMath.Phytagoras.main();
-        Input.sc.close();
+        try {
+
+        String[] list =  {
+            "Phytagoras",
+            "Resistor"            
+        };
+        String[] ls = {
+            "Kuro",
+            "Shiro",
+            "Ao",
+            "Aka",
+            "Midori"
+        };
+
+        System.out.println(Arrays.toString(Util.merge_array(
+            list,ls
+        )));
+        
+
+            
+
+
+            
+        } finally { Input.sc.close(); }
     }
 }

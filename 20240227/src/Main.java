@@ -1,27 +1,42 @@
 import java.util.Scanner;
 
 // Debug
-import java.util.Arrays;
+// import java.util.Arrays;
 
 class Util {
-    public static String block = "========================================================";
+    // public static String block = "========================================================";
+    public static String block = "=".repeat(56);
 
-    public static void view(String text, String[] list_menu) {
+    public static void view(String text, String[] list_menu) {                
+        System.out.println("\n".repeat(200));
+        
         System.out.printf("%s%n%s%n",block,text);
         System.out.println("|------------------------------------------------------|");
         for (int i = 0; i < list_menu.length; i++) {
             System.out.printf("| %d | %-48s |%n", i+1, list_menu[i]);
-        } System.out.println(block);
+        }
+
+        System.out.printf("| %d | %-48s |%n", 0,"Back");
+
+        System.out.println(block);
     }
 
+    // String[]... = *args
     public static String[] merge_array(String[]... array) {
-        // System.out.println(Arrays.toString(array));
-        String [] tmp = new String[100];
-        
-        for (String[] arr : array) {       
-            
+        int array_lenght = 0, index = 0;
+
+        for (String[] arr : array) {
+            array_lenght += arr.length;
         }
-        return array[0];
+
+        String[] tmp = new String[array_lenght];
+
+        for (String[] arr : array) {
+            for (String item : arr) {
+                tmp[index++] = item;
+            }
+        }
+        return tmp;
     }
 }
 
@@ -35,13 +50,13 @@ class Input {
                 if (sc.hasNextInt()) {
                     return sc.nextInt();
                 } else {
+                    sc.next();
                     throw new java.util.InputMismatchException();
                 }
             } catch (java.util.InputMismatchException e) {
-                sc.next();
                 System.out.println("Invalid input!!!");
             } catch (Exception e) {
-                System.out.println(e);
+                e.printStackTrace();
             }
         }
     }
@@ -53,15 +68,21 @@ class Input {
                 if (sc.hasNextDouble()) {
                     return sc.nextDouble();
                 } else {
+                    sc.next();
                     throw new java.util.InputMismatchException();
                 }
             } catch (java.util.InputMismatchException e) {
-                sc.next();
                 System.out.println("Invalid input!!!");
             } catch (Exception e) {
-                System.out.println(e);
+                e.printStackTrace();
             }
         }
+    }
+
+    public static void ivoid() {
+        System.out.println("Ketik apapun kecuali spasi lalu tekan enter.");
+        sc.next();
+        sc.nextLine();
     }
 }
 
@@ -86,9 +107,9 @@ class MyMath {
             );
         }
 
-        public static void main() {
+        public static void main() throws IllegalArgumentException {
             String text = "|                      Phytagoras                      |";
-            double x, y;
+            double x, y, hasil;
             int inp;
             String[] lformula = {
                 "c² = b² + a²",
@@ -98,10 +119,16 @@ class MyMath {
 
             while (true) {
                 inp = Input.iint("Choose: ");
-                if (inp > lformula.length) {
+
+                if (inp == 0) {
+                    return;
+                } else if (inp > lformula.length) {
                     System.out.println("Invalid input!");
                     continue;
-                } break;
+                } else {
+                    System.out.println("Invalid input!");
+                    break;
+                }
             }
 
             x = Input.idouble(String.format(
@@ -111,99 +138,92 @@ class MyMath {
                 "Masukkan nilai %s: ", (inp == 1 || inp == 2) ? "a" : "b"
             ));
 
-            System.out.printf(
-                "%.02f² %s %.02f² = %.03f\n", x, (inp == 1) ? "+" : "-", y,
-                switch (inp) {
-                    case 1 -> Phytagoras.c(y, x);
-                    case 2 -> Phytagoras.b(x, y);
-                    case 3 -> Phytagoras.a(x, y);
-                    default -> throw new IllegalArgumentException();
-                }
-            );
-        }
-    }
+            hasil = switch (inp) {
+                case 1 -> c(y, x);
+                case 2 -> b(x, y);
+                case 3 -> a(x, y);
+                default -> throw new IllegalArgumentException(); // Imposible line
+            };
 
-    public class Resistor {
-        public static double pararell() {
-            double out = 0;
 
-            for (int i = 0; i < Input.iint("Number of resistors: "); i++) {
-
+            if (Double.isNaN(hasil)) {
+                System.out.printf("Output: %s merupakan bilangan imajiner%n", hasil);
+                Input.ivoid();
+                return;
             }
-            
-            
-            return .5d;
-        }
 
-        public static void main() {
-            String text = "|                       Resistor                       |";
-            String[] list = {
-                "Pararell"
-            }; Util.view(text, list);
-
+            System.out.printf(
+                "%.02f² %s %.02f² = %.03f\n", x, (inp == 1) ? "+" : "-", y, hasil
+            );
+            Input.ivoid();
         }
     }
+
+    // public class Resistor {        
+    //     public static void main() {
+    //         String text = "|                       Resistor                       |";
+    //         String[] lformula = {
+    //             "V = I x R",
+    //             "R = V / I",
+    //             "I = V / R"
+    //         }; Util.view(text, lformula);
+    //         while (true) {
+    //             int inp = Input.iint("Choose: ");
+    //             if (inp > lformula.length) {
+    //                 System.out.println("Invalid input!");
+    //                 continue;
+    //             } break;
+    //         }
+    //     }
+    // }
 }
 
 class Main {
-    // public static void view(String[] list_menu) {
-    //     System.out.println("""
-    //         ========================================================
-    //         |                       Main Menu                      |
-    //         ========================================================""");
-    //     for (int i = 0; i < list_menu.length; i++) {
-    //         System.out.printf("| %d | %-48s |%n", i+1, list_menu[i]);
-    //     } System.out.println("========================================================");
-    // }
 
-    public static void menu() {
+    public static int menu() {
         String text = "|                       Main Menu                      |";
         String[] list =  {
             "Phytagoras",
-            "Resistor"            
         }; Util.view(text, list);
 
         switch (Input.iint("Choose: ")) {
             case 1:
                 MyMath.Phytagoras.main();
                 break;
-
-            case 2:
-                MyMath.Resistor.main();
-                break;
-            
             case 0:
-                break;
-
+                return 0;
             default:
+                System.out.println("Invalid input!!");
                 break;
         }
+        return 505;
     }
-    
-    public static void main(String[] args) {
+
+    public static void main(String[] args) {     
+        String[] Bug = {
+            "Terjadi bug yang tidak diketahui jika user tidak memasukkan apa apa pada input yang disediakan.",
+            "Jika user memasukkan sembarang karakter ditambah dengan spasi dan diiringin dengan nomor dari opsi yang ada, program akan masuk pada nomor yang diinput, tetapi tetap menampilkan pesan kalau input tidak valid. Contoh: \"i !use arch btw 1\"",
+            "Dan banyak lagi bug yang semuanya terkait dengan input"
+        };
+        boolean debug = false;
+
         try {
+            if (debug) {
+                System.out.println("\n".repeat(2));
+                for (String bug : Bug) {
+                    System.out.println(bug);
+                } Input.ivoid();
+                System.out.println("\n".repeat(2));
+            }
 
-        String[] list =  {
-            "Phytagoras",
-            "Resistor"            
-        };
-        String[] ls = {
-            "Kuro",
-            "Shiro",
-            "Ao",
-            "Aka",
-            "Midori"
-        };
-
-        System.out.println(Arrays.toString(Util.merge_array(
-            list,ls
-        )));
-        
-
-            
-
-
-            
+            while (true) {
+                switch (menu()) {
+                    case 0:
+                        return;
+                    default:
+                        continue;
+                }
+            }
         } finally { Input.sc.close(); }
     }
 }

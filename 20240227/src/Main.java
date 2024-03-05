@@ -107,7 +107,7 @@ class MyMath {
             );
         }
 
-        public static void main() throws IllegalArgumentException {
+        public static void main() {
             String text = "|                      Phytagoras                      |";
             double x, y, hasil;
             int inp;

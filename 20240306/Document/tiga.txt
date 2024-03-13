@@ -1,0 +1,44 @@
+1.Identifikasi Masalah
+ Bagaimana cara menentukan apakah seseorang boleh memiliki KTP dengan ketentuan sudah memiliki KTP dan berumur lebih dari 17 tahun
+
+2.Desain Sistem
+ Untuk mendapatkan data seseorang sudah memiliki KTP atau bukan, digunakan sebuah fungsi boolput yang akan mengembalikan nilai boolean dan disimpan pada variable ktp.
+ Kemudian untuk mendapatkan informasi usia, dapat menggunakan fungsi intput yang akan mengembalikan nilai integer dan disimpan pada variable usia.
+ Lalu membuat dua buah if statement yang dimana berfungsi untuk menangani apakah user sudah memiliki ktp dan apakah user sudah berumur lebih dari 17 tahun.
+ Jika sudah tampilkan.
+
+3.Sumber Kode
+ Kode dapat dilihat pada folder $DIR/src/solo/tiga.py
+
+4.Testing
+ Test Pertama
+  as@anggap_vm:~/Code/Sch/20240306/src/solo$ python3 tiga.py 
+  Apakah sudah memiliki KTP? (y/n): n
+  Kamu belum boleh memiliki SIM
+
+ Test Kedua
+  as@anggap_vm:~/Code/Sch/20240306/src/solo$ python3 tiga.py 
+  Apakah sudah memiliki KTP? (y/n): y
+  Masukkan usia: 12
+  Kamu belum boleh memiliki SIM
+
+ Test ketiga
+  as@anggap_vm:~/Code/Sch/20240306/src/solo$ python3 tiga.py 
+  Apakah sudah memiliki KTP? (y/n): y
+  Masukkan usia: 60
+  Kamu boleh memiliki SIM
+
+ Test Keempat
+  as@anggap_vm:~/Code/Sch/20240306/src/solo$ python3 tiga.py 
+  Apakah sudah memiliki KTP? (y/n): cihuy
+  Kamu belum boleh memiliki SIM
+
+ Test Kelima
+  as@anggap_vm:~/Code/Sch/20240306/src/solo$ python3 tiga.py 
+  Apakah sudah memiliki KTP? (y/n): y
+  Masukkan usia: asdxc
+  Input tidak valid.
+  Masukkan usia: 19
+  Kamu boleh memiliki SIM
+
+ Dari hasil test, dapat disimpulkan kalau program sudah berjalan dengan benar dan menangani masalah input yang tidak sesuai.

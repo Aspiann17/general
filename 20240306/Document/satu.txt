@@ -1,0 +1,6 @@
+1.Identifikasi Masalah
+Bagaimana cara menentukan apakah seseorang itu Gemuk, Kurus atau Normal/Ideal
+dari dua buah variable, yaitu: Tinggi Badan dan Berat Badan
+
+2.Desain Sistem
+ 2.1 Menentukan variable yang akan digunakan

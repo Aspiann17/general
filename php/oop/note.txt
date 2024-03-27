@@ -1,0 +1,12 @@
+Visibility
+
+Jika sebuah class induk memiliki properti dengan visibilitas protected,
+maka pada class anak, visibilitas properti tersebut hanya dapat
+diubah menjadi lebih visible, yaitu dari protected ke public
+atau dari private ke public. Tidak memungkinkan untuk mengubah
+dari public ke private atau protected.
+
+
+Constant Property
+
+Pada pendefinisian properti konstanta, tidak perlu menambahkan keyword static

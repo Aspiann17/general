@@ -1,0 +1,26 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+main table {
+    text-align: center;
+    margin: auto;
+    margin-top: 50px;
+}
+
+main table td,th {
+    padding: 10px;
+}
+
+/* table.main form button[value="buy"],
+table.main form button[value="add"] {
+    background-color: green;
+}
+
+table.main form button[value="delete"] {
+    background-color: red;
+}
+
+table.main form button[value="search"] {
+    background-color: yellow;
+} */

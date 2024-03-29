@@ -21,7 +21,6 @@ class Hardisk extends Storage {
             $socket = "SATA";
 
     public function __construct(int $capacity, int $cache, int $rpm, float $size) {
-        // if ($size !== 2.5 && $size !== 3.5) {
         if (!in_array($size, [2.5,3.5])) {
             throw new InvalidArgumentException("HDD size must be 2.5 or 3.5!");
         }
@@ -39,7 +38,6 @@ class SSD extends Storage {
     private $tbw;
 
     public function __construct(int $capacity, int $cache, string $socket) {
-        // if (!in_array($socket, $this->SOCKET)) {
         if (!in_array($socket, self::SOCKET)) {
             throw new InvalidArgumentException(sprintf("Socket must be %s",implode(', ', self::SOCKET)));
         }

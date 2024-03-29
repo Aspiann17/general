@@ -6,11 +6,31 @@ body {
     display: none;
 }
 
-main table {
+table.main {
     margin: auto;
     text-align: center;
     margin-top: 50px;
     width: 800px;
+}
+
+table.main th.id {
+    width: 50px;
+}
+
+/* table.main th.barang {
+    width: 400px;
+} */
+
+table.main th.stok {
+    width: 70px;
+}
+
+table.main th.harga {
+    width: 170px;
+}
+
+table.main th.button {
+    width: 80px;
 }
 
 table.main td,
@@ -18,18 +38,23 @@ table.main th {
     padding: 6px 0;
 }
 
-table.main thead .id {
-    width: 50px;
-}
-
-table.main thead .barang {
-    width: 500px;
-}
-
-table.main tbody td:nth-child(2),
+/* table.main tbody td:nth-child(2),
 table.main tbody td:nth-child(4) {
     text-align: left;
+} */
+
+table.main tbody td:nth-child(2) {
+    text-align: left;
+    padding-left: 10px;
 }
+
+table.main tbody tr.add input {
+    /* background-color: black; */
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+}
+
 
 table.main button {
     padding: 0;
@@ -37,7 +62,7 @@ table.main button {
 }
 
 table.main button[value="buy"],
-table.main button[value="submit"],
+table.main button[value="add"],
 table.main button[value="complete"] {
     background-color: rgb(0, 255, 0);
 }

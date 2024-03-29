@@ -16,11 +16,11 @@
             <thead>
                 <form action="" method="get">
                     <tr>
-                        <th class="id">ID</th>
+                        <th class="id"><?= (Utils::isset("mode","edit")) ? "ID" : "No" ?></th>
                         <th class="barang">Nama Barang</th>
-                        <th>Stok</th>
-                        <th>Harga</th>
-                        <th>
+                        <th class="stok">Stok</th>
+                        <th class="harga">Harga</th>
+                        <th class="button">
                             <?php if (Utils::isset("mode","edit")) : ?>
                                 <button title="Selesai" value="complete">Selesai</button>
                             <?php else : ?>
@@ -31,37 +31,45 @@
                 </form>
             </thead>
             <tbody>
-                <form action="" method="post">
-                    <?php foreach ($barang as $b) : ?>
+                <?php $i = 0;?>
+                <?php foreach ($list_barang as $b) : 
+                    $i++
+                ?>
+                    <form action="" method="post">
                         <tr>
-                            <?php foreach ($b as $k => $v) : ?>
-                                <td><?=$v?></td>
-                            <?php endforeach ?>
+                            <td><?= (Utils::isset("mode","edit")) ? $b["id"] : $i ?></td>
+                            <td><?= $b["nama"] ?></td>
+                            <td><?= $b["stok"] ?></td>
+                            <td><?= $b["harga"] ?></td>
 
                             <?php if (Utils::isset("mode","edit")) : ?>
-                                <td><button type="submit" name="action" value="delete" title="Delete item">Delete</button></td>
+                                <td><button type="submit" name="action" value="delete" title="Hapus Barang">Delete</button></td>
                             <?php else : ?>
-                                <td><button type="submit" name="action" value="buy" title="Beli item">Buy</button></td>
+                                <td><button type="submit" name="action" value="buy" title="Beli Barang">Buy</button></td>
                             <?php endif ?>
 
-                            <?php // Parameter Tambahan ?>
                             <?php if (Utils::isset("mode","edit")) : ?>
                                 <input type="hidden" name="mode" value="edit">
                             <?php endif ?>
-                            <input class="hide" type="number" name="id" value="<?=$b['id']?>">
-                        </tr>
-                    <?php endforeach ?>
 
-                    <?php if (Utils::isset("mode","edit")) : ?>
-                        <tr>
-                            <th>Add</th>
-                            <td><input type="text" name="nama"></td>
-                            <td><input type="number" name="stok"></td>
-                            <td><input type="number" name="harga"></td>
-                            <td><button value="submit">Submit</button></td>
+                            <input type="hidden" name="id" value="<?=$b["id"]?>">
                         </tr>
-                    <?php endif ?>
-                </form>
+                    </form>
+                <?php endforeach ?>
+
+                <?php // Add ?>
+                <?php if (Utils::isset("mode","edit")) : ?>
+                    <form action="" method="post">
+                        <input type="hidden" name="mode" value="edit">
+                        <tr class="add">
+                            <th>Add</th>
+                            <td><input type="text" name="nama" autocomplete="off" required></td>
+                            <td><input type="number" name="stok" required></td>
+                            <td><input type="number" name="harga" required></td>
+                            <td><button type="submit" name="action" value="add">Submit</button></td>
+                        </tr>
+                    </form>
+                <?php endif ?>
             </tbody>
         </table>
     </div>

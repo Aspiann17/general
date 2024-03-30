@@ -7,8 +7,8 @@ body {
 }
 
 table.main {
-    margin: auto;
     text-align: center;
+    margin: auto;
     margin-top: 50px;
     width: 800px;
 }
@@ -30,7 +30,7 @@ table.main th.harga {
 }
 
 table.main th.button {
-    width: 80px;
+    width: 85px;
 }
 
 table.main td,
@@ -44,14 +44,14 @@ table.main tbody td:nth-child(4) {
 } */
 
 table.main tbody td:nth-child(2) {
-    text-align: left;
     padding-left: 10px;
+    text-align: left;
 }
 
-table.main tbody tr.add input {
-    /* background-color: black; */
+table.main tbody tr.add input,
+table.main tbody tr.change input {
     box-sizing: border-box;
-    height: 100%;
+    border: none;
     width: 100%;
 }
 
@@ -67,11 +67,12 @@ table.main button[value="complete"] {
     background-color: rgb(0, 255, 0);
 }
 
-table.main button[value="delete"] {
-    background-color: red;
-}
-
 table.main button[value="search"],
+table.main button[value="change"],
 table.main button[value="edit"] {
     background-color: yellow;
+}
+
+table.main button[value="delete"] {
+    background-color: red;
 }

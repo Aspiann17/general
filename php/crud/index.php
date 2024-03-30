@@ -1,4 +1,4 @@
-<?php require "App/setup.php" ?>
+<?php require __DIR__ . "/App/setup.php" ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +22,7 @@
                         <th class="harga">Harga</th>
                         <th class="button">
                             <?php if (Utils::isset("mode","edit")) : ?>
-                                <button title="Selesai" value="complete">Selesai</button>
+                                <button title="Selesai" value="complete">Complete</button>
                             <?php else : ?>
                                     <button title="Enter edit mode" name="mode" value="edit">Edit</button>
                             <?php endif ?>
@@ -62,13 +62,33 @@
                     <form action="" method="post">
                         <input type="hidden" name="mode" value="edit">
                         <tr class="add">
-                            <th>Add</th>
+                            <th>-</th>
                             <td><input type="text" name="nama" autocomplete="off" required></td>
-                            <td><input type="number" name="stok" required></td>
-                            <td><input type="number" name="harga" required></td>
-                            <td><button type="submit" name="action" value="add">Submit</button></td>
+                            <td><input type="number" name="stok"></td>
+                            <td><input type="number" name="harga"></td>
+                            <td><button type="submit" name="action" value="add">Add</button></td>
                         </tr>
                     </form>
+                    <form action="" method="post">
+                        <tr class="change">
+                            <td><input type="number" name="id" required></td>
+                            <td><input type="text" name="nama" autocomplete="off"></td>
+                            <td><input type="number" name="stok"></td>
+                            <td><input type="number" name="harga"></td>
+                            <td><button type="submit" name="action" value="change">Change</button></td>
+                        </tr>
+                    </form>
+                <?php endif ?>
+
+                <!-- Backpack -->
+                <?php if (!Utils::isset("mode", "edit")) : ?>
+                    <tr>
+                        <th colspan="5">Wallet</th>
+                    </tr>
+
+                    <tr>
+                        <th colspan="5">Backpack</th>
+                    </tr>
                 <?php endif ?>
             </tbody>
         </table>

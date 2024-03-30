@@ -1,0 +1,37 @@
+Database
+Jika menggunakan sqlite, pastikan file database memiliki izin yang memadai
+Rekomendasi:
+    user atau group www-data dengan konfigurasi folder rwx dan file rw
+    |  drwxrwxr-x 2 root www-data 4.0K Mar 30 11:54 database
+    |> -rw-rw-r-- 1 root www-data 8.0K Mar 30 11:54 db.sqlite
+
+Alternatif:
+    |  drwxrwxrwx 2 root root 4.0K Mar 30 11:54 database
+    |> -rw-rw-rw- 1 root root 8.0K Mar 30 12:12 db.sqlite
+
+Error yang ditimbulkan:
+    Fatal error: Uncaught PDOException: SQLSTATE[HY000]: General error: 8 attempt to write a readonly database
+
+
+$_POST, $_GET
+Pada Variable Global misalnya $_POST dan $_GET, walaupun pada html
+diberi tipe number, jika di var_dump maka akan mengeluarkan hasil dengan tipe str
+
+
+Placeholder
+Pada query database yang menggunakan placeholder seperti :value
+jangan menambahkan tanda kutip apapun.
+Error yang ditimbulkan:
+    Fatal error: Uncaught PDOException: SQLSTATE[HY000]: General error: 25 column index out of range
+True:
+    "UPDATE $this->table SET nama = :nama, stok = :stok, harga = :harga WHERE id = :id";
+False:
+    "UPDATE $this->table SET nama = ':nama', stok = :stok, harga = :harga WHERE id = :id";
+
+
+Null Coalescing
+$this->nama ?? $nama
+
+
+Destrukturisasi Array
+["nama" => $nama, "stok" => $stok, "harga" => $harga] = $this->get($this->id);

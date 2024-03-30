@@ -15,16 +15,5 @@ var_dump($_POST);
 // end debug
 
 $barang = new Barang($db, $table = "barang");
-
-if (Utils::isset("action","add")) {
-    if (
-        Utils::isset("mode","edit") &&
-        isset($_POST["nama"]) && isset($_POST["stok"]) && isset($_POST["harga"])
-    ) {
-        $barang->add();
-    }
-} elseif (Utils::isset("action","delete")) {
-    $barang->delete();
-}
-
 $list_barang = $barang->fetch();
+$no = 0;

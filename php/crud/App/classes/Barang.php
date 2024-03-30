@@ -16,7 +16,7 @@ class Barang {
                 $this->nama = $_POST["nama"];
             }
 
-            if (isset($_POST["id"]) && strlen($_POST["harga"]) > 0) {
+            if (isset($_POST["harga"]) && strlen($_POST["harga"]) > 0) {
                 $this->harga = intval($_POST["harga"]);
             }
 
@@ -34,11 +34,11 @@ class Barang {
         }
     }
 
-    public function fetch() {
+    public function fetch() : array {
         return $this->db->query("SELECT * FROM $this->table")->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function get($id) {
+    public function get($id) : array {
         $query = $this->db->query("SELECT * FROM $this->table WHERE id = :id");
         $query->bindParam(":id", $id, PDO::PARAM_INT);
         $query->execute();
@@ -52,7 +52,7 @@ class Barang {
         $query->execute();
     }
 
-    public function add() {
+    public function add() : bool {
         $query = $this->db->prepare("INSERT INTO $this->table (nama, stok, harga) VALUES (:nama, :stok, :harga)");
         $query->bindValue(":nama", $this->nama, PDO::PARAM_STR);
         $query->bindValue(":stok", $this->stok ?? 0, PDO::PARAM_INT);

@@ -11,7 +11,7 @@ class Barang {
             if (isset($_POST["id"]) && strlen($_POST["id"]) > 0) {
                 $this->id = intval($_POST["id"]);
             }
-            
+
             if (isset($_POST["nama"]) && strlen($_POST["nama"] > 0)) {
                 $this->nama = $_POST["nama"];
             }
@@ -54,9 +54,9 @@ class Barang {
 
     public function add() {
         $query = $this->db->prepare("INSERT INTO $this->table (nama, stok, harga) VALUES (:nama, :stok, :harga)");
-        $query->bindParam(":nama", $this->nama, PDO::PARAM_STR);
-        $query->bindParam(":stok", $this->stok, PDO::PARAM_INT);
-        $query->bindParam(":harga", $this->harga, PDO::PARAM_INT);
+        $query->bindValue(":nama", $this->nama, PDO::PARAM_STR);
+        $query->bindValue(":stok", $this->stok ?? 0, PDO::PARAM_INT);
+        $query->bindValue(":harga", $this->harga ?? 0, PDO::PARAM_INT);
 
         $query->execute();
 

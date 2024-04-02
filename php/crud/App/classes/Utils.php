@@ -10,4 +10,16 @@ class Utils {
 
         return false;
     }
+
+    public static function table_exists($database, $table_name) {
+        $query = "SELECT name FROM sqlite_master WHERE type='table' AND name = :table_name";
+        $stmt = $database->prepare($query);
+        $stmt->execute([":table_name" => $table_name]);
+
+        if ($stmt->fetch(PDO::FETCH_ASSOC)) {
+            return true;
+        }
+
+        return false;
+    }
 }

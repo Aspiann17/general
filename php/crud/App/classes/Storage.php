@@ -1,7 +1,7 @@
 <?php
 
 class Storage {
-    public function __construct() {
+    public function __construct(int $id) {
 
     }
 }

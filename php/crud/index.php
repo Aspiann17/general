@@ -97,6 +97,7 @@
 
                         <div class="storage">
                             <tr><th colspan="5">Storage</th></tr>
+
                         </div>
                     </div>
                 <?php endif ?>

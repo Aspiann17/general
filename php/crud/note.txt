@@ -5,7 +5,7 @@ Rekomendasi:
     |  drwxrwxr-x 2 root www-data 4.0K Mar 30 11:54 database
     |--> -rw-rw-r-- 1 root www-data 8.0K Mar 30 11:54 db.sqlite
 
-Alternatif:
+Alternatif (Tidak disarankan):
     |  drwxrwxrwx 2 root root 4.0K Mar 30 11:54 database
     |--> -rw-rw-rw- 1 root root 8.0K Mar 30 12:12 db.sqlite
 

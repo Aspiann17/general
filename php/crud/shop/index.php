@@ -1,4 +1,4 @@
-<?php require __DIR__ . "/App/setup.php" ?>
+<?php require "setup.php" ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Toko</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <main>
@@ -22,7 +22,7 @@
                         <th class="harga">Harga</th>
                         <th class="button">
                             <?php if (Utils::isset("mode","edit")) : ?>
-                                <button title="Selesai" value="complete">Complete</button>
+                                <button title="Selesai">Complete</button>
                             <?php else : ?>
                                     <button title="Enter edit mode" name="mode" value="edit">Edit</button>
                             <?php endif ?>

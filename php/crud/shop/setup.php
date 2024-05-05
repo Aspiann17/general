@@ -1,8 +1,5 @@
 <?php
-
-// require __DIR__ . "/database/koneksi.mysql.php";
-require __DIR__ . "/database/koneksi.sqlite.php";
-require __DIR__ . "/autoload.php";
+require __DIR__ . "/../core/init.php";
 
 // debug
 echo "GET: ";

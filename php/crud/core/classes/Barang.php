@@ -37,7 +37,7 @@ class Barang {
         return $this->db->query("SELECT * FROM $this->table")->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function get(int $id) : array {
+    private function get(int $id) : array {
         $stmt = $this->db->query("SELECT * FROM $this->table WHERE id = :id");
         $stmt->bindParam(":id", $id, PDO::PARAM_INT);
         $stmt->execute();
@@ -45,17 +45,17 @@ class Barang {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function delete() {        
+    private function delete() {        
         $stmt = $this->db->prepare("DELETE FROM $this->table WHERE id = :id");
         $stmt->bindParam(":id", $this->id, PDO::PARAM_INT);
         $stmt->execute();
     }
 
-    public function add() : bool {
+    private function add() : bool {
         if (!$this->nama) {
             return false;
         }
-        
+
         $stmt = $this->db->prepare("INSERT INTO $this->table (nama, stok, harga) VALUES (:nama, :stok, :harga)");
         $stmt->bindValue(":nama", $this->nama, PDO::PARAM_STR);
         $stmt->bindValue(":stok", $this->stok ?? 0, PDO::PARAM_INT);
@@ -66,7 +66,7 @@ class Barang {
         return true;
     }
 
-    public function change() {
+    private function change() {
         ["nama" => $nama, "stok" => $stok, "harga" => $harga] = $this->get($this->id);
 
         $query = "UPDATE $this->table SET nama = :nama, stok = :stok, harga = :harga WHERE id = :id";
@@ -79,14 +79,13 @@ class Barang {
     }
 
     private function create_table() {
-        $query = "
+        $this->db->exec("
             CREATE TABLE IF NOT EXISTS $this->table (
                 id	INTEGER NOT NULL,
                 nama	TEXT NOT NULL,
                 stok	INTEGER DEFAULT 0,
                 harga	INTEGER DEFAULT 0,
                 PRIMARY KEY(id)
-            );";
-        $this->db->exec($query);
+        );");
     }
 }

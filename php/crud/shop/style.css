@@ -75,7 +75,7 @@ table.main button {
 
 table.main button[value="buy"],
 table.main button[value="add"],
-table.main button[value="complete"] {
+table.main button[title="Selesai"] {
     background-color: rgb(0, 255, 0);
 }
 

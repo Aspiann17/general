@@ -1,9 +1,10 @@
 import java.util.Scanner;
+
 class Main {
     public static void main(String[] args) {
-        boolean debug = false;
-        
         Scanner input = new Scanner(System.in);
+
+        boolean debug = false;
         double berat, tinggi, bmi;
 
         System.out.print("Masukkan Berat Badan (Kg): ");
@@ -38,8 +39,4 @@ class Main {
 // Contributor
 // Muhammad Nazwan Ali
 
-// Source: https://www.siloamhospitals.com/informasi-siloam/artikel/cara-menghitung-bmi
-// Kurang dari 18,5 berarti berat badan kurang (underweight).
-// Antara 18,5 - 24,9 berarti berat badan normal
-// Antara 25-29,9 berarti berat badan berlebih (overweight).
-// Di atas 30 berarti obesitas
+// Referensi: https://www.siloamhospitals.com/informasi-siloam/artikel/cara-menghitung-bmi

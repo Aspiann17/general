@@ -35,16 +35,14 @@ class SSD extends Storage {
     private const SOCKET = [
         "SATA", "mSATA", "M.2 SATA", "M.2 NVMe"
     ];
-    private $tbw;
+    private $tbw, $socket;
 
     public function __construct(int $capacity, int $cache, string $socket) {
         if (!in_array($socket, self::SOCKET)) {
-            throw new InvalidArgumentException(sprintf("Socket must be %s",implode(', ', self::SOCKET)));
+            throw new InvalidArgumentException(sprintf("Socket must be %s", implode(', ', self::SOCKET)));
         }
-    }
-
-    public function capacity() {
-        return $this->capacity;
+        parent::__construct($capacity, $cache);
+        $this->socket = $socket;
     }
 }
 

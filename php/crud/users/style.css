@@ -1,3 +1,45 @@
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+
+    to   { transform: rotate(360deg); }
+}
+
+@keyframes reverse_rotate {
+    from { transform: rotate(0deg); }
+
+    to   { transform: rotate(-360deg); }
+}
+
+/* Change Background Color */
+@keyframes cbc {
+    0% { background-color: #ff0000; }
+    25% { background-color: #00ff00; }
+    50% { background-color: #0000ff; }
+    75% { background-color: #ffff00; }
+    100% { background-color: #ff00ff; }
+}
+
+/* Change Font Color */
+@keyframes cfc {
+    0% { color: #ff0000; }
+    25% { color: #00ff00; }
+    50% { color: #0000ff; }
+    75% { color: #ffff00; }
+    100% { color: #ff00ff; }    
+}
+
+@keyframes move_right {
+    0% { left: 0; }
+    50% { left: calc(100% - 100px); }
+    100% { left: 0; }
+}
+
+@keyframes move_left {
+    0% { right: 0; }
+    50% { right: calc(100% - 100px); }
+    100% { right: 0; }
+}
+
 body {
     font-family: Arial, Helvetica, sans-serif;
     background-color: #f0f4f9;
@@ -25,11 +67,11 @@ main {
     
 }
 
-.input input::placeholder {
+input::placeholder {
     color: #707070;
 }
 
-.input input {
+input {
     width: 300px;
     margin: 5px 0;
     height: 50px;
@@ -47,7 +89,7 @@ main {
     padding: 20px;
 }
 
-.button button {
+button {
     border: none;
     color: white;
     width: 300px;
@@ -57,7 +99,7 @@ main {
     transition: transform .3s ease;
 }
 
-.button button:hover {
+button:hover {
     transform: scale(1.08);
 }
 
@@ -67,4 +109,54 @@ button[value="login"] {
 
 button[value="register"] {
     background-color: rgb(70, 231, 78);
+}
+
+button:active {
+    transition-duration: .01s;
+    transform: scale(1);
+}
+
+body.hehe {
+    animation: cbc 5s linear infinite;
+}
+
+.hehe main {
+    animation: reverse_rotate 2s linear infinite;
+    background-color: black;
+}
+
+.hehe h1 {
+    animation: cfc .5s linear infinite,
+    rotate .1s linear infinite;
+}
+
+.hehe input {
+    border: none;
+}
+
+.hehe input[name="username"] {
+    position: relative;
+    animation: move_right 1s linear infinite,
+    cbc 1s linear infinite;
+}
+
+.hehe input[name="password"] {
+    position: relative;
+    animation: move_left 1s linear infinite,
+    cbc 1s linear infinite;
+}
+
+.hehe button {
+    background-color: white;
+    color: black;
+}
+
+.hehe button:active[value="login"] {
+    transform: scale(20);
+    transition-duration: .01s;
+}
+
+.hehe button:active[value="register"] {
+    animation: rotate 1s linear infinite;
+    animation-duration: 1s;
 }

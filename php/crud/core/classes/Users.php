@@ -1,11 +1,11 @@
 <?php
 
 class Users {
-    private $db, $table, $username, $password;
+    private $db, $table;
 
     public $message = array();
     // Property message akan berisi Array Associative dengan dua buah kunci yaitu:
-    //    type -> Tipe pesan, berupa sukses atau error.
+    //    type -> Tipe pesan, berupa sukses atau gagal.
     //    message -> Isi pesan.
     // Berfungsi untuk menampilkan pesan kepada user dan akan ditampilkan dengan alert
     // dan terletak di atas tag penutup body
@@ -17,17 +17,17 @@ class Users {
         $this->create_table();
 
         if (
-            isset($_POST["username"]) && strlen($_POST["username"]) > 0 &&
-            isset($_POST["password"]) && strlen($_POST["password"]) > 0
+            isset($_POST["username"], $_POST["password"]) &&
+            strlen($_POST["username"]) > 0 && strlen($_POST["username"]) > 0
         ) {
-            $this->username = $_POST["username"];
-            $this->password = $_POST["password"];
-        }
+            $username = $_POST["username"];
+            $password = $_POST["password"];
 
-        if (Utils::isset("action", "login")) {
-
-        } else if (Utils::isset("action", "register")) {
-            $this->add($this->username, $this->password);
+            if (Utils::isset("action", "login")) {
+                $this->login($username, $password);
+            } else if (Utils::isset("action", "register")) {
+                $this->add($username, $password);
+            }
         }
     }
 
@@ -41,12 +41,11 @@ class Users {
         // Enkripsi Password
         $password = password_hash($password, PASSWORD_DEFAULT);
 
-        $query = "
+        $stmt = $this->db->prepare("
             INSERT INTO $this->table
             (username, password, added)
-            VALUES (:username, :password, :added)";
-        $stmt = $this->db->prepare($query);
-
+            VALUES (:username, :password, :added)"
+        );
         $stmt->bindParam(":username", $username, PDO::PARAM_STR);
         $stmt->bindParam(":password", $password, PDO::PARAM_STR);
         $stmt->bindValue(":added", time(), PDO::PARAM_INT);
@@ -63,13 +62,63 @@ class Users {
             // Menangani input duplikat
             if ($e->getCode() == "23000") {
                 $this->message[] = array(
-                    "type" => "error",
-                    "message" => "Username Sudah Ada!"
+                    "type" => "failed",
+                    "message" => "Username Sudah Ada!",
+                    "debug" => $e
                 );
 
                 return false;
-            } else { throw new PDOException($e); }
+            } else {
+                $this->message[] = array(
+                    "type" => "failed",
+                    "error_code" => $e->getCode(),
+                    "message" => $e
+                );
+                return false;
+            }
         }
+    }
+
+    public function login(string $username, string $password) : bool {
+        // Memeriksa hasil query apakah ada
+        $hassword = $this->get_password($username);
+
+        if (is_null($hassword)) {
+            $this->message[] = array(
+                "type" => "failed",
+                "message" => "Username Tidak Ada!"
+            );
+
+            return false;
+        }
+
+        // Varifikasi Password apakah sama dengan yang ada di database
+        else if (!password_verify($password, $hassword)) {
+            $this->message[] = array(
+                "type" => "failed",
+                "message" => "Password Salah!"
+            );
+
+            return false;
+        }
+
+        $this->message[] = array(
+            "type" => "success",
+            "message" => "Login Berhasil!"
+        );
+
+        return true;
+    }
+
+    public function get_password(string $username) : string | null {
+        $stmt = $this->db->prepare("
+            SELECT password FROM $this->table
+            WHERE username = :username"
+        );
+        $stmt->bindParam(":username", $username, PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC)["password"] ?? null;
     }
 
     private function create_table() {
@@ -79,6 +128,7 @@ class Users {
                 username	TEXT NOT NULL UNIQUE,
                 password	TEXT NOT NULL,
                 added	INTEGER NOT NULL,
+                access	VARCHAR(8) NOT NULL DEFAULT 'users',
                 money	INTEGER NOT NULL DEFAULT 0,
                 PRIMARY KEY(id AUTOINCREMENT)
         );");

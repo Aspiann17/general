@@ -15,20 +15,6 @@ class Users {
         $this->table = $table;
 
         $this->create_table();
-
-        if (
-            isset($_POST["username"], $_POST["password"]) &&
-            strlen($_POST["username"]) > 0 && strlen($_POST["username"]) > 0
-        ) {
-            $username = $_POST["username"];
-            $password = $_POST["password"];
-
-            if (Utils::isset("action", "login")) {
-                $this->login($username, $password);
-            } else if (Utils::isset("action", "register")) {
-                $this->add($username, $password);
-            }
-        }
     }
 
     public function fetch() {
@@ -64,7 +50,6 @@ class Users {
                 $this->message[] = array(
                     "type" => "failed",
                     "message" => "Username Sudah Ada!",
-                    "debug" => $e
                 );
 
                 return false;
@@ -108,6 +93,17 @@ class Users {
         );
 
         return true;
+    }
+
+    public function info(string $username) : array | bool {
+        $stmt = $this->db->prepare("
+            SELECT id, username, access, money FROM $this->table
+            WHERE username = :username
+        ");
+        $stmt->bindParam(":username", $username, PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public function get_password(string $username) : string | null {

@@ -1,5 +1,5 @@
 Sqlite file permission
-Jika menggunakan sqlite, pastikan file database memiliki izin yang memadai
+Jika menggunakan sqlite, pastikan file database memiliki izin yang memadai.
 Rekomendasi:
     user atau group www-data dengan konfigurasi folder rwx dan file rw
     |  drwxrwxr-x 2 root www-data 4.0K Mar 30 11:54 database
@@ -39,3 +39,36 @@ Destrukturisasi Array
 
 execute() dan exec()
 ...
+
+
+Return Type / Tipe Pengembalian
+Semisal ada fungsi seperti ini:
+public function func() : bool {
+    return false;
+}
+var_dump: bool(false) 
+Tipe pengembaliannya sudah sesuai.
+
+Tetapi jika diubah menjadi string:
+public function func() : string {
+    return false;
+}
+var_dump: string(0) ""
+Ini menandakan bahwa tipe pengembalian sangat berpengaruh terhadap hasilnya.
+
+Pada beberapa kasus misalnya:
+public function info(string $username) : array | bool {
+    $stmt = $this->db->prepare("
+        SELECT id, username, access, money FROM $this->table
+        WHERE username = :username
+    ");
+    $stmt->bindParam(":username", $username, PDO::PARAM_STR);
+    $stmt->execute();
+
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+Jika diubah menjadi:
+    public function info(string $username) : array { // isi fungsi }
+
+Jika hasil query tidak ada, normalnya akan mengembalikan nilai false.
+Tetapi karena pada tipe pengembalian hanya ada array, jika di-var_dump tidak menampilkan apa-apa.

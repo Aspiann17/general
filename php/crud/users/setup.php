@@ -14,3 +14,27 @@ var_dump($_POST);
 // end debug
 
 $users = new Users($db);
+
+if (isset($_SESSION["login"])) {
+    header("location:../shop");
+}
+
+if (
+    isset($_POST["username"], $_POST["password"]) &&
+    strlen($_POST["username"]) > 0 && strlen($_POST["username"]) > 0
+) {
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+
+    if (Utils::isset("action", "login")) {
+        if ($users->login($username, $password)) {
+            $_SESSION["login"] = true;
+            $_SESSION += $users->info($username);
+            header("location: ../shop");
+        }
+    }
+
+    else if (Utils::isset("action", "register")) {
+        $users->add($username, $password);
+    }
+}

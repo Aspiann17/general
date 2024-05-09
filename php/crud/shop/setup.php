@@ -1,6 +1,10 @@
 <?php
 require __DIR__ . "/../core/init.php";
 
+if (!isset($_SESSION["login"])) {
+    header("location:../users");
+}
+
 // debug
 echo "GET: ";
 var_dump($_GET);

@@ -19,7 +19,7 @@ diberi tipe number, jika di var_dump maka akan mengeluarkan hasil dengan tipe st
 
 
 Placeholder
-Pada query database yang menggunakan placeholder seperti :value
+Pada query database yang menggunakan placeholder misalnya :value
 jangan menambahkan tanda kutip apapun.
 Error yang ditimbulkan:
     Fatal error: Uncaught PDOException: SQLSTATE[HY000]: General error: 25 column index out of range
@@ -72,3 +72,29 @@ Jika diubah menjadi:
 
 Jika hasil query tidak ada, normalnya akan mengembalikan nilai false.
 Tetapi karena pada tipe pengembalian hanya ada array, jika di-var_dump tidak menampilkan apa-apa.
+
+
+htaccess
+Jika ingin user tidak dapat mengakses directory tertentu yang tidak 
+memiliki file index, dapat menggunakan file .htaccess dengan isi:
+Options -Indexes
+
+Jangan lupa ubah konfigurasi apache pada /etc/apache2/apache2.conf pada bagian
+<Directory /var/www/>
+    Options Indexes FollowSymLinks
+    AllowOverride None
+    Require all granted
+</Directory>
+
+Kemudian ubah AllowOverride menjadi All
+
+<Directory /var/www/>
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Require all granted
+</Directory>
+
+Jika ingin mengganti file .htaccess dengan nama lain, dapat mengubah
+AccessFileName .htaccess
+menjadi .config misalnya
+AccessFileName .config

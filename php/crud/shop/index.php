@@ -24,7 +24,7 @@
                             <?php if (Utils::isset("mode","edit")) : ?>
                                 <button title="Selesai">Complete</button>
                             <?php else : ?>
-                                    <button title="Enter edit mode" name="mode" value="edit">Edit</button>
+                                <button title="Enter edit mode" name="mode" value="edit">Edit</button>
                             <?php endif ?>
                         </th>
                     </tr>

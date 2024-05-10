@@ -90,7 +90,7 @@
 
                             <tr>
                                 <th>Rp</th>
-                                <td id="wallet-value" colspan="4">Jumlah</td>
+                                <td id="wallet-value" colspan="4"><?=$_SESSION["money"]?></td>
                             </tr>
                         </div>
 

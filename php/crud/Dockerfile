@@ -1,10 +1,14 @@
-FROM debian:latest
+FROM debian:stable-slim
+
+LABEL maintainer="Aspian"
+LABEL version="1.0.2-alpha"
 
 RUN apt update && apt install -y --no-install-recommends \
-    php \
-    php-sqlite3 \
+    php8.2 \
+    php8.2-sqlite3 \
     apache2 \
-    libapache2-mod-php
+    libapache2-mod-php8.2 \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY . /var/www/html/
 RUN find /var/www/html/ -type f -name '*.sqlite' -delete

@@ -37,7 +37,7 @@ class Barang {
         return $this->db->query("SELECT * FROM $this->table")->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    private function get(int $id) : array {
+    private function get(int $id) : array | bool {
         $stmt = $this->db->query("SELECT * FROM $this->table WHERE id = :id");
         $stmt->bindParam(":id", $id, PDO::PARAM_INT);
         $stmt->execute();

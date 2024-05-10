@@ -16,16 +16,20 @@
             <thead>
                 <form action="" method="get">
                     <tr>
-                        <th class="id"><?= (Utils::isset("mode","edit")) ? "ID" : "No" ?></th>
+                        <th class="id"><?= ($edit) ? "ID" : "No" ?></th>
                         <th class="barang">Nama Barang</th>
                         <th class="stok">Stok</th>
                         <th class="harga">Harga</th>
                         <th class="button">
-                            <?php if (Utils::isset("mode","edit")) : ?>
+
+                            <?php if ($edit) : ?>
                                 <button title="Selesai">Complete</button>
-                            <?php else : ?>
+                            <?php elseif (Users::is("admin")) : ?>
                                 <button title="Enter edit mode" name="mode" value="edit">Edit</button>
+                            <?php else : ?>
+                                <p>-</p>
                             <?php endif ?>
+
                         </th>
                     </tr>
                 </form>
@@ -35,19 +39,15 @@
                     <?php foreach ($list_barang as $barang) : $no++ ?>
                         <form action="" method="post">
                             <tr>
-                                <td><?= (Utils::isset("mode","edit")) ? $barang["id"] : $no ?></td>
+                                <td><?= ($edit) ? $barang["id"] : $no ?></td>
                                 <td><?= $barang["nama"] ?></td>
                                 <td><?= $barang["stok"] ?></td>
                                 <td><?= $barang["harga"] ?></td>
 
-                                <?php if (Utils::isset("mode","edit")) : ?>
+                                <?php if ($edit) : ?>
                                     <td><button type="submit" name="action" value="delete" title="Hapus Barang">Delete</button></td>
                                 <?php else : ?>
                                     <td><button type="submit" name="action" value="buy" title="Beli Barang">Buy</button></td>
-                                <?php endif ?>
-
-                                <?php if (Utils::isset("mode","edit")) : ?>
-                                    <input type="hidden" name="mode" value="edit">
                                 <?php endif ?>
 
                                 <input type="hidden" name="id" value="<?=$barang["id"]?>">
@@ -59,7 +59,7 @@
                 <?php endif ?>
 
 
-                <?php if (Utils::isset("mode","edit")) : ?>
+                <?php if ($edit) : ?>
                     <form action="" method="post">
                         <input type="hidden" name="mode" value="edit">
                         <tr class="add">
@@ -83,7 +83,7 @@
                 <?php endif ?>
 
                 <?php // User Data ?>
-                <?php if (!Utils::isset("mode", "edit")) : ?>
+                <?php if (!$edit) : ?>
                     <div class="users">
                         <div class="wallet">
                             <tr><th colspan="5">Dompet</th></tr>
@@ -94,10 +94,8 @@
                             </tr>
                         </div>
 
-
                         <div class="storage">
                             <tr><th colspan="5">Storage</th></tr>
-
                         </div>
                     </div>
                 <?php endif ?>

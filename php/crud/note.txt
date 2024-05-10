@@ -98,3 +98,8 @@ Jika ingin mengganti file .htaccess dengan nama lain, dapat mengubah
 AccessFileName .htaccess
 menjadi .config misalnya
 AccessFileName .config
+
+
+Staticmethod
+Berbeda dengan python, staticmethod pada php hanya bisa dipanggil dengan nama class
+dan tidak bisa dipanggil dengan objek dari class tersebut.

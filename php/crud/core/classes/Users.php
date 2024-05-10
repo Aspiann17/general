@@ -117,6 +117,14 @@ class Users {
         return $stmt->fetch(PDO::FETCH_ASSOC)["password"] ?? null;
     }
 
+    public static function is(string $access) : bool {
+        if (isset($_SESSION["access"]) && $_SESSION["access"] === $access) {
+            return true;
+        }
+
+        return false;
+    }
+
     private function create_table() {
         $this->db->exec("
             CREATE TABLE IF NOT EXISTS $this->table (

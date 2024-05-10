@@ -16,6 +16,7 @@ echo "POST: ";
 var_dump($_POST);
 // end debug
 
+$edit = Utils::isset("mode", "edit") && Users::is("admin");
+
 $barang = new Barang($db, $table = "barang");
 $list_barang = $barang->fetch();
-$no = 0;

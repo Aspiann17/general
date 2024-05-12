@@ -18,5 +18,5 @@ var_dump($_POST);
 
 $edit = Utils::isset("mode", "edit") && Users::is("admin");
 
-$barang = new Barang($db, $table = "product");
-$list_barang = $barang->fetch();
+$barang = new Product($db, $table = "product");
+$list_barang = $barang->fetch_all();

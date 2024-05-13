@@ -1,7 +1,7 @@
 FROM debian:stable-slim
 
 LABEL maintainer="Aspian"
-LABEL version="1.0.2-alpha"
+LABEL version="1.2"
 
 RUN apt update && apt install -y --no-install-recommends \
     php8.2 \

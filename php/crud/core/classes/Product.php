@@ -116,14 +116,6 @@ class Product {
 
         ["name" => $name_old, "stock" => $stock_old, "price" => $price_old] = $user_data;
 
-        // $query = "UPDATE $this->table SET name = :name, stock = :stock, price = :price WHERE id = :id";
-        // $stmt = $this->db->prepare($query);
-        // $stmt->bindValue(":name", ($name ?? $name_old), PDO::PARAM_STR);
-        // $stmt->bindValue(":stock", ($stock ?? $stock_old), PDO::PARAM_INT);
-        // $stmt->bindValue(":price", ($price ?? $price_old), PDO::PARAM_INT);
-        // $stmt->bindParam(":id", $id, PDO::PARAM_INT);
-        // $stmt->execute();
-
         $updates = [];
 
         if ($name !== null && $name !== $name_old) {
@@ -134,7 +126,7 @@ class Product {
             $updates[] = "stock = :stock";
         }
 
-        if ($price !== null && $price !== $name_old) {
+        if ($price !== null && $price !== $price_old) {
             $updates[] = "price = :price";
         }
 
@@ -172,23 +164,8 @@ class Product {
                 "message" => "Produk berhasil diubah"
             ];
 
-            // return true;
-            var_dump([
-                "new" => $price,
-                "old" => $price_old
-            ]);
-            return "UPDATE $this->table SET " . implode(", ", $updates) . " WHERE id = :id";
+            return true;
         }
-
-        // Jika tidak ada data yang diubah
-        // elseif ($result) {
-        //     $this->message[] = [
-        //         "type" => "failed",
-        //         "message" => "Tidak ada perubahan yang terjadi"
-        //     ];
-
-        //     return false;
-        // }
 
         $this->message[] = [
             "type" => "error",

@@ -1,0 +1,5 @@
+Options -Indexes
+ErrorDocument 401 /401.php
+ErrorDocument 403 https://github.com/Aspiann17
+ErrorDocument 404 /404.php
+ErrorDocument 500 /500.php

@@ -1,54 +1,167 @@
-<?php require "utils.php" ?>
+<?php
+require "utils.php";
+check();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Biodata</title>
-        <link href="css/styles.css" rel="stylesheet" />
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 
-        <style>
-            @media print {
-                .hide {
-                    display: none;
-                }
+<head>
+    <?= template("meta") ?>
+    <title>Biodata</title>
+    <link href="css/styles.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+
+    <style>
+        @media print {
+            .hide {
+                display: none;
             }
-        </style>
-    </head>
-    <body>
-        <!-- Nav Bar -->
-        <?=template("navbar")?>
-        
-        <div id="layoutSidenav">
+        }
 
-            <!-- Side Bar -->
-            <?=template("sidepanel")?>
-            
-            <div id="layoutSidenav_content">
-                <main>
-                    <div class="container-fluid px-4">
-                        <h1 class="mt-4">Biodata</h1>
-                        <!-- <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Static Navigation</li>
-                        </ol> -->
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <p class="mb-0"></p>
-                                <button class="btn btn-primary hide" onclick="window.print()">Print</button>
+        /* Template */
+        .card {
+            border: none;
+
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .card:before {
+
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background-color: #E1BEE7;
+            transform: scaleY(1);
+            transition: all 0.5s;
+            transform-origin: bottom
+        }
+
+        .card:after {
+
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background-color: #8E24AA;
+            transform: scaleY(0);
+            transition: all 0.5s;
+            transform-origin: bottom
+        }
+
+        .card:hover::after {
+            transform: scaleY(1);
+        }
+
+
+        .fonts {
+            font-size: 11px;
+        }
+
+        .social-list {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            padding: 0;
+        }
+
+        .social-list li {
+            padding: 10px;
+            color: #8E24AA;
+            font-size: 19px;
+        }
+
+
+        .buttons button:nth-child(1) {
+            border: 1px solid #8E24AA !important;
+            color: #8E24AA;
+            height: 40px;
+        }
+
+        .buttons button:nth-child(1):hover {
+            border: 1px solid #8E24AA !important;
+            color: #fff;
+            height: 40px;
+            background-color: #8E24AA;
+        }
+
+        .buttons button:nth-child(2) {
+            border: 1px solid #8E24AA !important;
+            background-color: #8E24AA;
+            color: #fff;
+            height: 40px;
+        }
+
+        .card-body {
+            background-color: #eaeaea !important;
+        }
+        /* End Template */
+    </style>
+</head>
+
+<body>
+    <!-- Nav Bar -->
+    <?= template("navbar") ?>
+
+    <div id="layoutSidenav">
+
+        <!-- Side Bar -->
+        <?= template("sidepanel") ?>
+
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Biodata</h1>
+                    <div class="card mb-4">
+                        <div class="card-body">
+
+                            <!-- Template -->
+                            <div class="container mt-5">
+                            <div class="row d-flex justify-content-center">
+                            <div class="col-md-7">
+                            <div class="card p-3 py-4">
+
+                                <div class="text-center">
+                                    <img src="https://i.imgur.com/bDLhJiP.jpg" width="100" class="rounded-circle">
+
+                                </div>
+
+                                <div class="text-center mt-3">
+                                    <span class="bg-secondary p-1 px-4 rounded text-white">X RPL 2</span>
+                                    <h5 class="mt-2 mb-0">Muhammad Aspian</h5>
+                                    <span>Programmer</span>
+
+                                    <div class="px-4 mt-1">
+                                        <p class="fonts"></p>
+                                    </div>
+
+                                    <ul class="social-list">
+                                        <li><i class="fa-brands fa-facebook"></i></li>
+                                        <li><i class="fa-brands fa-github"></i></li>
+                                    </ul>
+                                </div>
                             </div>
+                            </div>
+                            </div>
+                            </div>
+                            <!-- End Template -->
+                            <button class="btn btn-primary hide" onclick="window.print()">Print</button>
                         </div>
                     </div>
-                </main>
-                <?=template("footer")?>
-            </div>
+                </div>
+            </main>
+            <?= template("footer") ?>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="js/scripts.js"></script>
-    </body>
+    </div>
+    <?= template("js") ?>
+</body>
+
 </html>

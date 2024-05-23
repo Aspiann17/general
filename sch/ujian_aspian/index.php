@@ -1,19 +1,13 @@
 <?php
 require "utils.php";
 
-session_start();
 check();
-
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
+        <?=template("meta")?>
         <title>Control Panel</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
@@ -79,10 +73,12 @@ check();
                             <div class="col-xl-6">
                                 <div class="card mb-4">
                                     <div class="card-header">
-                                        <i class="fas fa-chart-area me-1"></i>
-                                        Area Chart Example
+                                        <!-- <i class="fas fa-chart-area me-1"></i> -->
+                                        <i class="fas fas-linux me-1"></i>
+                                        System Information
                                     </div>
-                                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+                                    <div class="card-body">
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-xl-6">
@@ -99,6 +95,7 @@ check();
                         </div>
                     </div>
                 </main>
+                <?=template("footer")?>
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

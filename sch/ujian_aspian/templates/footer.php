@@ -2,9 +2,7 @@
     <div class="container-fluid px-4">
         <div class="d-flex align-items-center justify-content-between small">
             <div class="text-muted">
-                Copyleft
-                <span style="display: inline-block; transform: rotate(180deg);">&copy;</span>
-                Aspian 2024
+                Copyleft &#x1f12f; Aspian 2024
             </div>
             <div>
                 <a href="#">Privacy Policy</a>

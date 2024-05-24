@@ -22,7 +22,6 @@ check();
         /* Template */
         .card {
             border: none;
-
             position: relative;
             overflow: hidden;
             border-radius: 8px;
@@ -30,28 +29,26 @@ check();
         }
 
         .card:before {
-
             content: "";
             position: absolute;
             left: 0;
             top: 0;
             width: 4px;
             height: 100%;
-            background-color: #E1BEE7;
+            background-color: gray;
             transform: scaleY(1);
             transition: all 0.5s;
             transform-origin: bottom
         }
 
         .card:after {
-
             content: "";
             position: absolute;
             left: 0;
             top: 0;
             width: 4px;
             height: 100%;
-            background-color: #8E24AA;
+            background-color: black;
             transform: scaleY(0);
             transition: all 0.5s;
             transform-origin: bottom
@@ -60,7 +57,6 @@ check();
         .card:hover::after {
             transform: scaleY(1);
         }
-
 
         .fonts {
             font-size: 11px;
@@ -75,29 +71,7 @@ check();
 
         .social-list li {
             padding: 10px;
-            color: #8E24AA;
             font-size: 19px;
-        }
-
-
-        .buttons button:nth-child(1) {
-            border: 1px solid #8E24AA !important;
-            color: #8E24AA;
-            height: 40px;
-        }
-
-        .buttons button:nth-child(1):hover {
-            border: 1px solid #8E24AA !important;
-            color: #fff;
-            height: 40px;
-            background-color: #8E24AA;
-        }
-
-        .buttons button:nth-child(2) {
-            border: 1px solid #8E24AA !important;
-            background-color: #8E24AA;
-            color: #fff;
-            height: 40px;
         }
 
         .card-body {
@@ -131,7 +105,6 @@ check();
 
                                 <div class="text-center">
                                     <img src="https://i.imgur.com/bDLhJiP.jpg" width="100" class="rounded-circle">
-
                                 </div>
 
                                 <div class="text-center mt-3">
@@ -144,7 +117,7 @@ check();
                                     </div>
 
                                     <ul class="social-list">
-                                        <li><i class="fa-brands fa-facebook"></i></li>
+                                        <li><i class="fa-brands fa-facebook text-primary"></i></li>
                                         <li><i class="fa-brands fa-github"></i></li>
                                     </ul>
                                 </div>

@@ -12,10 +12,13 @@
                     Biodata
                 </a>
 
-                <a class="nav-link" href="https://github.com/Aspiann17">
-                    <div class="sb-nav-link-icon"><i class="fas fa-code-branch"></i></div>
-                    Github
-                </a>
+                <?php if (!is_set("hide", "true")) : ?>
+                    <a class="nav-link" href="https://github.com/Aspiann17">
+                        <div class="sb-nav-link-icon"><i class="fas fa-code-branch"></i></div>
+                        Github
+                    </a>
+                <?php endif ?>
+
             </div>
         </div>
         <div class="sb-sidenav-footer">

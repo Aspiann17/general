@@ -5,7 +5,7 @@
 <html lang="en">
     <head>
         <?=template("meta")?>
-        <title>404 Error - SB Admin</title>
+        <title>404 Error - Page not Found</title>
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>

@@ -1,6 +1,6 @@
 <?php
 
-class Users {
+final class Users {
     private $db, $table;
 
     public $message = array();

@@ -1,3 +1,4 @@
-Template:
-    https://github.com/startbootstrap/startbootstrap-sb-admin/
-    https://bbbootstrap.com/snippets/bootstrap-5-user-social-profile-transition-effect-79746232
+Template
+
+Dashboard: https://github.com/startbootstrap/startbootstrap-sb-admin/
+Profile: https://bbbootstrap.com/snippets/bootstrap-5-user-social-profile-transition-effect-79746232

@@ -1,6 +1,6 @@
 <?php
 
-class Utils {
+final class Utils {
     public static function isset($key, $value) : bool {
         if (isset($_GET[$key]) && $_GET[$key] == $value) {
             return true;

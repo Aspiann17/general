@@ -1,5 +1,5 @@
 <?php
-class Product {
+final class Product {
     private $db, $table, $id, $nama, $stok, $harga;
 
     public $message = array();

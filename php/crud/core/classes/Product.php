@@ -174,7 +174,6 @@ final class Product {
         ];
 
         return false;
-
     }
 
     private function create_table() {

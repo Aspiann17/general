@@ -86,7 +86,7 @@
                 <?php if (!$edit) : ?>
                     <div class="users">
                         <div class="wallet">
-                            <tr><th colspan="5">Dompet</th></tr>
+                            <tr><th colspan="5">Uang</th></tr>
 
                             <tr>
                                 <th>Rp</th>
@@ -94,8 +94,8 @@
                             </tr>
                         </div>
 
-                        <div class="storage">
-                            <tr><th colspan="5">Storage</th></tr>
+                        <div class="cart">
+                            <tr><th colspan="5">Keranjang Belanja</th></tr>
                         </div>
                     </div>
                 <?php endif ?>

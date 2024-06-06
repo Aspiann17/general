@@ -16,7 +16,8 @@ var_dump($_POST);
 $users = new Users($db);
 
 if (isset($_SESSION["login"])) {
-    header("location:../shop");
+    header("Location:../shop");
+    exit;
 }
 
 if (
@@ -30,7 +31,8 @@ if (
         if ($users->login($username, $password)) {
             $_SESSION["login"] = true;
             $_SESSION += $users->info($username);
-            header("location: ../shop");
+            header("Location: ../shop");
+            exit;
         }
     }
 

@@ -1,7 +1,7 @@
 FROM debian:stable-slim
 
 LABEL maintainer="Aspian"
-LABEL version="1.4"
+LABEL version="1.5"
 
 RUN apt update && apt install -y --no-install-recommends \
     php8.2 \
@@ -18,4 +18,4 @@ RUN chown -R www-data: /var/www/html/ && \
 
 EXPOSE 80
 
-CMD ["apachectl", "-D", "FOREGROUND"]
+CMD ["apachectl", "-DFOREGROUND"]

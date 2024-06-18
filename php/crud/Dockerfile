@@ -1,7 +1,7 @@
-FROM debian:stable-slim
+FROM debian:bookworm-slim
 
 LABEL maintainer="Aspian"
-LABEL version="1.5"
+LABEL version="1.6"
 
 RUN apt update && apt install -y --no-install-recommends \
     php8.2 \
@@ -14,7 +14,7 @@ RUN apt update && apt install -y --no-install-recommends \
 
 COPY . /var/www/html/
 RUN chown -R www-data: /var/www/html/ && \
-    sed '/<Directory \/var\/www\/>/,/<\/Directory>/ {s/AllowOverride None/AllowOverride All/}' "/etc/apache2/apache2.conf"
+    sed -i.bak '/<Directory \/var\/www\/>/,/<\/Directory>/s/AllowOverride None/AllowOverride All/' "/etc/apache2/apache2.conf"
 
 EXPOSE 80
 

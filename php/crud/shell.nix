@@ -2,17 +2,14 @@
 
 let
   VERSION = 0.1;
-  # PORT = 8000;
 in
 
 pkgs.mkShell {
   buildInputs = with pkgs; [
     php82
+    php82Packages.composer
     php82Extensions.pdo
     php82Extensions.sqlite3
-
-    # apacheHttpd
-    # apacheHttpdPackages.php
   ];
 
   shellHook = ''

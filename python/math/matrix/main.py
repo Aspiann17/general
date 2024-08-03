@@ -79,34 +79,9 @@ class Matrix:
         if a.ordo[1] != b.ordo[0]:
             raise TypeError
 
-        # result = []
-
-        # 4 #
-        # b = Matrix(b.transpose)
-
-        # for row in range(len(a.value)):
-
-        #     # 1 #
-        #     # result.append([a.value[row][col] * b.value[col][row] for col in range(len(a.value[0]))])
-        #     # for col in range(len(a.value[0])):
-        #         # result.append([a.value[row][col] * b.value[col][row]])
-        #         # print(a.value[row][col], b.value[col][row])
-
-        #     # 2 #
-        #     # tmp = []
-        #     # for col in range(len(a.value[0])):
-        #     #     print(a.value[row][col] * b.value[col][row])
-        #     #     tmp.append(a.value[row][col] * b.value[col][row])
-
-        #     # result.append([sum(tmp)])
-        #     # tmp.clear()
-
-        #     # 3 #
-        #     for col in range(len(b.value[0])):
-        #         print(b.value[row][col])
-
+        # Membuat matrix yang berisi None dengan ukuran a * c
+        # sesuai dengan aturan matrix -> a * b . b * c = a * c
         result:list[list] = [[None for _ in range(a.ordo[0])] for _ in range(b.ordo[1])]
-
         b = Matrix(b.transpose)
 
         for row in range(len(a.value)):
@@ -120,6 +95,82 @@ class Matrix:
                 )
 
         return result
+
+        # Semisal
+        # a = [
+        #     [1, 2, 3],
+        #     [4, 5, 6]
+        # ]
+        #
+        # dan
+        #
+        # b = [
+        #     [6, 5],
+        #     [4, 3],
+        #     [2, 1]
+        # ]
+        #
+        # Melakukan looping dengan array dua dimensi yang memiliki
+        # ukuran berbeda sangat menyulitkan, makanya b dikondisikan agar sama dengan a.
+        # b = Matrix(b.transpose)
+        # Maka akan menjadi
+        # a = [
+        #     [1, 2, 3],
+        #     [4, 5, 6]
+        # ]
+        #
+        # b = [
+        #     [6, 4, 2],
+        #     [5, 3, 1]
+        # ]
+        #
+        # Kemudian melakukan looping dengan panjang baris a, dalam kasus ini 3 kali.
+        # Lalu melakukan loop lagi dengan panjang kolom b yang sudah diubah menjadi baris b.
+        #
+        # Contoh perkalian matrix (normal):
+        # a = [
+        #     [1, 2, 3],
+        #     [4, 5, 6]
+        # ]
+        #
+        # b = [
+        #     [6, 5],
+        #     [4, 3],
+        #     [2, 1]
+        # ]
+        #
+        # Jika dikalian akan menjadi:
+        # hasil = [
+        #     [1 * 6 + 2 * 4 + 3 * 2, 1 * 5 + 2 * 3 + 3 * 1],
+        #     [4 * 6 + 5 * 4 + 6 * 2, 4 * 5 + 5 * 3 + 6 * 1]
+        # ]
+        #
+        # hasil = [
+        #     [ 20, 14 ],
+        #     [ 56, 41 ]
+        # ]
+        #
+        # Disini terlihat kalau tiap nilai pada baris a akan dikalikan dengan tiap nilai
+        # pada kolom pada b, dikarenakan hal ini, dilakukan lah loop berikut:
+        #   for loop in range(len(b.value)): ...
+        # Dengan loop tersebut, memungkinkan untuk mengakses baris pada transpose b.
+        #
+        # Kemudian terdapat baris berikut:
+        # result[row][loop] = sum(
+        #     [a.value[row][col] * b.value[loop][col] for col in range(len(a.value[0]))]
+        # )
+        #
+        # Nilai result = [
+        #     [None, None],
+        #     [None, None]
+        # ]
+        # ordo = 2 * 2
+        # Jadi variable loop akan digunakan untuk mengakses baris dari b result.
+        #
+        # result[row][loop] = sum(
+        #     [a.value[row][col] * b.value[loop][col] for col in range(len(a.value[0]))]
+        # )
+        # malas
 
 if __name__ == "__main__":
     A = Matrix([
@@ -150,7 +201,4 @@ if __name__ == "__main__":
 
     F = Matrix.generate(2, 2, 0, 10)
 
-    hasil = Matrix(Matrix.multiply(A, E))
-    print(hasil.value)
-
-    print(Matrix(Matrix.multiply(D, F)).value) # ?
+    print(Matrix.multiply(A, E))

@@ -2,13 +2,6 @@ from main import Matrix as M
 import unittest
 
 class TestMatrix(unittest.TestCase):    
-    def test_generate(self):
-        A = M.generate(5, 20, 0, 100)
-        At = M(A.transpose)
-
-        self.assertEqual(A.ordo, [5, 20])
-        self.assertEqual(At.ordo, [20, 5])
-
     def test_ordo(self):
         ordo1 = M([
             [1, 2, 3, 4],
@@ -52,6 +45,13 @@ class TestMatrix(unittest.TestCase):
             [1, 2, 3, 4],
             [5, 6, 7, 8]
         ])
+
+    def test_generate(self):
+        A = M.generate(5, 20, 0, 100)
+        At = M(A.transpose)
+
+        self.assertEqual(A.ordo, [5, 20])
+        self.assertEqual(At.ordo, [20, 5])
 
     def test_add(self):
 

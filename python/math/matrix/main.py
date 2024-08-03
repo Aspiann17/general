@@ -74,6 +74,53 @@ class Matrix:
         # List Comprehension
         # return [[a.value[row][col] - b.value[row][col] for col in range(len(a.value[0]))] for row in range(len(a.value))]
 
+    @classmethod
+    def multiply(cls, a:"Matrix", b:"Matrix"):
+        if a.ordo[1] != b.ordo[0]:
+            raise TypeError
+
+        # result = []
+
+        # 4 #
+        # b = Matrix(b.transpose)
+
+        # for row in range(len(a.value)):
+
+        #     # 1 #
+        #     # result.append([a.value[row][col] * b.value[col][row] for col in range(len(a.value[0]))])
+        #     # for col in range(len(a.value[0])):
+        #         # result.append([a.value[row][col] * b.value[col][row]])
+        #         # print(a.value[row][col], b.value[col][row])
+
+        #     # 2 #
+        #     # tmp = []
+        #     # for col in range(len(a.value[0])):
+        #     #     print(a.value[row][col] * b.value[col][row])
+        #     #     tmp.append(a.value[row][col] * b.value[col][row])
+
+        #     # result.append([sum(tmp)])
+        #     # tmp.clear()
+
+        #     # 3 #
+        #     for col in range(len(b.value[0])):
+        #         print(b.value[row][col])
+
+        result:list[list] = [[None for _ in range(a.ordo[0])] for _ in range(b.ordo[1])]
+
+        b = Matrix(b.transpose)
+
+        for row in range(len(a.value)):
+            for loop in range(len(b.value)):
+
+                for col in range(len(a.value[0])):
+                    print(f"{a.value[row][col]} * {b.value[loop][col]} = {a.value[row][col] * b.value[loop][col]}")
+
+                result[row][loop] = sum(
+                    [a.value[row][col] * b.value[loop][col] for col in range(len(a.value[0]))]
+                )
+
+        return result
+
 if __name__ == "__main__":
     A = Matrix([
         [1, 2, 3],
@@ -86,7 +133,24 @@ if __name__ == "__main__":
     ])
 
     C = Matrix([
-        [2],
-        [1],
-        [4]
+        [11],
+        [12],
     ])
+
+    D = Matrix([
+        [1, 2],
+        [3, 4]
+    ])
+
+    E = Matrix([
+        [6, 5],
+        [4, 3],
+        [2, 1]
+    ])
+
+    F = Matrix.generate(2, 2, 0, 10)
+
+    hasil = Matrix(Matrix.multiply(A, E))
+    print(hasil.value)
+
+    print(Matrix(Matrix.multiply(D, F)).value) # ?

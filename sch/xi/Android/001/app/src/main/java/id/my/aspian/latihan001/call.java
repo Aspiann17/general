@@ -21,4 +21,10 @@ public class call extends AppCompatActivity {
             return insets;
         });
     }
+
+//    public void check_permission() {
+//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+//
+//        };
+//    }
 }

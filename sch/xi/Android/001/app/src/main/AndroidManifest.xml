@@ -23,4 +23,16 @@
         </activity>
     </application>
 
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+
+    <queries>
+        <!--
+            Jika tidak ditambahkan, ketika membuat object Intent misalnya:
+                Intent Itermux = getPackageManager().getLaunchIntentForPackage("com.termux");
+            Itermux akan bernilai null dan jika tidak dicek dengan if, maka akan menghasilkan crash.
+        -->
+
+        <package android:name="com.termux" />
+        <package android:name="com.termux.nix" />
+    </queries>
 </manifest>

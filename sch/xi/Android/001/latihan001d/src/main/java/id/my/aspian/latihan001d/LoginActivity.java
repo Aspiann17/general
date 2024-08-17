@@ -11,6 +11,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import android.content.Intent;
+import android.widget.EditText;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -35,11 +36,11 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         // Login Button
-        findViewById(R.id.register).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.login).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent Iregister = new Intent(getApplicationContext(), RegisterActivity.class);
-                startActivity(Iregister);
+                Intent Ilogin = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(Ilogin);
             };
         });
     }

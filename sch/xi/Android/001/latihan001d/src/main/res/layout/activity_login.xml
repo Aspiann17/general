@@ -37,31 +37,17 @@
 
             <EditText
                 android:id="@+id/username"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/edittext"
-                android:drawableLeft="@drawable/icon_username"
-                android:drawablePadding="8dp"
                 android:hint="Username"
-                android:inputType="text|textAutoComplete"
-                android:padding="10dp"
-                android:textColor="@color/black"
-                android:textColorHint="#8D8D8D" />
+                android:inputType="text"
+                android:drawableLeft="@drawable/icon_username"
+                style="@style/basic_input" />
 
             <EditText
                 android:id="@+id/password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/edittext"
-                android:drawableLeft="@drawable/icon_password"
-                android:drawablePadding="8dp"
                 android:hint="Password"
-                android:inputType="text|textPassword"
-                android:padding="10dp"
-                android:textColor="@color/black"
-                android:textColorHint="#8D8D8D" />
+                android:inputType="textPassword"
+                android:drawableLeft="@drawable/icon_password"
+                style="@style/basic_input" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -87,6 +73,7 @@
                     android:layout_weight="1" />
 
                 <Button
+                    android:id="@+id/login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Login"

@@ -108,5 +108,14 @@ public class MainActivity extends AppCompatActivity {
                 };
             }
         });
+
+        // Browser Intent
+        findViewById(R.id.btn_browser).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent Ibrowser = new Intent(Intent.ACTION_VIEW, Uri.parse("https://kernel.org"));
+                startActivity(Ibrowser);
+            }
+        });
     }
 }

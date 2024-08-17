@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Telepon Intent
+        // Jangan lupa ganti nomor pada /app/res/values/strings.xml
         findViewById(R.id.btn_call).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,6 +95,17 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent Ifacebook = new Intent(Intent.ACTION_VIEW, Uri.parse("https://facebook.com"));
                 startActivity(Ifacebook);
+            }
+        });
+
+        // Design Intent
+        findViewById(R.id.btn_design).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent Idesign = getPackageManager().getLaunchIntentForPackage("id.my.aspian.latihan001d");
+                if (Idesign != null) {
+                    startActivity(Idesign);
+                };
             }
         });
     }

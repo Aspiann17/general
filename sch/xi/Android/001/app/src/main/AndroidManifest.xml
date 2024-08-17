@@ -34,5 +34,6 @@
 
         <package android:name="com.termux" />
         <package android:name="com.termux.nix" />
+        <package android:name="id.my.aspian.latihan001d" />
     </queries>
 </manifest>

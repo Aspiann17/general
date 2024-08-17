@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "L001b"
 include(":app")
+include(":latihan001d")

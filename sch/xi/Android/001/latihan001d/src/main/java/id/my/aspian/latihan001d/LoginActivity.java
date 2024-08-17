@@ -1,12 +1,16 @@
 package id.my.aspian.latihan001d;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import android.content.Intent;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -19,6 +23,24 @@ public class LoginActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+
+        // Register Text
+        findViewById(R.id.register).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent Iregister = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivity(Iregister);
+            };
+        });
+
+        // Login Button
+        findViewById(R.id.register).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent Iregister = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivity(Iregister);
+            };
         });
     }
 }

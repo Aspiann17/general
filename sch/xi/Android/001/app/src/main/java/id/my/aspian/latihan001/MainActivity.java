@@ -10,8 +10,6 @@ import androidx.core.view.WindowInsetsCompat;
 
 // Intent
 import android.content.Intent;
-import android.widget.Button;
-import android.view.View;
 import android.net.Uri;
 
 
@@ -30,92 +28,65 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Github Intent
-        findViewById(R.id.btn_github).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent Igithub = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Aspiann17"));
-                startActivity(Igithub);
-            }
+        findViewById(R.id.btn_github).setOnClickListener(v -> {
+            Intent Github = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Aspiann17"));
+            startActivity(Github);
         });
 
         // Youtube Intent
-        findViewById(R.id.btn_youtube).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent Iyoutube = new Intent(Intent.ACTION_VIEW, Uri.parse("https://youtube.com/"));
-                startActivity(Iyoutube);
-            }
+        findViewById(R.id.btn_youtube).setOnClickListener(v -> {
+            Intent YouTube = new Intent(Intent.ACTION_VIEW, Uri.parse("https://youtube.com/"));
+            startActivity(YouTube);
         });
 
         // Shopee Intent
-        findViewById(R.id.btn_shopee).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent Ishopee = new Intent(Intent.ACTION_VIEW, Uri.parse("https://shopee.co.id/"));
-                startActivity(Ishopee);
-            }
+        findViewById(R.id.btn_shopee).setOnClickListener(v -> {
+            Intent Shoppe = new Intent(Intent.ACTION_VIEW, Uri.parse("https://shopee.co.id/"));
+            startActivity(Shoppe);
         });
 
         // Telepon Intent
         // Jangan lupa ganti nomor pada /app/res/values/strings.xml
-        findViewById(R.id.btn_call).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String phone_number = String.format("tel:%s", R.string.phone_number);
-                Intent Icall = new Intent(Intent.ACTION_CALL, Uri.parse(phone_number));
-                startActivity(Icall);
-            }
+        findViewById(R.id.btn_call).setOnClickListener(v -> {
+            String phone_number = String.format("tel:%s", R.string.phone_number);
+            Intent Call = new Intent(Intent.ACTION_CALL, Uri.parse(phone_number));
+            startActivity(Call);
         });
 
         // Termux Intent
-        findViewById(R.id.btn_termux).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent Itermux = getPackageManager().getLaunchIntentForPackage("com.termux");
-                if (Itermux != null) {
-                    startActivity(Itermux);
-                };
+        findViewById(R.id.btn_termux).setOnClickListener(v -> {
+            Intent Termux = getPackageManager().getLaunchIntentForPackage("com.termux");
+            if (Termux != null) {
+                startActivity(Termux);
             }
         });
 
         // Nix on Droid Intent
-        findViewById(R.id.btn_nod).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent Inod = getPackageManager().getLaunchIntentForPackage("com.termux.nix");
-                if (Inod != null) {
-                    startActivity(Inod);
-                };
+        findViewById(R.id.btn_nod).setOnClickListener(v -> {
+            Intent Nod = getPackageManager().getLaunchIntentForPackage("com.termux.nix");
+            if (Nod != null) {
+                startActivity(Nod);
             }
         });
 
         // Facebook Intent
-        findViewById(R.id.btn_facebook).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent Ifacebook = new Intent(Intent.ACTION_VIEW, Uri.parse("https://facebook.com"));
-                startActivity(Ifacebook);
-            }
+        findViewById(R.id.btn_facebook).setOnClickListener(v -> {
+            Intent Facebook = new Intent(Intent.ACTION_VIEW, Uri.parse("https://facebook.com"));
+            startActivity(Facebook);
         });
 
         // Design Intent
-        findViewById(R.id.btn_design).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent Idesign = getPackageManager().getLaunchIntentForPackage("id.my.aspian.latihan001d");
-                if (Idesign != null) {
-                    startActivity(Idesign);
-                };
+        findViewById(R.id.btn_design).setOnClickListener(v -> {
+            Intent Design = getPackageManager().getLaunchIntentForPackage("id.my.aspian.latihan001d");
+            if (Design != null) {
+                startActivity(Design);
             }
         });
 
         // Browser Intent
-        findViewById(R.id.btn_browser).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent Ibrowser = new Intent(Intent.ACTION_VIEW, Uri.parse("https://kernel.org"));
-                startActivity(Ibrowser);
-            }
+        findViewById(R.id.btn_browser).setOnClickListener(v -> {
+            Intent Browser = new Intent(Intent.ACTION_VIEW, Uri.parse("https://kernel.org"));
+            startActivity(Browser);
         });
     }
 }

@@ -24,21 +24,15 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         // Login Text
-        findViewById(R.id.login).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent Ilogin = new Intent(getApplicationContext(), RegisterActivity.class);
-                startActivity(Ilogin);
-            };
+        findViewById(R.id.login).setOnClickListener(v -> {
+            Intent Login = new Intent(getApplicationContext(), RegisterActivity.class);
+            startActivity(Login);
         });
 
         // Register Button
-        findViewById(R.id.register).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent Iregister = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(Iregister);
-            };
+        findViewById(R.id.register).setOnClickListener(v -> {
+            Intent Register = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(Register);
         });
     }
 }

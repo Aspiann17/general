@@ -11,7 +11,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import android.content.Intent;
-import android.widget.EditText;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -27,21 +26,15 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         // Register Text
-        findViewById(R.id.register).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent Iregister = new Intent(getApplicationContext(), RegisterActivity.class);
-                startActivity(Iregister);
-            };
+        findViewById(R.id.register).setOnClickListener(v -> {
+            Intent Register = new Intent(getApplicationContext(), RegisterActivity.class);
+            startActivity(Register);
         });
 
         // Login Button
-        findViewById(R.id.login).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent Ilogin = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(Ilogin);
-            };
+        findViewById(R.id.login).setOnClickListener(v -> {
+            Intent Login = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(Login);
         });
     }
 }

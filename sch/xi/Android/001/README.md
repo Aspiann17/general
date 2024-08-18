@@ -1,7 +1,6 @@
 # Resource
 - https://www.iconfinder.com/icons/386451/arch_linux_archlinux_icon
 
-
 # Reference
 
 ## Design
@@ -20,17 +19,54 @@
 
 
 # -
-## Fungsi CardView
+## Design
+### Satuan
+- dp(Density-independent Pixels) -> Konsisten pada setiap ukuran layar.
+- sp(Scale-independent Pixels)   -> Menyesuaikan dengan ukuran layar.
+
+### Styles
+#### -
+Semisal ada sebuah style seperti dibawah
+```xml
+<style name="main_info_text">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textStyle">bold</item>
+    <item name="android:textColor">@color/white</item>
+</style>
+```
+
+Kemudian saya ingin membuat style baru yang mewarisi `main_info_text` dengan beberapa penambahan
+```xml
+<style name="main_info_text_value">
+    <item name="android:textSize">10sp</item>
+</style>
+```
+
+Agar `main_info_text_value` mewarisi `main_info_text`, tambahkan `parent` sehingga menjadi
+```xml
+<style name="main_info_text_value" parent="main_info_text">
+    <item name="android:textSize">10sp</item>
+</style>
+```
+
+### LinearLayout
+#### Attribute
+- `android:gravity`         -> Mengatur elemen didalam layout/child.
+- `android:layout_gravity`  -> Mengatur LinearLayout itu sendiri.
+
+### Fungsi CardView
 - Memberi Bayangan -> `app:cardElevation`
 - Memberi Radius   -> `app:cardCornerRadius`
 
-## Fungsi LinearLayout yang berisi TextView, View, dan Button
+### Fungsi LinearLayout yang berisi TextView, View, dan Button
 Fungsi utamanya adalah agar teks register dan button dapat bersebelahan.
 Hal ini dilakukan dengan `android:orientation="horizontal"`.
 
 Jika menggunakan RelativeLayout, hal ini dapat dilakukan hanya dengan `android:layout_toRightOf`.
 
-## Mengganti MainActivity
+## Code
+### Mengganti MainActivity
 Pada Manifest file terdapat
 ```xml
 <activity
@@ -64,7 +100,7 @@ android:exported="true" />
 ```
 Jika ketika run, LoginActivity tidak secara otomatis terbuka, ubah `android:exported` menjadi `true`.
 
-## Lambda
+### Lambda
 Pada sebelum sebelumnya, intent dilakukan dengan menggunakan _Anonymous classes_ seperti pada code dibawah
 
 ```java

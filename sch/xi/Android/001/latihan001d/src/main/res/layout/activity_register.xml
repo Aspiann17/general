@@ -39,28 +39,28 @@
                 android:id="@+id/username"
                 android:hint="Username"
                 android:inputType="text"
-                android:drawableLeft="@drawable/icon_username"
+                android:drawableStart="@drawable/icon_username"
                 style="@style/basic_input" />
 
             <EditText
                 android:id="@+id/email"
                 android:hint="Email"
                 android:inputType="textEmailAddress"
-                android:drawableLeft="@drawable/icon_mail"
+                android:drawableStart="@drawable/icon_mail"
                 style="@style/basic_input" />
 
             <EditText
                 android:id="@+id/password"
                 android:hint="Password"
                 android:inputType="textPassword"
-                android:drawableLeft="@drawable/icon_password"
+                android:drawableStart="@drawable/icon_password"
                 style="@style/basic_input" />
 
             <EditText
                 android:id="@+id/verification_password"
                 android:hint="Verification Password"
                 android:inputType="textPassword"
-                android:drawableLeft="@drawable/icon_password"
+                android:drawableStart="@drawable/icon_password"
                 style="@style/basic_input" />
 
             <LinearLayout
@@ -74,11 +74,11 @@
                     android:id="@+id/login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:text="Login?"
                     android:textAlignment="textStart"
                     android:textColor="@color/primary"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <View

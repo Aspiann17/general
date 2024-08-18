@@ -8,23 +8,25 @@
     android:background="@color/blue"
     tools:context=".MainActivity">
 
+    <!-- Logo | Username -->
     <RelativeLayout
         android:id="@+id/layout_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        
+
         <ImageView
             android:id="@+id/logo"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_marginTop="40dp"
             android:layout_centerHorizontal="true"
+            android:importantForAccessibility="no"
             app:srcCompat="@drawable/archlinux" />
 
         <View
             android:id="@+id/hr"
             android:layout_below="@id/logo"
-            android:layout_width="100dp"
+            android:layout_width="218dp"
             android:layout_height="5dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
@@ -45,35 +47,131 @@
             android:textStyle="bold" />
     </RelativeLayout>
 
-<!--    <ImageView-->
-<!--        android:id="@+id/logo"-->
-<!--        android:layout_width="120dp"-->
-<!--        android:layout_height="120dp"-->
-<!--        android:layout_marginTop="40dp"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        app:srcCompat="@drawable/archlinux" />-->
+    <LinearLayout
+        android:id="@+id/content"
+        android:layout_below="@+id/layout_top"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp"
+        android:orientation="vertical"
+        android:background="@drawable/profile_background_main" >
 
-<!--    <View-->
-<!--        android:id="@+id/hr"-->
-<!--        android:layout_below="@id/logo"-->
-<!--        android:layout_width="100dp"-->
-<!--        android:layout_height="5dp"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:layout_marginBottom="10dp"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:background="@color/white" />-->
+        <!-- Main Info -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="15dp" >
 
-<!--    <TextView-->
-<!--        android:id="@+id/name"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@id/hr"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:fontFamily="monospace"-->
-<!--        android:text="Muhammad Aspian"-->
-<!--        android:textAlignment="center"-->
-<!--        android:textColor="#FFFFFF"-->
-<!--        android:textSize="24sp"-->
-<!--        android:textStyle="bold" />-->
+            <LinearLayout style="@style/main_info">
 
+                <TextView
+                    android:text="Kelas"
+                    style="@style/main_info_text_title" />
+
+                <TextView
+                    android:text="XI 2"
+                    style="@style/main_info_text_value" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/main_info">
+
+                <TextView
+                    android:text="Jurusan"
+                    style="@style/main_info_text_title" />
+
+                <TextView
+                    android:text="RPL"
+                    style="@style/main_info_text_value" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/main_info">
+
+                <TextView
+                    android:text="Kondisi"
+                    style="@style/main_info_text_title" />
+
+                <TextView
+                    android:text="Gila"
+                    style="@style/main_info_text_value" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Info -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="15dp"
+            android:paddingLeft="15dp"
+            android:paddingEnd="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="15dp">
+
+            <!-- Item -->
+            <LinearLayout style="@style/info">
+
+                <TextView
+                    android:text="OS"
+                    style="@style/info_text_left" />
+
+                <View style="@style/info_view" />
+
+                <TextView
+                    android:text="Android"
+                    style="@style/info_text_right" />
+
+            </LinearLayout>
+
+            <!-- Item -->
+            <LinearLayout style="@style/info">
+
+                <TextView
+                    android:text="Version"
+                    style="@style/info_text_left" />
+
+                <View style="@style/info_view" />
+
+                <TextView
+                    android:text="13"
+                    style="@style/info_text_right" />
+
+            </LinearLayout>
+
+            <!-- Item -->
+            <LinearLayout style="@style/info">
+
+                <TextView
+                    android:text="RAM"
+                    style="@style/info_text_left" />
+
+                <View style="@style/info_view" />
+
+                <TextView
+                    android:text="6GB"
+                    style="@style/info_text_right" />
+
+            </LinearLayout>
+
+            <!-- Item -->
+            <LinearLayout style="@style/info">
+
+                <TextView
+                    android:text="Storage"
+                    style="@style/info_text_left" />
+
+                <View style="@style/info_view" />
+
+                <TextView
+                    android:text="128GB"
+                    style="@style/info_text_right" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>

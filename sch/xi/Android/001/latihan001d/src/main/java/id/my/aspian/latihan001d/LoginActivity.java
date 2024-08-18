@@ -24,17 +24,15 @@ public class LoginActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    };
 
-        // Register Text
-        findViewById(R.id.register).setOnClickListener(v -> {
-            Intent Register = new Intent(getApplicationContext(), RegisterActivity.class);
-            startActivity(Register);
-        });
+    public void to_main(View v) {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+    };
 
-        // Login Button
-        findViewById(R.id.login).setOnClickListener(v -> {
-            Intent Login = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(Login);
-        });
-    }
+    public void to_register(View v) {
+        Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+        startActivity(intent);
+    };
 }

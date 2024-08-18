@@ -14,10 +14,17 @@
 ## Code
 - https://www.geeksforgeeks.org/how-to-make-a-phone-call-from-an-android-application/
 - https://stackoverflow.com/questions/68808796/how-can-you-launch-termux-through-another-android-app
-- https://stackoverflow.com/questions/2201917/how-can-i-open-a-url-in-androids-web-browser-from-my-application # Intent with url
+- https://developer.android.com/guide/components/intents-common#java # Intent Android
+- https://stackoverflow.com/questions/2201917/
+- https://developer.android.com/reference/android/net/MailTo # mailto
+how-can-i-open-a-url-in-androids-web-browser-from-my-application # Intent with url
 - https://stackoverflow.com/questions/3872063/how-to-launch-an-activity-from-another-application-in-android # Intent with package name
+- https://stackoverflow.com/questions/2662531/launching-google-maps-directions-via-an-intent-on-android # Intent Maps
 - https://stackoverflow.com/questions/3631982/change-applications-starting-activity # Change starting activity
 
+
+mailto
+geo
 
 # -
 ## Design
@@ -197,3 +204,8 @@ findViewById(R.id.btn_github).setOnClickListener(v -> {
     startActivity(Github);
 });
 ```
+
+### Intent
+Ada beberapa cara untuk melakukan intent.
+1. Menggunakan atribut pada tag.
+2. 

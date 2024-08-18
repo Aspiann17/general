@@ -22,17 +22,15 @@ public class RegisterActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-        // Login Text
-        findViewById(R.id.login).setOnClickListener(v -> {
-            Intent Login = new Intent(getApplicationContext(), RegisterActivity.class);
-            startActivity(Login);
-        });
-
-        // Register Button
-        findViewById(R.id.register).setOnClickListener(v -> {
-            Intent Register = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(Register);
-        });
     }
+
+    public void to_main(View v) {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+    };
+
+    public void to_login(View v) {
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
+    };
 }

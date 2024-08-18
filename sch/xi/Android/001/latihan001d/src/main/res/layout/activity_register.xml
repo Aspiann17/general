@@ -79,7 +79,8 @@
                     android:textAlignment="textStart"
                     android:textColor="@color/primary"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:onClick="to_login" />
 
                 <View
                     android:layout_width="0dp"
@@ -91,7 +92,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Register"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#FFFFFF"
+                    android:onClick="to_register"/>
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

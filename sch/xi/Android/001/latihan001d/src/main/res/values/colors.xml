@@ -8,4 +8,5 @@
     <color name="green">#198754</color>
 
     <color name="primary">@color/blue</color>
+    <color name="secondary">@color/white</color>
 </resources>

@@ -35,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Youtube Intent
         findViewById(R.id.btn_youtube).setOnClickListener(v -> {
-            Intent YouTube = new Intent(Intent.ACTION_VIEW, Uri.parse("https://youtube.com/"));
+            // Intent YouTube = new Intent(Intent.ACTION_VIEW, Uri.parse("https://youtube.com/"));
+            Intent YouTube = new Intent(Intent.ACTION_VIEW, Uri.parse("https://youtu.be/dQw4w9WgXcQ?si=LEHzRe_Dh6cavWQ6"));
             startActivity(YouTube);
         });
 

@@ -93,7 +93,7 @@
                     android:layout_height="wrap_content"
                     android:text="Register"
                     android:textColor="#FFFFFF"
-                    android:onClick="to_register"/>
+                    android:onClick="to_main"/>
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

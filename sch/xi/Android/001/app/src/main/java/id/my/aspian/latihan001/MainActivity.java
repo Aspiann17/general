@@ -11,6 +11,7 @@ import androidx.core.view.WindowInsetsCompat;
 // Intent
 import android.content.Intent;
 import android.net.Uri;
+import android.view.View;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -86,8 +87,10 @@ public class MainActivity extends AppCompatActivity {
 
         // Browser Intent
         findViewById(R.id.btn_browser).setOnClickListener(v -> {
-            Intent Browser = new Intent(Intent.ACTION_VIEW, Uri.parse("https://kernel.org"));
-            startActivity(Browser);
+//            Intent Browser = new Intent(Intent.ACTION_VIEW, Uri.parse("https://kernel.org"));
+//            startActivity(Browser);
+            Intent intent = new Intent(getApplicationContext(), RelativeActivity.class);
+            startActivity(intent);
         });
     }
 }

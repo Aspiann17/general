@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:background="@drawable/background_button_main"
+        android:layout_centerInParent="true" >
+
+        <Button
+            android:id="@+id/btn_github"
+            style="@style/button_template"
+            android:text="Github" />
+
+        <Button
+            android:id="@+id/btn_youtube"
+            android:layout_toRightOf="@id/btn_github"
+            android:layout_gravity="fill_horizontal"
+            android:layout_width="match_parent"
+            android:text="YouTube"
+            style="@style/button_template" />
+
+        <ImageButton
+            android:id="@+id/btn_design"
+            android:layout_below="@id/btn_github"
+            android:layout_gravity="fill_vertical"
+            android:paddingTop="27dp"
+            android:src="@drawable/archlinux"
+            style="@style/button_template" />
+
+        <Button
+            android:id="@+id/btn_shopee"
+            android:layout_below="@id/btn_youtube"
+            android:layout_toRightOf="@id/btn_design"
+            android:text="Shopee"
+            style="@style/button_template" />
+
+        <Button
+            android:id="@+id/btn_facebook"
+            android:layout_below="@id/btn_youtube"
+            android:layout_toRightOf="@id/btn_shopee"
+            android:layout_width="match_parent"
+            android:text="Facebook"
+            style="@style/button_template" />
+
+        <Button
+            android:id="@+id/btn_call"
+            android:layout_gravity="fill_horizontal"
+            android:text="Telpon"
+            android:layout_width="match_parent"
+            android:layout_below="@id/btn_shopee"
+            android:layout_toRightOf="@id/btn_design"
+            style="@style/button_template" />
+
+        <Button
+            android:id="@+id/btn_termux"
+            android:layout_below="@id/btn_design"
+            android:layout_gravity="fill_horizontal"
+            android:text="Termux"
+            style="@style/button_template" />
+
+        <Button
+            android:id="@+id/btn_nod"
+            android:layout_below="@id/btn_call"
+            android:layout_toRightOf="@id/btn_termux"
+            android:layout_width="match_parent"
+            android:text="Nix Droid"
+            style="@style/button_template" />
+
+        <Button
+            android:id="@+id/btn_browser"
+            android:layout_below="@id/btn_termux"
+            android:layout_gravity="fill_horizontal"
+            android:layout_width="match_parent"
+            android:text="Browser"
+            style="@style/button_template" />
+
+    </RelativeLayout>
+</RelativeLayout>

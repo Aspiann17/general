@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -13,16 +14,17 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        android:layout_marginHorizontal="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:gravity="center"
         android:orientation="horizontal"
         android:padding="10dp"
-        android:background="@drawable/main_header">
+        android:background="@drawable/main_header_background">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/main_header_icon" />
+            android:src="@drawable/linuxmint" />
 
         <View
             android:layout_width="0dp"
@@ -33,48 +35,131 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
+            android:padding="5dp"
             android:text="ATRA"
             android:textColor="@color/secondary"
-            android:textSize="24sp"
+            android:textSize="36sp"
             android:textStyle="bold" />
 
     </LinearLayout>
 
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="horizontal"-->
-<!--        android:gravity="center"-->
-<!--        android:backgroundTint="@color/primary">-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="20dp"
+        android:gravity="center"
+        android:orientation="horizontal" >
 
-<!--        <ImageButton-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:padding="10dp"-->
-<!--            android:background="@drawable/main_icon_background"-->
-<!--            android:src="@drawable/main_icon_car"/>-->
+        <ImageButton
+            android:background="@drawable/main_nav_icon_background"
+            android:src="@drawable/main_nav_icon_car"
+            style="@style/main_nav_icon_style" />
 
+        <ImageButton
+            android:background="@drawable/main_nav_icon_background"
+            android:src="@drawable/main_nav_icon_motor"
+            style="@style/main_nav_icon_style" />
 
-<!--    </LinearLayout>-->
+        <ImageButton
+            android:background="@drawable/main_nav_icon_background"
+            android:src="@drawable/main_nav_icon_train"
+            style="@style/main_nav_icon_style" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:orientation="vertical"
         android:background="@drawable/main_content_background">
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+        <LinearLayout style="@style/main_content_item_style" >
+
+            <ImageButton
+                android:src="@drawable/main_nav_icon_car"
+                style="@style/main_content_item_img_style" />
+
+            <View style="@style/main_content_item_view_style" />
+
+            <LinearLayout style="@style/main_content_item_right_style" >
+
+                <TextView
+                    android:text="Kapuas - Sungai Andai"
+                    style="@style/main_content_item_right_text_top_style" />
+
+                <TextView
+                    android:text="RP100.000"
+                    style="@style/main_content_item_right_text_bottom_style" />
 
             </LinearLayout>
+        </LinearLayout>
 
-        </ScrollView>
+        <LinearLayout style="@style/main_content_item_style" >
+
+            <ImageButton
+                android:src="@drawable/main_nav_icon_train"
+                style="@style/main_content_item_img_style" />
+
+            <View style="@style/main_content_item_view_style" />
+
+            <LinearLayout style="@style/main_content_item_right_style" >
+
+                <TextView
+                    android:text="Saranjana - Kelayan C"
+                    style="@style/main_content_item_right_text_top_style" />
+
+                <TextView
+                    android:text="RP50.000"
+                    style="@style/main_content_item_right_text_bottom_style" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout style="@style/main_content_item_style" >
+
+            <ImageButton
+                android:src="@drawable/main_nav_icon_train"
+                style="@style/main_content_item_img_style" />
+
+            <View style="@style/main_content_item_view_style" />
+
+            <LinearLayout style="@style/main_content_item_right_style" >
+
+                <TextView
+                    android:text="IKN - Bati Bati"
+                    style="@style/main_content_item_right_text_top_style" />
+
+                <TextView
+                    android:text="RP200.000"
+                    style="@style/main_content_item_right_text_bottom_style" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+        <LinearLayout style="@style/main_content_item_style" >
+
+            <ImageButton
+                android:src="@drawable/main_nav_icon_motor"
+                style="@style/main_content_item_img_style" />
+
+            <View style="@style/main_content_item_view_style" />
+
+            <LinearLayout style="@style/main_content_item_right_style" >
+
+                <TextView
+                    android:text="Free"
+                    style="@style/main_content_item_right_text_top_style" />
+
+                <TextView
+                    android:text="-"
+                    style="@style/main_content_item_right_text_bottom_style" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
     </LinearLayout>
-
 </LinearLayout>

@@ -51,16 +51,19 @@
         android:orientation="horizontal" >
 
         <ImageButton
+            android:onClick="to_car"
             android:background="@drawable/main_nav_icon_background"
             android:src="@drawable/main_nav_icon_car"
             style="@style/main_nav_icon_style" />
 
         <ImageButton
+            android:onClick="to_motor"
             android:background="@drawable/main_nav_icon_background"
             android:src="@drawable/main_nav_icon_motor"
             style="@style/main_nav_icon_style" />
 
         <ImageButton
+            android:onClick="to_train"
             android:background="@drawable/main_nav_icon_background"
             android:src="@drawable/main_nav_icon_train"
             style="@style/main_nav_icon_style" />
@@ -159,7 +162,6 @@
 
             </LinearLayout>
         </LinearLayout>
-
 
     </LinearLayout>
 </LinearLayout>

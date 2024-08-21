@@ -104,6 +104,17 @@ Agar `main_info_text_value` mewarisi `main_info_text`, tambahkan `parent` sehing
 - `android:layout_gravity`  -> Mengatur LinearLayout itu sendiri.
 
 # Code
+## HashMap
+Untuk menggunakan hashmap pada java, kita perlu mengimport classnya.
+```java
+import java.util.HashMap;
+```
+
+Syntax dasar
+```java
+HashMap<String, String> mobil = new HashMap<String, String>();
+```
+
 ## Mengganti activity yang pertama kali dibuka
 Ketika aplikasi baru dijalankan/dibuka, activity yang pertama kali dijalankan adalah MainActivity.
 Hal tersebut dapat diubah dengan konfigurasi pada AndroidManifest.
@@ -163,14 +174,54 @@ public void to_main(View v) {
 
 `MainActivity` merupakan nama activity yang dituju.
 
-### Class Intent
+### Mengirim data
+
+
+
+
 
 ### Tambahan
-
 #### -
+Untuk melakukan `Intent`, terdapat beberapa metode.
+
+##### Menggunakan findViewById
 ```xml
-android:onClick="onClick"
-android:clickable="true"
+<Button
+    android:id="@+id/btn_github"
+    style="@style/button_template"
+    android:layout_row="0"
+    android:layout_column="0"
+    android:text="Github" />
+```
+
+```java
+findViewById(R.id.btn_github).setOnClickListener(v -> {
+    Intent Github = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Aspiann17"));
+    startActivity(Github);
+});
+```
+
+##### Dengan atribut onClick
+Jika menggunakan atribut onClick, terlebih dahulu harus didefinisikan method yang menangani intent nya.
+
+```java
+public void to_main(View v) {
+    // Intent intent = new Intent(this, MainActivity.class);
+    Intent intent = new Intent(this, MainActivity.class);
+    startActivity(intent);
+}
+```
+
+Nilai dari atribut `android:onClick` sama dengan nama method yang didefinisikan.
+
+```xml
+<Button
+    android:id="@+id/login"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Login"
+    android:textColor="#FFFFFF"
+    android:onClick="to_main" />
 ```
 
 # Referensi

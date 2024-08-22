@@ -36,7 +36,7 @@
         <LinearLayout style="@style/info_content_container" >
 
             <TextView
-                android:text="Jumlah Penumpang"
+                android:text="Kapasitas"
                 style="@style/info_content_text" />
 
             <View
@@ -96,10 +96,26 @@
                 android:layout_weight="1" />
 
             <TextView
-                android:text="1KM/menit"
+                android:text="1km/menit"
                 style="@style/info_content_text" />
 
         </LinearLayout>
 
+        <LinearLayout style="@style/info_content_container" >
+
+            <TextView
+                android:text="Estimasi Waktu"
+                style="@style/info_content_text" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                android:text="20 Menit"
+                style="@style/info_content_text" />
+
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

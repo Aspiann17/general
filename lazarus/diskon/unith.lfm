@@ -1,0 +1,162 @@
+object Form1: TForm1
+  Left = 706
+  Height = 316
+  Top = 181
+  Width = 242
+  Caption = 'Diskon'
+  ClientHeight = 316
+  ClientWidth = 242
+  OnCreate = FormCreate
+  LCLVersion = '2.2.6.0'
+  object Label1: TLabel
+    Left = 8
+    Height = 25
+    Top = 16
+    Width = 215
+    Caption = 'Departemen Store'
+    Font.Height = -21
+    Font.Name = 'Sans'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object Label2: TLabel
+    Left = 8
+    Height = 16
+    Top = 56
+    Width = 82
+    Caption = 'Jenis Kelamin'
+    ParentColor = False
+  end
+  object Label3: TLabel
+    Left = 8
+    Height = 16
+    Top = 88
+    Width = 44
+    Caption = 'Ukuran'
+    ParentColor = False
+  end
+  object Label4: TLabel
+    Left = 8
+    Height = 16
+    Top = 120
+    Width = 68
+    Caption = 'Langganan'
+    ParentColor = False
+  end
+  object Label5: TLabel
+    Left = 8
+    Height = 16
+    Top = 176
+    Width = 36
+    Caption = 'Harga'
+    ParentColor = False
+  end
+  object Label6: TLabel
+    Left = 8
+    Height = 16
+    Top = 208
+    Width = 42
+    Caption = 'Diskon'
+    ParentColor = False
+  end
+  object Label7: TLabel
+    Left = 8
+    Height = 16
+    Top = 240
+    Width = 31
+    Caption = 'Total'
+    ParentColor = False
+  end
+  object pria: TRadioButton
+    Left = 104
+    Height = 21
+    Top = 56
+    Width = 46
+    Caption = 'Pria'
+    TabOrder = 0
+  end
+  object wanita: TRadioButton
+    Left = 158
+    Height = 21
+    Top = 56
+    Width = 65
+    Caption = 'Wanita'
+    Checked = True
+    TabOrder = 1
+    TabStop = True
+  end
+  object ukuran: TComboBox
+    Left = 104
+    Height = 26
+    Top = 80
+    Width = 119
+    ItemHeight = 0
+    Items.Strings = (
+      'S'
+      'M'
+      'L'
+    )
+    TabOrder = 2
+    Text = 'ukuran'
+  end
+  object pelanggan: TCheckBox
+    Left = 104
+    Height = 21
+    Top = 120
+    Width = 37
+    Caption = 'Ya'
+    TabOrder = 3
+  end
+  object oharga: TEdit
+    Left = 104
+    Height = 24
+    Top = 168
+    Width = 119
+    TabOrder = 4
+    Text = 'oharga'
+  end
+  object odiskon: TEdit
+    Left = 104
+    Height = 24
+    Top = 200
+    Width = 119
+    TabOrder = 5
+    Text = 'odiskon'
+  end
+  object ototal: TEdit
+    Left = 104
+    Height = 24
+    Top = 232
+    Width = 119
+    TabOrder = 6
+    Text = 'ototal'
+  end
+  object bhitung: TButton
+    Left = 9
+    Height = 25
+    Top = 280
+    Width = 43
+    Caption = 'Hitung'
+    OnClick = bhitungClick
+    TabOrder = 7
+  end
+  object breset: TButton
+    Left = 96
+    Height = 25
+    Top = 280
+    Width = 43
+    Caption = 'Reset'
+    OnClick = bresetClick
+    TabOrder = 8
+  end
+  object bclose: TButton
+    Left = 180
+    Height = 25
+    Top = 280
+    Width = 43
+    Caption = 'Close'
+    OnClick = bcloseClick
+    TabOrder = 9
+  end
+end

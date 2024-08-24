@@ -1,0 +1,11 @@
+# Ignore build output directories and files
+**/lib/
+**/backup/
+*.o
+*.or
+*.compiled
+*.ppu
+*.res
+
+# Ignore Lazarus project session file
+*.lps

@@ -3,7 +3,7 @@ FROM debian:bookworm-slim
 LABEL maintainer="Aspian"
 LABEL version="1.7"
 
-RUN apt update && apt install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     php8.2 \
     php8.2-sqlite3 \
     apache2 \

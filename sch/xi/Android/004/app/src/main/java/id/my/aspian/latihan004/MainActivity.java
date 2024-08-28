@@ -12,9 +12,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
-    EditText input1 = findViewById(R.id.input1), input2 = findViewById(R.id.input2);
-    TextView output = findViewById(R.id.output);
-    float satu = Integer.parseInt(input1.getText().toString()), dua = Integer.parseInt(input2.getText().toString());
+    EditText input1, input2;
+    TextView output;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,21 +25,30 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        input1 = findViewById(R.id.input1);
+        input2 = findViewById(R.id.input2);
+        output = findViewById(R.id.output);
     }
 
     public void tambah(View v) {
-        output.setText(String.valueOf(satu + dua));
+        output.setText(String.valueOf(
+                Float.parseFloat(input1.getText().toString()) + Float.parseFloat(input2.getText().toString())
+        ));
     }
-
     public void kurang(View v) {
-        output.setText(String.valueOf(satu - dua));
+        output.setText(String.valueOf(
+                Float.parseFloat(input1.getText().toString()) - Float.parseFloat(input2.getText().toString())
+        ));
     }
-
     public void kali(View v) {
-        output.setText(String.valueOf(satu * dua));
+        output.setText(String.valueOf(
+                Float.parseFloat(input1.getText().toString()) * Float.parseFloat(input2.getText().toString())
+        ));
     }
-
     public void bagi(View v) {
-        output.setText(String.valueOf(satu / dua));
+        output.setText(String.valueOf(
+                Float.parseFloat(input1.getText().toString()) / Float.parseFloat(input2.getText().toString())
+        ));
     }
 }

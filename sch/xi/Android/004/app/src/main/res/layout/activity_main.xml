@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
+    android:background="#fff"
     tools:context=".MainActivity">
 
     <EditText
@@ -14,19 +15,21 @@
         android:hint="Input 1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#000000" />
+        android:textColor="#000" />
 
     <EditText
         android:id="@+id/input2"
         android:hint="Input 2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textColor="#000"/>
 
     <TextView
         android:id="@+id/output"
         android:text="Output"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textColor="#000" />
 
     <Button
         android:text="Tambah"

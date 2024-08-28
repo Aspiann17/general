@@ -206,7 +206,6 @@ Jika menggunakan atribut onClick, terlebih dahulu harus didefinisikan method yan
 
 ```java
 public void to_main(View v) {
-    // Intent intent = new Intent(this, MainActivity.class);
     Intent intent = new Intent(this, MainActivity.class);
     startActivity(intent);
 }

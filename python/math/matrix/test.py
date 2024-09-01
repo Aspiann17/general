@@ -67,7 +67,10 @@ class TestMatrix(unittest.TestCase):
 
         result = M.add(a, b)
 
-        self.assertEqual(result, [[8], [8], [8], [8], [8], [8]])
+        self.assertEqual(result, [
+            [8], [8], [8],
+            [8], [8], [8]
+        ])
 
     def test_sub(self):
         a = M([
@@ -82,7 +85,32 @@ class TestMatrix(unittest.TestCase):
 
         result = M.sub(a, b)
 
-        self.assertEqual(result, [[-6], [-4], [-2], [0], [2], [4]])
+        self.assertEqual(result, [
+            [-6],
+            [-4],
+            [-2],
+            [0],
+            [2],
+            [4]
+        ])
+    
+    def test_multiply(self):
+        a = M([[1, 2, 3]])
+        b = M([
+            [3],
+            [2],
+            [1]
+        ])
+
+        result1 = M.multiply(a, b)
+        result2 = M.multiply(b, a)
+
+        self.assertEqual(result1, [[10]])
+        self.assertEqual(result2, [
+            [3, 6, 9],
+            [2, 4, 6],
+            [1, 2, 3]
+        ])
 
 if __name__ == "__main__":
     unittest.main()

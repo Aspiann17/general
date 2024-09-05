@@ -1,0 +1,7 @@
+CREATE TABLE "siswa" (
+	"nis"	INTEGER NOT NULL UNIQUE,
+	"nama"	TEXT NOT NULL UNIQUE,
+	"kelas"	TEXT,
+	"jk"	TEXT,
+	PRIMARY KEY("nis" AUTOINCREMENT)
+);

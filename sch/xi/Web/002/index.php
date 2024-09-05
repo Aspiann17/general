@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>L002</title>
     <link rel="stylesheet" href="../bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.5/css/dataTables.dataTables.min.css">
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -20,6 +21,8 @@
         <div class="d-flex flex-row mt-5 justify-content-between">
             <h3 id="main_title">SCRUD</h3>
             <div class="d-flex">
+                <form method="get"><button type="submit" class="btn btn-primary mx-2" name="action" value="print">Print</button></form>
+
                 <button id="edit_button" type="button" class="btn btn-secondary mx-2" data-bs-toggle="modal"
                     data-bs-target="#modal_data">
                     Edit
@@ -123,6 +126,9 @@
     </div>
 
     <script src="../bootstrap/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/2.1.5/js/dataTables.min.js"></script>
+
     <script>
         const modal_title = document.getElementById("modal_title");
         const modal_button = document.getElementById("modal_button");
@@ -133,6 +139,8 @@
         const array_nis = Array.from(document.querySelectorAll(
             "input[type='hidden'][name='nis']"
         )).map(input => input.value);
+
+        let table = new DataTable('#main_table');
 
         document.getElementById("add_button").addEventListener("click", () => {
             modal_title.textContent = "Tambahkan Data";
@@ -157,7 +165,20 @@
             });
         });
 
-    <script src="../bootstrap/bootstrap.min.js">
+        // input_nis.addEventListener("change", (event) => {
+        //     console.log("kontol");
+        //     const nis = event.target.value;
+        //     const rows = document.querySelectorAll("#main_table tbody tr");
+
+        //     rows.forEach(row => {
+        //         const cells = row.getElementsByTagName('td');
+
+        //         if (cells[0].textContent === nis) {
+        //             input_name.textContent = cells[1].textContent;
+        //             // input_kelas.textContent = cells[2].textContent;
+        //         };
+        //     });
+        // })
 
     </script>
 </body>

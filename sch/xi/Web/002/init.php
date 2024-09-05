@@ -1,15 +1,8 @@
 <?php
-$db_path = __DIR__ . "/tmp/database.sqlite";
+require 'vendor/autoload.php';
+use Dompdf\Dompdf;
 
-function is_set($key, $value) : bool {
-    return (
-        (
-            isset($_GET[$key]) && $_GET[$key] == $value
-        ) || (
-            isset($_POST[$key]) && $_POST[$key] == $value
-        )
-    ) ? true : false;
-}
+$db_path = __DIR__ . "/tmp/database.sqlite";
 
 try {
     $db = new PDO("sqlite:$db_path");
@@ -35,6 +28,51 @@ try {
     die($e->getMessage());
 }
 
+function is_set($key, $value) : bool {
+    return (
+        (
+            isset($_GET[$key]) && $_GET[$key] == $value
+        ) || (
+            isset($_POST[$key]) && $_POST[$key] == $value
+        )
+    ) ? true : false;
+}
+
+function printpdf() {
+    global $db;
+    $pdf = new Dompdf();
+    echo "ehe";
+    $html = "
+        <center><h3>Daftar Nama Siswa</h3></center>
+        <hr/><br/>
+        <table border='1' width='100%'>
+            <tr>
+                <td>No</td>
+                <td>Nama</td>
+                <td>Kelas</td>
+                <td>Jenis Kelamin</td>
+            </tr>
+    ";
+
+    foreach ($db->query("SELECT * FROM `siswa` ORDER BY nama ASC")->fetchAll(PDO::FETCH_ASSOC) as $i => $item) {
+        $html .= "
+            <tr>
+                <td>$i</td>
+                <td>".$item["nama"]."</td>
+                <td>".$item["kelas"]."</td>
+                <td>".$item["jk"]."</td>
+            </tr>
+        ";
+    };
+
+    $html .= "</table>";
+
+    $pdf->loadHtml($html);
+    $pdf->setPaper("A4");
+    $pdf->render();
+    $pdf->stream("Report.pdf");
+};
+
 $db->exec("
     CREATE TABLE IF NOT EXISTS `siswa` (
         `nis`	INTEGER NOT NULL UNIQUE,
@@ -44,6 +82,11 @@ $db->exec("
         PRIMARY KEY(`nis` AUTOINCREMENT)
     );
 ");
+
+// pdf
+if (is_set("action", "print")) {
+    printpdf();
+};
 
 // CRUD
 if ( is_set("action", "delete") && isset($_POST["nis"]) ) {

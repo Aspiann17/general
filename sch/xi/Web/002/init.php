@@ -50,9 +50,19 @@ if ( is_set("action", "delete") && isset($_POST["nis"]) ) {
     $stmt = $db->prepare("DELETE FROM `siswa` WHERE nis = :nis");
     $stmt->bindParam(":nis", $_POST["nis"], PDO::PARAM_INT);
     $stmt->execute();
-} else if ( is_set() && is_set() ) {
-
-}
+} else if ( is_set("action", "add") ) {
+    if (
+        (isset($_POST["input_name"]) && strlen($_POST["input_name"]) > 0) &&
+        (isset($_POST["input_kelas"]) && strlen($_POST["input_kelas"]) > 0) &&
+        (isset($_POST["input_jk"]) && strlen($_POST["input_jk"]) > 0)
+    ) {
+        $stmt = $db->prepare("INSERT INTO `siswa` (nama, kelas, jk) VALUES (:nama, :kelas, :jk)");
+        $stmt->bindValue(":nama", $_POST["input_name"], PDO::PARAM_STR);
+        $stmt->bindValue(":kelas", $_POST["input_kelas"], PDO::PARAM_STR);
+        $stmt->bindValue(":jk", $_POST["input_jk"], PDO::PARAM_STR);
+        $stmt->execute();
+    };
+};
 
 
 // $db->exec("INSERT INTO siswa (nama, kelas, jk) VALUES ('kontol', 'alah', 'Pria')");

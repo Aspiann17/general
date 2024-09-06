@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>L002</title>
     <link rel="stylesheet" href="../bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.5/css/dataTables.dataTables.min.css">
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -18,23 +17,27 @@
 <body>
     <div class="container">
 
-        <div class="d-flex flex-row mt-5 justify-content-between">
-            <h3 id="main_title">SCRUD</h3>
-            <div class="d-flex">
-                <form method="get"><button type="submit" class="btn btn-primary mx-2" name="action" value="print">Print</button></form>
+        <form method="post">
+            <div class="d-flex flex-row mt-5 justify-content-between">
+                <h3 id="main_title">SCRUD</h3>
+                <div class="d-flex">
+                    <button type="submit" name="action" value="generate"
+                        class="btn btn-secondary mx-2">Generate</button>
 
-                <button id="edit_button" type="button" class="btn btn-secondary mx-2" data-bs-toggle="modal"
-                    data-bs-target="#modal_data">
-                    Edit
-                </button>
+                    <button type="button" class="btn btn-danger mx-2" data-bs-toggle="modal"
+                        data-bs-target="#modal_verify">Reset</button>
 
-                <button id="add_button" type="button" class="btn btn-primary" data-bs-toggle="modal"
-                    data-bs-target="#modal_data">
-                    Tambah
-                </button>
+                    <button type="submit" name="action" value="print" class="btn btn-success mx-2">Print</button>
 
+                    <button id="edit_button" type="button" class="btn btn-warning mx-2" data-bs-toggle="modal"
+                        data-bs-target="#modal_data">Edit</button>
+
+                    <button id="add_button" type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#modal_data">Tambah</button>
+
+                </div>
             </div>
-        </div>
+        </form>
 
         <hr>
 
@@ -43,36 +46,27 @@
                 <tr>
                     <td>Nis</td>
                     <td>Nama</td>
-                    <td>jk</td>
+                    <td>Kelas</td>
                     <td>Jenis Kelamin</td>
-                    <td>Aksi</td>
+                    <td>-</td>
                 </tr>
             </thead>
 
             <tbody>
-                <!-- <tr>
-                    <td>1</td>
-                    <td>Fulan</td>
-                    <td>X RPL</td>
-                    <td>Stainless Steel</td>
-                    <td><button class="btn btn-dark">Delete</button></td>
-                </tr> -->
-
                 <?php foreach ($list_siswa as $siswa): ?>
-                    <form method="post">
-                        <tr>
-                            <td><?= $siswa["nis"] ?></td>
-                            <td><?= $siswa["nama"] ?></td>
-                            <td><?= $siswa["kelas"] ?></td>
-                            <td><?= $siswa["jk"] ?></td>
-                            <td><button class="btn btn-dark" name="action" value="delete">Delete</button></td>
-                        </tr>
+                    <tr>
+                        <td class="nis"><?= $siswa["nis"] ?></td>
+                        <td><?= $siswa["nama"] ?></td>
+                        <td><?= $siswa["kelas"] ?></td>
+                        <td><?= $siswa["jk"] ?></td>
+                        <td><a href="?action=delete&nis=<?=$siswa['nis']?>"><button class="btn btn-dark">Delete</button></a></td>
                         <input type="hidden" name="nis" value="<?= $siswa['nis'] ?>">
-                    </form>
+                    </tr>
                 <?php endforeach ?>
             </tbody>
         </table>
 
+        <!-- Create, Update Modal -->
         <div class="modal fade" id="modal_data" tabindex="-1" aria-labelledby="modal_data" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -96,9 +90,9 @@
 
                             <div class="mb-3">
                                 <label for="input_kelas">Kelas</label>
-                                <select class="form-control" name="input_kelas">
+                                <select class="form-control" name="input_kelas" id="input_kelas">
                                     <option selected>-</option>
-                                    <option value="x">X</option>
+                                    <option value="X">X</option>
                                     <option value="XI">XI</option>
                                     <option value="XII">XII</option>
                                 </select>
@@ -106,11 +100,11 @@
 
                             <div class="mb-3">
                                 <label for="input_jk">Jenis Kelamin</label>
-                                <select class="form-control" name="input_jk">
+                                <select class="form-control" name="input_jk" id="input_jk">
                                     <option selected>-</option>
-                                    <option value="pria">Pria</option>
-                                    <option value="wanita">Wanita</option>
-                                    <option value="pria">Stainless Steel</option>
+                                    <option value="Pria">Pria</option>
+                                    <option value="Wanita">Wanita</option>
+                                    <option value="Stainless Steel">Stainless Steel</option>
                                 </select>
                             </div>
                         </div>
@@ -123,64 +117,40 @@
                 </div>
             </div>
         </div>
+
+        <!-- Verify Modal -->
+        <div class="modal fade" id="modal_verify" tabindex="-1" aria-labelledby="modal_verify" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Hapus Semua Data</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed nisi fugit quod voluptate
+                            accusamus ab, qui saepe vero incidunt! Neque blanditiis omnis laboriosam rem aliquid. Nulla,
+                            atque maxime! Molestiae, distinctio?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
+                        <form method="post">
+                            <button type="submit" name="action" value="reset" class="btn btn-danger">Hapus</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <script src="../bootstrap/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/2.1.5/js/dataTables.min.js"></script>
-
+    <script src="https://cdn.datatables.net/2.1.5/js/dataTables.bootstrap5.js"></script>
     <script>
-        const modal_title = document.getElementById("modal_title");
-        const modal_button = document.getElementById("modal_button");
-        const input_name = document.getElementById("input_name");
-        const input_kelas = document.getElementById("input_kelas");
-        const input_jk = document.getElementById("input_jk");
-        const input_nis = document.getElementById("input_nis");
-        const array_nis = Array.from(document.querySelectorAll(
-            "input[type='hidden'][name='nis']"
-        )).map(input => input.value);
-
-        let table = new DataTable('#main_table');
-
-        document.getElementById("add_button").addEventListener("click", () => {
-            modal_title.textContent = "Tambahkan Data";
-            modal_button.textContent = "Tambah"
-            modal_button.setAttribute("value", "add");
-            input_nis.disabled = true;
-            input_nis.innerHTML = "";
-        });
-
-        document.getElementById("edit_button").addEventListener("click", () => {
-            modal_title.textContent = "Edit Data";
-            modal_button.textContent = "Edit";
-            modal_button.setAttribute("value", "update");
-            input_nis.disabled = false;
-            input_nis.innerHTML = "";
-
-            array_nis.forEach(item => {
-                const option = document.createElement("option");
-                option.value = item;
-                option.text = item;
-                document.getElementById("input_nis").appendChild(option);
-            });
-        });
-
-        // input_nis.addEventListener("change", (event) => {
-        //     console.log("kontol");
-        //     const nis = event.target.value;
-        //     const rows = document.querySelectorAll("#main_table tbody tr");
-
-        //     rows.forEach(row => {
-        //         const cells = row.getElementsByTagName('td');
-
-        //         if (cells[0].textContent === nis) {
-        //             input_name.textContent = cells[1].textContent;
-        //             // input_kelas.textContent = cells[2].textContent;
-        //         };
-        //     });
-        // })
-
+        let main_table = new DataTable("#main_table");
     </script>
+
+    <script src="../bootstrap/bootstrap.min.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>

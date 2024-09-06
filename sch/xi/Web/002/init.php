@@ -36,12 +36,21 @@ function is_set($key, $value) : bool {
             isset($_POST[$key]) && $_POST[$key] == $value
         )
     ) ? true : false;
-}
+};
 
-function printpdf() {
-    global $db;
+$db->exec("
+    CREATE TABLE IF NOT EXISTS `siswa` (
+        `nis`	INTEGER NOT NULL UNIQUE,
+        `nama`	TEXT NOT NULL,
+        `kelas`	TEXT,
+        `jk`	TEXT,
+        PRIMARY KEY(`nis` AUTOINCREMENT)
+    );
+");
+
+// PDF
+if (is_set("action", "print")) {
     $pdf = new Dompdf();
-    echo "ehe";
     $html = "
         <center><h3>Daftar Nama Siswa</h3></center>
         <hr/><br/>
@@ -54,7 +63,9 @@ function printpdf() {
             </tr>
     ";
 
-    foreach ($db->query("SELECT * FROM `siswa` ORDER BY nama ASC")->fetchAll(PDO::FETCH_ASSOC) as $i => $item) {
+    foreach ($db->query(
+        "SELECT * FROM `siswa` ORDER BY nama ASC"
+    )->fetchAll(PDO::FETCH_ASSOC) as $i => $item) {
         $html .= "
             <tr>
                 <td>$i</td>
@@ -71,29 +82,17 @@ function printpdf() {
     $pdf->setPaper("A4");
     $pdf->render();
     $pdf->stream("Report.pdf");
-};
+}
 
-$db->exec("
-    CREATE TABLE IF NOT EXISTS `siswa` (
-        `nis`	INTEGER NOT NULL UNIQUE,
-        `nama`	TEXT NOT NULL,
-        `kelas`	TEXT,
-        `jk`	TEXT,
-        PRIMARY KEY(`nis` AUTOINCREMENT)
-    );
-");
-
-// pdf
-if (is_set("action", "print")) {
-    printpdf();
-};
-
-// CRUD
-if ( is_set("action", "delete") && isset($_POST["nis"]) ) {
+// Delete
+else if ( is_set("action", "delete") && isset($_GET["nis"]) ) {
     $stmt = $db->prepare("DELETE FROM `siswa` WHERE nis = :nis");
-    $stmt->bindParam(":nis", $_POST["nis"], PDO::PARAM_INT);
+    $stmt->bindParam(":nis", $_GET["nis"], PDO::PARAM_INT);
     $stmt->execute();
-} else if ( is_set("action", "add") ) {
+}
+
+// Insert
+else if ( is_set("action", "add") ) {
     if (
         (isset($_POST["input_name"]) && strlen($_POST["input_name"]) > 0) &&
         (isset($_POST["input_kelas"]) && strlen($_POST["input_kelas"]) > 0) &&
@@ -105,14 +104,31 @@ if ( is_set("action", "delete") && isset($_POST["nis"]) ) {
         $stmt->bindValue(":jk", $_POST["input_jk"], PDO::PARAM_STR);
         $stmt->execute();
     };
+}
+
+// Update
+else if ( is_set("action", "update") ) {
+    if (isset($_POST["input_nis"])) {
+        $stmt = $db->prepare("UPDATE `siswa` SET nama = :nama, kelas = :kelas, jk = :jenis_kelamin WHERE nis = :nis");
+        $stmt->bindValue(":nis", $_POST["input_nis"], PDO::PARAM_INT);
+        $stmt->bindValue(":nama", $_POST["input_name"] ?? "Fulan", PDO::PARAM_STR);
+        $stmt->bindValue(":kelas", $_POST["input_kelas"] ?? "Undefined", PDO::PARAM_STR);
+        $stmt->bindValue(":jenis_kelamin", $_POST["input_jk"] ?? "Undefined", PDO::PARAM_STR);
+        $stmt->execute();
+    };
+}
+
+// Delete All Data
+else if ( is_set("action", "reset") ) {
+    $db->exec("DELETE FROM siswa");
+}
+
+// Generate Dummy Data
+else if ( is_set("action", "generate") ) {
+    $db->exec("INSERT INTO siswa (nama, kelas, jk) VALUES ('Astagfirullah', 'X', 'Pria')");
 };
 
-
-// $db->exec("INSERT INTO siswa (nama, kelas, jk) VALUES ('kontol', 'alah', 'Pria')");
-// $db->exec("DELETE FROM siswa");
-
 $list_siswa = $db->query("SELECT * FROM `siswa`")->fetchAll(PDO::FETCH_ASSOC);
-
 
 // Debug
 echo "<pre>";

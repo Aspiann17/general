@@ -50,23 +50,11 @@ $db->exec("
 
 // PDF
 if (is_set("action", "print")) {
-    $pdf = new Dompdf();
-    $html = "
-        <center><h3>Daftar Nama Siswa</h3></center>
-        <hr/><br/>
-        <table border='1' width='100%'>
-            <tr>
-                <td>No</td>
-                <td>Nama</td>
-                <td>Kelas</td>
-                <td>Jenis Kelamin</td>
-            </tr>
-    ";
-
+    $tmp = "";
     foreach ($db->query(
         "SELECT * FROM `siswa` ORDER BY nama ASC"
     )->fetchAll(PDO::FETCH_ASSOC) as $i => $item) {
-        $html .= "
+        $tmp .= "
             <tr>
                 <td>$i</td>
                 <td>".$item["nama"]."</td>
@@ -76,9 +64,21 @@ if (is_set("action", "print")) {
         ";
     };
 
-    $html .= "</table>";
+    $pdf = new Dompdf();
+    $pdf->loadHtml("
+        <center><h3>Daftar Nama Siswa</h3></center>
+        <hr/><br/>
+        <table border='1' width='100%'>
+            <tr>
+                <td>No</td>
+                <td>Nama</td>
+                <td>Kelas</td>
+                <td>Jenis Kelamin</td>
+            </tr>
 
-    $pdf->loadHtml($html);
+            $tmp
+        </table>
+    ");
     $pdf->setPaper("A4");
     $pdf->render();
     $pdf->stream("Report.pdf");

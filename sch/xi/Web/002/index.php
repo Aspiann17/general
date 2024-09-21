@@ -123,13 +123,11 @@
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Hapus Semua Data</h5>
+                        <h5 class="modal-title">Hapus Semua Data?</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed nisi fugit quod voluptate
-                            accusamus ab, qui saepe vero incidunt! Neque blanditiis omnis laboriosam rem aliquid. Nulla,
-                            atque maxime! Molestiae, distinctio?</p>
+                        <p class="text-danger">Data yang telah dihapus tidak dapat dipulihkan kembali!</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
@@ -145,14 +143,13 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/2.1.5/js/dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/2.1.5/js/dataTables.bootstrap5.js"></script>
-    <script>
-        let main_table = new DataTable("#main_table");
-    </script>
 
     <script src="../bootstrap/bootstrap.min.js"></script>
     <script>
+        let main_table = new DataTable("#main_table");        
+
         // Membersihkan semua key/value pada search bar.
-        // window.onload = () => window.history.replaceState({}, document.title, window.location.pathname);
+        window.onload = () => window.history.replaceState({}, document.title, window.location.pathname);
 
         const modal_title = document.getElementById("modal_title");
         const modal_button = document.getElementById("modal_button");
@@ -160,9 +157,6 @@
         const input_kelas = document.getElementById("input_kelas");
         const input_jk = document.getElementById("input_jk");
         const input_nis = document.getElementById("input_nis");
-        const array_nis = Array.from(document.querySelectorAll(
-            "input[type='hidden'][name='nis']"
-        )).map(input => input.value);
 
         document.getElementById("add_button").addEventListener("click", () => {
             modal_title.textContent = "Tambahkan Data";
@@ -173,6 +167,10 @@
         });
 
         document.getElementById("edit_button").addEventListener("click", () => {
+            const array_nis = Array.from(document.querySelectorAll(
+                "input[type='hidden'][name='nis']"
+            )).map(input => input.value);
+
             modal_title.textContent = "Edit Data";
             modal_button.textContent = "Edit";
             modal_button.setAttribute("value", "update");
@@ -192,6 +190,39 @@
                     input_nis.appendChild(option);
                 });
             };
+        });
+
+        document.getElementById("input_nis").addEventListener("change", () => {
+            // # 01
+            // var data = [];
+            // var rows = document.getElementById("main_table").getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+            // for (var i = 0; i < rows.length; i++) {
+            //     var cols = rows[i].getElementsByTagName("td");
+            //     data.push({
+            //         nis: cols[0].textContent,
+            //         nama: cols[1].textContent,
+            //         kelas: cols[2].textContent,
+            //         jk: cols[3].textContent,
+            //     });
+            // };
+            // console.log(data[input_nis.selectedIndex]);
+
+            // # 02
+            // var rows = document.getElementById("main_table")
+            //                     .getElementsByTagName("tbody")[0]
+            //                     .getElementsByTagName("tr");
+            // var cols = rows[input_nis.selectedIndex].getElementsByTagName("td");
+
+            // input_name.value = cols[1].textContent;
+            // input_kelas.value = cols[2].textContent;
+            // input_jk.value = cols[3].textContent;
+
+            // # 03
+            const rows = document.querySelectorAll("#main_table tbody tr");
+            const cols = rows[input_nis.selectedIndex].querySelectorAll("td");
+            input_name.value = cols[1].textContent;
+            input_kelas.value = cols[2].textContent;
+            input_jk.value = cols[3].textContent;
         });
 
         // input_nis.addEventListener("change", (event) => {

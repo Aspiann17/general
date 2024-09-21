@@ -8,7 +8,7 @@ try {
     $db = new PDO("sqlite:$db_path");
     $db->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 } catch (Exception $e) {
-    if ($e->getCode() === 14) {
+    if ( (PHP_OS_FAMILY !== "Windows") && ($e->getCode() === 14) ) {
         $file_info = stat($db_path);
 
         echo "<pre>";
@@ -21,9 +21,7 @@ try {
             "Message" => $e->getMessage(),
         ]);
         echo "</pre>";
-
-        exit;
-    }
+    };
 
     die($e->getMessage());
 }
@@ -125,7 +123,14 @@ else if ( is_set("action", "reset") ) {
 
 // Generate Dummy Data
 else if ( is_set("action", "generate") ) {
-    $db->exec("INSERT INTO siswa (nama, kelas, jk) VALUES ('Astagfirullah', 'X', 'Pria')");
+    $array_kelas  = ["X", "XI", "XII"];
+    $array_jk     = ["Pria", "Wanita", "Stainless Steel"];
+
+    $kelas = $array_kelas[array_rand($array_kelas)];
+    $jk = $array_jk[array_rand($array_jk)];
+
+    $db->exec("INSERT INTO siswa (nama, kelas, jk) VALUES ('Astagfirullah', '$kelas', '$jk')");
+    var_dump($kelas, $jk);
 };
 
 $list_siswa = $db->query("SELECT * FROM `siswa`")->fetchAll(PDO::FETCH_ASSOC);

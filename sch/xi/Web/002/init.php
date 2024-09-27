@@ -2,7 +2,7 @@
 require 'vendor/autoload.php';
 use Dompdf\Dompdf;
 
-$db_path = __DIR__ . "/tmp/database.sqlite";
+$db_path = __DIR__ . "/database.sqlite3";
 
 try {
     $db = new PDO("sqlite:$db_path");
@@ -130,7 +130,6 @@ else if ( is_set("action", "generate") ) {
     $jk = $array_jk[array_rand($array_jk)];
 
     $db->exec("INSERT INTO siswa (nama, kelas, jk) VALUES ('Astagfirullah', '$kelas', '$jk')");
-    var_dump($kelas, $jk);
 };
 
 $list_siswa = $db->query("SELECT * FROM `siswa`")->fetchAll(PDO::FETCH_ASSOC);

@@ -36,7 +36,7 @@ CREATE TABLE `armada` (
   `jenis` varchar(21) DEFAULT NULL,
   `warna` varchar(21) DEFAULT NULL,
   `kursi` varchar(2) DEFAULT NULL,
-  `kode_supir` varchar(11) DEFAULT NULL,
+  `kode_supir` varchar(7) DEFAULT NULL,
   PRIMARY KEY (`plat`),
   KEY `kode_supir` (`kode_supir`),
   CONSTRAINT `armada_ibfk_1` FOREIGN KEY (`kode_supir`) REFERENCES `supir` (`kode_supir`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -49,6 +49,7 @@ CREATE TABLE `armada` (
 
 LOCK TABLES `armada` WRITE;
 /*!40000 ALTER TABLE `armada` DISABLE KEYS */;
+INSERT INTO `armada` VALUES ('p001','Kapal Karam','Hijau','99','su001'),('p002','Kapal Selam','Pink','50','su002');
 /*!40000 ALTER TABLE `armada` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -75,6 +76,7 @@ CREATE TABLE `kursi` (
 
 LOCK TABLES `kursi` WRITE;
 /*!40000 ALTER TABLE `kursi` DISABLE KEYS */;
+INSERT INTO `kursi` VALUES ('k001','01','p001'),('k002','02','p001'),('k003','01','p002'),('k004','02','p002');
 /*!40000 ALTER TABLE `kursi` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,7 +89,7 @@ DROP TABLE IF EXISTS `penumpang`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `penumpang` (
   `kode_penumpang` varchar(11) NOT NULL,
-  `nama` varchar(75) NOT NULL,
+  `nama` varchar(75) DEFAULT NULL,
   `alamat` text,
   `jk` varchar(15) DEFAULT NULL,
   `umur` varchar(9) DEFAULT NULL,
@@ -98,7 +100,11 @@ CREATE TABLE `penumpang` (
   `tanggal` date DEFAULT NULL,
   PRIMARY KEY (`kode_penumpang`),
   KEY `kode_tujuan` (`kode_tujuan`),
-  CONSTRAINT `penumpang_ibfk_1` FOREIGN KEY (`kode_tujuan`) REFERENCES `tujuan` (`kode_tujuan`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `kode_kursi` (`kode_kursi`),
+  KEY `plat` (`plat`),
+  CONSTRAINT `penumpang_ibfk_1` FOREIGN KEY (`kode_tujuan`) REFERENCES `tujuan` (`kode_tujuan`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `penumpang_ibfk_2` FOREIGN KEY (`kode_kursi`) REFERENCES `kursi` (`kode_kursi`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `penumpang_ibfk_3` FOREIGN KEY (`plat`) REFERENCES `armada` (`plat`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -108,6 +114,7 @@ CREATE TABLE `penumpang` (
 
 LOCK TABLES `penumpang` WRITE;
 /*!40000 ALTER TABLE `penumpang` DISABLE KEYS */;
+INSERT INTO `penumpang` VALUES ('c001','Reno Halimawan','Bati Bati','Pria','20','+62bbbbbbbbbbb','tu010','k004','p002','2024-09-29'),('c002','Ali Baba','Sungai Andai','Pria','19','+62ccccccccccc','tu002','k004','p002','2025-11-21'),('c004','Fulana','Kelayan C','Pria','16','+62eeeeeeeeeee','tu004','k003','p002','2045-01-01');
 /*!40000 ALTER TABLE `penumpang` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -135,6 +142,7 @@ CREATE TABLE `supir` (
 
 LOCK TABLES `supir` WRITE;
 /*!40000 ALTER TABLE `supir` DISABLE KEYS */;
+INSERT INTO `supir` VALUES ('su001','Johan','Pria','JL. Simpang Siur','+62aaaaaaaaaaa','39'),('su002','Aditya Surya','Wanita','JL. Simpang Ampat','','25');
 /*!40000 ALTER TABLE `supir` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -160,6 +168,7 @@ CREATE TABLE `tujuan` (
 
 LOCK TABLES `tujuan` WRITE;
 /*!40000 ALTER TABLE `tujuan` DISABLE KEYS */;
+INSERT INTO `tujuan` VALUES ('tu002','Pulau Kembang','Rp30.000','09:05'),('tu004','Sungai Andai','Rp25.000','07:90'),('tu010','Siring','Rp10.000','08:10');
 /*!40000 ALTER TABLE `tujuan` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50112 SET @disable_bulk_load = IF (@is_rocksdb_supported, 'SET SESSION rocksdb_bulk_load = @old_rocksdb_bulk_load', 'SET @dummy_rocksdb_bulk_load = 0') */;
@@ -176,4 +185,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-09-22 14:10:50
+-- Dump completed on 2024-10-05 13:22:38

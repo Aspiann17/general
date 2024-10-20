@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">T007</string>
+    <string name="button_text">Next</string>
 </resources>

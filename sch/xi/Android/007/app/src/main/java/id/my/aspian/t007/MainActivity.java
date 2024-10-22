@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         int[] drawables = {R.drawable.tr_1, R.drawable.tr_2, R.drawable.tr_3};
 
         // Indeks akan bertambah satu setiap kali tombol ditekan dan
-        // akan direset menjadi '0' jika mimiliki nilai sama dengan panjang array.
+        // akan direset menjadi '0' jika mimiliki nilai yang sama dengan panjang array.
         findViewById(R.id.change).setOnClickListener(v -> {
 
             picture.setImageResource(drawables[index]);

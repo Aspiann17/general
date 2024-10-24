@@ -2,6 +2,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php dump() ?>
+
 <head>
     <?= template("chead") ?>
     <meta name="author" content="Muhamad Nauval Azhar">

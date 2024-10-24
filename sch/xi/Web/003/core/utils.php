@@ -27,9 +27,7 @@ function alert(string $message) : void {
 }
 
 function start() : void {
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
+    if (session_status() === PHP_SESSION_NONE) session_start();
 }
 
 function check() : void {
@@ -38,4 +36,11 @@ function check() : void {
     if (!is_set("login", true)) {
         header("location: login.php");
     }
+}
+
+
+function dump() : void {
+    echo "<pre>";
+    var_dump($_GET, $_POST);
+    echo "</pre>";
 }

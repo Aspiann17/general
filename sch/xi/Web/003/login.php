@@ -4,6 +4,8 @@
 
 <!-- https://github.com/nauvalazhar/bootstrap-5-login-page -->
 
+<?php dump() ?>
+
 <head>
     <?= template("chead") ?>
     <meta name="author" content="Muhamad Nauval Azhar">
@@ -28,14 +30,23 @@
                             <h1 class="fs-4 card-title fw-bold mb-4 text-center">Login</h1>
 
                             <form method="POST" class="needs-validation" novalidate="" autocomplete="off">
+
                                 <div class="mb-3">
+                                    <label class="mb-2 text-muted" for="username">Username</label>
+                                    <input id="username" type="text" class="form-control" name="username" required autofocus>
+                                    <div class="invalid-feedback">
+                                        Username is empty
+                                    </div>
+                                </div>
+                                
+                                <!-- <div class="mb-3">
                                     <label class="mb-2 text-muted" for="email">E-Mail Address</label>
                                     <input id="email" type="email" class="form-control" name="email" value="" required
                                         autofocus>
                                     <div class="invalid-feedback">
                                         Email is invalid
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <div class="mb-3">
                                     <div class="mb-2 w-100">
@@ -57,7 +68,7 @@
                                         <label for="remember" class="form-check-label">Remember Me</label>
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary ms-auto">
+                                    <button type="submit" class="btn btn-primary ms-auto" name="action" value="login">
                                         Login
                                     </button>
 

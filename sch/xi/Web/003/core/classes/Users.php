@@ -14,7 +14,7 @@ final class Users {
         $this->db = $database;
         $this->table = $table;
 
-        $this->create_table();
+        $this->create_table($table);
     }
 
     public function fetch() {
@@ -23,26 +23,32 @@ final class Users {
         )->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function add($username, $password) : bool {
+    public function add(
+        string $username,
+        string $email,
+        string $password
+    ) : bool {
+
         // Enkripsi Password
         $password = password_hash($password, PASSWORD_DEFAULT);
 
         $stmt = $this->db->prepare("
             INSERT INTO $this->table
-            (username, password, added)
-            VALUES (:username, :password, :added)"
+            (username, email, password)
+            VALUES (:username, :email, :password)"
         );
+
         $stmt->bindParam(":username", $username, PDO::PARAM_STR);
+        $stmt->bindParam(":email", $email, PDO::PARAM_STR);
         $stmt->bindParam(":password", $password, PDO::PARAM_STR);
-        $stmt->bindValue(":added", time(), PDO::PARAM_INT);
 
         try {
 
             $stmt->execute();
-            $this->message[] = array(
+            $this->message[] = [
                 "type" => "success",
                 "message" => "Akun Berhasil Ditambahkan!"
-            );
+            ];
 
             return true;
         } catch (PDOException $e) {
@@ -70,9 +76,9 @@ final class Users {
     }
 
     public function login(string $username, string $password) : bool {
-        // Memeriksa hasil query apakah ada
         $hassword = $this->get_password($username);
-
+        
+        // Memeriksa hasil query apakah ada
         if (is_null($hassword)) {
             $this->message[] = array(
                 "type" => "failed",
@@ -112,14 +118,14 @@ final class Users {
         return $stmt->fetch(PDO::FETCH_ASSOC)["password"] ?? null;
     }
 
-    private function create_table() {
+    private function create_table(string $table) : void {
         $this->db->exec("
-            CREATE TABLE IF NOT EXISTS $this->table (
-                id	        INTEGER,
-                username	TEXT NOT NULL UNIQUE,
-                password	TEXT NOT NULL,
-                added	    INTEGER NOT NULL,
-                PRIMARY KEY(id AUTOINCREMENT)
-        );");
+            -- DROP TABLE IF EXISTS $table;
+            CREATE TABLE IF NOT EXISTS $table (
+                username VARCHAR(255) PRIMARY KEY,
+                email TEXT,
+                password TEXT NOT NULL
+            );
+        ");
     }
 }

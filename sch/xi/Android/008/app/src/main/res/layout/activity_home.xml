@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="10dp"
+    android:background="@color/white"
+    tools:context=".HomeActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aplikasi Perhitungan!!!"
+        android:textColor="#FF0000"
+        android:textAlignment="center"
+        android:textSize="26sp" />
+
+    <Button
+        android:id="@+id/dua_bilangan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Perhitungan Dua Bilangan"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/bangun_ruang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Bangun Ruang"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/bangun_datar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Bangun Datar"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/konversi_suhu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Konversi Suhu"
+        android:textSize="20sp" />
+
+</LinearLayout>

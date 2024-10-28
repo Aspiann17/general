@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php dump() ?>
+<?php dump(); ?>
 
 <head>
     <?= template("chead") ?>
@@ -29,8 +29,8 @@
 
                             <form method="POST" class="needs-validation" novalidate="" autocomplete="off">
                                 <div class="mb-3">
-                                    <label class="mb-2 text-muted" for="name">Name</label>
-                                    <input id="name" type="text" class="form-control" name="name" value="" required
+                                    <label class="mb-2 text-muted" for="username">Name</label>
+                                    <input id="username" type="text" class="form-control" name="username" required
                                         autofocus>
 
                                     <div class="invalid-feedback">
@@ -59,7 +59,7 @@
                                 </div>
 
                                 <div class="align-items-center d-flex pt-2 pb-2">
-                                    <button type="submit" class="btn btn-primary ms-auto w-100">
+                                    <button type="submit" class="btn btn-primary ms-auto w-100" name="action" value="register">
                                         Register
                                     </button>
                                 </div>

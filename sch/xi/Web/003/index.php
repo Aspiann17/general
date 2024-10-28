@@ -1,4 +1,11 @@
-<?php require "core/init.php" ?>
+<?php
+require "core/init.php";
+
+if (!$_SESSION["login"]) {
+    header("location: login.php");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 

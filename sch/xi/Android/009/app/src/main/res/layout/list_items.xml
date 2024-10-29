@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/LIjumlah"
+        android:id="@+id/jumlah"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="N/A"
@@ -16,13 +16,13 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/LIketerangan"
+            android:id="@+id/keterangan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="keterangan"/>
 
         <TextView
-            android:id="@+id/LIstatus"
+            android:id="@+id/status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -31,14 +31,14 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/LItanggal"
+        android:id="@+id/tanggal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tanggal"
         android:textSize="10sp" />
 
     <TextView
-        android:id="@+id/LIid"
+        android:id="@+id/id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="id"

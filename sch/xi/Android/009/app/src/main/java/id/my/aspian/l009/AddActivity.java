@@ -13,7 +13,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class AddActivity extends AppCompatActivity {
-    Koneksi koneksi = new Koneksi(this);;
+    Koneksi koneksi = new Koneksi(this);
     String status = "";
 
     @Override
@@ -46,6 +46,8 @@ public class AddActivity extends AppCompatActivity {
 
                 db.execSQL(query);
                 toast("Data berhasil disimpan!");
+
+                finish();
             }
         });
     }

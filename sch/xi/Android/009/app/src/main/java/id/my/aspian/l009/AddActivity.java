@@ -13,7 +13,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class AddActivity extends AppCompatActivity {
-    Koneksi koneksi = new Koneksi(this);
+    Koneksi koneksi;
     String status = "";
 
     @Override
@@ -30,8 +30,9 @@ public class AddActivity extends AppCompatActivity {
         EditText Rvalue = findViewById(R.id.jumlah);
         EditText Rketerangan = findViewById(R.id.keterangan);
         RadioGroup RRGstatus = findViewById(R.id.status);
+        koneksi = new Koneksi(this);
 
-        RRGstatus.setOnCheckedChangeListener((group, checkedId) -> status = (checkedId == R.id.masuk) ? "masuk" : "keluar" );
+        RRGstatus.setOnCheckedChangeListener((group, checkedId) -> status = (checkedId == R.id.masuk) ? "Masuk" : "Keluar" );
 
         findViewById(R.id.save).setOnClickListener(v -> {
             if (status.isEmpty()) toast("Pilih Status!!");
@@ -39,14 +40,12 @@ public class AddActivity extends AppCompatActivity {
             else if (Rketerangan.getText().toString().isEmpty()) toast("Isi Keterangan");
             else {
                 SQLiteDatabase db = koneksi.getWritableDatabase();
-                String query = String.format(
-                        "INSERT INTO %s (status, jumlah, keterangan) VALUES ('%s', '%s', %s)",
-                        Koneksi.TABLE_NAME, Rvalue.getText().toString(), Rketerangan.getText().toString()
-                );
+                db.execSQL(String.format(
+                        "INSERT INTO %s (status, jumlah, keterangan) VALUES ('%s', '%s', '%s')",
+                        Koneksi.TABLE_NAME, status, Rvalue.getText().toString(), Rketerangan.getText().toString()
+                ));
 
-                db.execSQL(query);
-                toast("Data berhasil disimpan!");
-
+                toast("Data berhasil ditambahkan coyy!!!!");
                 finish();
             }
         });

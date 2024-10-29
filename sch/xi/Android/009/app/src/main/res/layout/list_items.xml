@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/LIjumlah"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="N/A"
+        android:textSize="16sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/LIketerangan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="keterangan"/>
+
+        <TextView
+            android:id="@+id/LIstatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="status" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/LItanggal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tanggal"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/LIid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="id"
+        android:visibility="gone" />
+
+</LinearLayout>

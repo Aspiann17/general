@@ -7,10 +7,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 public class Koneksi extends SQLiteOpenHelper {
+    public static final String DB_NAME = "efisien_jar_ihsan";
     public static final String TABLE_NAME = "transaksi";
 
     public Koneksi(@Nullable Context context) {
-        super(context, "efisien_jar_ihsan", null, 1);
+        super(context, DB_NAME, null, 1);
     }
 
     @Override

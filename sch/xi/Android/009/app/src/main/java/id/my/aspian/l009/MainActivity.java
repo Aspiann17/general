@@ -38,12 +38,16 @@ public class MainActivity extends AppCompatActivity {
         koneksi = new Koneksi(this);
 
         list_transaksi = findViewById(R.id.list_transaksi);
-        findViewById(R.id.refresh).setOnClickListener(v -> {
-            arus_kas.clear();
-            show_data();
-            show_total();
-        });
 
+        show_data();
+        show_total();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        arus_kas.clear();
         show_data();
         show_total();
     }
@@ -93,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
         double pemasukan = cursor != null ? cursor.getDouble(1) : 0;
         double pengeluaran = cursor != null ? cursor.getDouble(2) : 0;
+
         masuk.setText(String.valueOf(pemasukan));
         keluar.setText(String.valueOf(pengeluaran));
         saldo.setText(String.valueOf(pemasukan - pengeluaran));

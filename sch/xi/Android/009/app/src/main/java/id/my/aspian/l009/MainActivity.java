@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void show_data() {
         SQLiteDatabase db = koneksi.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + Koneksi.TABLE_NAME, null);
+        Cursor cursor = db.rawQuery("SELECT *, STRFTIME('%d-%m-%Y', tanggal) AS tanggall FROM " + Koneksi.TABLE_NAME, null);
 
         if (cursor != null && cursor.moveToFirst()) {
             do {
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                 map.put("status", cursor.getString(1));
                 map.put("jumlah", cursor.getString(2));
                 map.put("keterangan", cursor.getString(3));
-                map.put("tanggal", cursor.getString(4));
+                map.put("tanggal", cursor.getString(5));
 
                 arus_kas.add(map);
             } while (cursor.moveToNext());

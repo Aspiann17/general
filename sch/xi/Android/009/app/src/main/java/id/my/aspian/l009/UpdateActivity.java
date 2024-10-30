@@ -15,6 +15,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Calendar;
 
 public class UpdateActivity extends AppCompatActivity {
@@ -59,8 +61,8 @@ public class UpdateActivity extends AppCompatActivity {
             int tanggal = calendar.get(Calendar.DAY_OF_MONTH);
 
             DatePickerDialog date_picker = new DatePickerDialog(this, (view, year, month, dayOfMonth) -> {
-                Rdate.setText(year + '/' + (month + 1) + '/' +  dayOfMonth);
-                toast(String.valueOf(year));
+                NumberFormat DF = new DecimalFormat("00");
+                Rdate.setText(year + '-' + DF.format(month + 1) + '-' +  DF.format(dayOfMonth));
             }, tahun, bulan, tanggal);
             date_picker.show();
         });

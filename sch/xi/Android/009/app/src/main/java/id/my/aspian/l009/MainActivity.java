@@ -1,18 +1,23 @@
 package id.my.aspian.l009;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.WindowManager;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     Koneksi koneksi;
     ArrayList<HashMap<String, String>> arus_kas = new ArrayList<>();
     ListView list_transaksi;
+    SwipeRefreshLayout swipeRefresh;
+    public static String item_id = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,19 +44,63 @@ public class MainActivity extends AppCompatActivity {
 
         koneksi = new Koneksi(this);
 
-        list_transaksi = findViewById(R.id.list_transaksi);
+        swipeRefresh = findViewById(R.id.refresh);
+        swipeRefresh.setOnRefreshListener(this::reload);
+        swipeRefresh.setRefreshing(false);
 
-        show_data();
-        show_total();
+        list_transaksi = findViewById(R.id.list_transaksi);
+        list_transaksi.setOnItemClickListener((parent, view, position, id) -> {
+            item_id = ((TextView) view.findViewById(R.id.id)).getText().toString();
+
+            Dialog dialog = new Dialog(this);
+            dialog.setContentView(R.layout.list_menu);
+            dialog.getWindow().setLayout(
+                    WindowManager.LayoutParams.MATCH_PARENT,
+                    WindowManager.LayoutParams.WRAP_CONTENT
+            ); dialog.show();
+
+            dialog.findViewById(R.id.delete).setOnClickListener(v -> {
+                dialog.dismiss();
+
+                AlertDialog.Builder alert = new AlertDialog.Builder(this);
+                alert.setTitle("Hapus Data? " + item_id);
+                alert.setMessage("Yakin ingin menghapus data ini?");
+                alert.setNegativeButton("False", (dialog1, which) -> toast("Ehe"));
+                alert.setPositiveButton("True", (dialog1, which) -> {
+                    SQLiteDatabase db = koneksi.getWritableDatabase();
+                    db.execSQL(String.format(
+                            "DELETE FROM %s WHERE id = '%s'",
+                            Koneksi.TABLE_NAME, item_id
+                    ));
+
+                    toast("Data " + item_id + " berhasil dihapus!");
+                    reload();
+                });
+
+                alert.show();
+            });
+
+            dialog.findViewById(R.id.update).setOnClickListener(v -> {
+                dialog.dismiss();
+                startActivity(new Intent(this, UpdateActivity.class));
+            });
+        });
+
+        reload();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        reload();
+    }
 
+    private void reload() {
         arus_kas.clear();
         show_data();
         show_total();
+
+        swipeRefresh.setRefreshing(false);
     }
 
     private void show_data() {
@@ -67,6 +118,8 @@ public class MainActivity extends AppCompatActivity {
 
                 arus_kas.add(map);
             } while (cursor.moveToNext());
+
+            cursor.close();
         }
 
         SimpleAdapter simple_katanya = new SimpleAdapter(
@@ -76,7 +129,6 @@ public class MainActivity extends AppCompatActivity {
         );
 
         list_transaksi.setAdapter(simple_katanya);
-        if (cursor != null) cursor.close();
     }
 
     private void show_total() {
@@ -103,5 +155,9 @@ public class MainActivity extends AppCompatActivity {
         saldo.setText(String.valueOf(pemasukan - pengeluaran));
 
         if (cursor != null) cursor.close();
+    }
+
+    public void toast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

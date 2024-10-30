@@ -29,10 +29,12 @@ public class AddActivity extends AppCompatActivity {
 
         EditText Rvalue = findViewById(R.id.jumlah);
         EditText Rketerangan = findViewById(R.id.keterangan);
-        RadioGroup RRGstatus = findViewById(R.id.status);
         koneksi = new Koneksi(this);
 
-        RRGstatus.setOnCheckedChangeListener((group, checkedId) -> status = (checkedId == R.id.masuk) ? "Masuk" : "Keluar" );
+        ((RadioGroup) findViewById(R.id.status)).setOnCheckedChangeListener((group, checkedId) -> {
+            if (checkedId == R.id.masuk) status = "Masuk";
+            else if (checkedId == R.id.keluar) status = "Keluar";
+        });
 
         findViewById(R.id.save).setOnClickListener(v -> {
             if (status.isEmpty()) toast("Pilih Status!!");
@@ -40,10 +42,8 @@ public class AddActivity extends AppCompatActivity {
             else if (Rketerangan.getText().toString().isEmpty()) toast("Isi Keterangan");
             else {
                 SQLiteDatabase db = koneksi.getWritableDatabase();
-                db.execSQL(String.format(
-                        "INSERT INTO %s (status, jumlah, keterangan) VALUES ('%s', '%s', '%s')",
-                        Koneksi.TABLE_NAME, status, Rvalue.getText().toString(), Rketerangan.getText().toString()
-                ));
+                String[] param = {status, Rvalue.getText().toString(), Rketerangan.getText().toString()};
+                db.execSQL("INSERT INTO " + Koneksi.TABLE_NAME + " (status, jumlah, keterangan) VALUES (?, ?, ?)", param);
 
                 toast("Data berhasil ditambahkan coyy!!!!");
                 finish();

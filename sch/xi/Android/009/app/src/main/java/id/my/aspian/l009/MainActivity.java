@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     public static String tanggal_dari, tanggal_sampai;
     public static boolean filter = false;
     String data_query, total_query;
+    TextView filter_indicator;
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -76,6 +77,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
 //        swipeRefresh.setOnRefreshListener(this::reload);
+
+        filter_indicator = findViewById(R.id.filter_indicator);
+        filter_indicator.setVisibility(ListView.GONE);
 
         list_transaksi = findViewById(R.id.list_transaksi);
         list_transaksi.setOnItemClickListener((parent, view, position, id) -> {
@@ -129,19 +133,24 @@ public class MainActivity extends AppCompatActivity {
     private void reload() {
         arus_kas.clear();
 
-        data_query = "SELECT *, STRFTIME('%d-%m-%Y', tanggal) AS tanggall FROM " + Koneksi.TABLE_NAME;
-        total_query = "SELECT SUM(jumlah)," +
-                "(SELECT SUM(jumlah) FROM " + Koneksi.TABLE_NAME + " WHERE status = 'Masuk') as jumlah_masuk," +
-                "(SELECT SUM(jumlah) FROM " + Koneksi.TABLE_NAME + " WHERE status = 'Keluar') as jumlah_keluar" +
-                " FROM " + Koneksi.TABLE_NAME;
-
         if (filter) {
+            filter_indicator.setVisibility(ListView.VISIBLE);
+            filter_indicator.setText(String.format("%s -> %s", tanggal_dari, tanggal_sampai));
+
             data_query = "SELECT *, STRFTIME('%d-%m-%Y', tanggal) AS tanggall FROM " + Koneksi.TABLE_NAME +
                             " WHERE (tanggal >= '" + tanggal_dari + "' ) AND (tanggal <= '" + tanggal_sampai + "')";
 
             total_query = "SELECT SUM(jumlah)," +
                     "(SELECT SUM(jumlah) FROM " + Koneksi.TABLE_NAME + " WHERE status = 'Masuk' AND (tanggal >= '" + tanggal_dari + "' ) AND (tanggal <= '" + tanggal_sampai + "')) as jumlah_masuk," +
                     "(SELECT SUM(jumlah) FROM " + Koneksi.TABLE_NAME + " WHERE status = 'Keluar' AND (tanggal >= '" + tanggal_dari + "' ) AND (tanggal <= '" + tanggal_sampai + "')) as jumlah_keluar" +
+                    " FROM " + Koneksi.TABLE_NAME;
+        } else {
+            filter_indicator.setVisibility(ListView.GONE);
+
+            data_query = "SELECT *, STRFTIME('%d-%m-%Y', tanggal) AS tanggall FROM " + Koneksi.TABLE_NAME;
+            total_query = "SELECT SUM(jumlah)," +
+                    "(SELECT SUM(jumlah) FROM " + Koneksi.TABLE_NAME + " WHERE status = 'Masuk') as jumlah_masuk," +
+                    "(SELECT SUM(jumlah) FROM " + Koneksi.TABLE_NAME + " WHERE status = 'Keluar') as jumlah_keluar" +
                     " FROM " + Koneksi.TABLE_NAME;
         }
 

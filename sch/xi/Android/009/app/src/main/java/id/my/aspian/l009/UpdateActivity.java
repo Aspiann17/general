@@ -47,6 +47,7 @@ public class UpdateActivity extends AppCompatActivity {
         Rdate = findViewById(R.id.date);
         Rstatus = findViewById(R.id.status);
 
+        findViewById(R.id.update).setOnClickListener(v -> update());
         Rstatus.setOnCheckedChangeListener((group, checkedId) -> {
             if (checkedId == R.id.masuk) status = "Masuk";
             else if (checkedId == R.id.keluar) status = "Keluar";
@@ -56,18 +57,13 @@ public class UpdateActivity extends AppCompatActivity {
 
         Rdate.setOnClickListener(v -> {
             Calendar calendar = Calendar.getInstance();
-            int tahun = calendar.get(Calendar.YEAR);
-            int bulan = calendar.get(Calendar.MONTH);
-            int tanggal = calendar.get(Calendar.DAY_OF_MONTH);
-
             DatePickerDialog date_picker = new DatePickerDialog(this, (view, year, month, dayOfMonth) -> {
                 NumberFormat DF = new DecimalFormat("00");
-                Rdate.setText(year + '-' + DF.format(month + 1) + '-' +  DF.format(dayOfMonth));
-            }, tahun, bulan, tanggal);
+                Rdate.setText(year + "-" + DF.format(month + 1) + "-" + DF.format(dayOfMonth));
+            }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+
             date_picker.show();
         });
-
-        findViewById(R.id.update).setOnClickListener(v -> update());
     }
 
     public void update() {

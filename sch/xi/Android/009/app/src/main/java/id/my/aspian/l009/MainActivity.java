@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -13,7 +15,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -28,6 +32,24 @@ public class MainActivity extends AppCompatActivity {
     ListView list_transaksi;
     SwipeRefreshLayout swipeRefresh;
     public static String item_id = "";
+    public static String tanggal_dari, tanggal_sampai;
+    public static boolean filter = false;
+    String data_query, total_query;
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.menu_filter) {
+            startActivity(new Intent(this, FilterActivity.class));
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +62,20 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         findViewById(R.id.add).setOnClickListener(v -> startActivity(new Intent(this, AddActivity.class)));
 
         koneksi = new Koneksi(this);
 
         swipeRefresh = findViewById(R.id.refresh);
-        swipeRefresh.setOnRefreshListener(this::reload);
+        swipeRefresh.setOnRefreshListener(() -> {
+            filter = false;
+            reload();
+        });
+
+//        swipeRefresh.setOnRefreshListener(this::reload);
 
         list_transaksi = findViewById(R.id.list_transaksi);
         list_transaksi.setOnItemClickListener((parent, view, position, id) -> {
@@ -98,15 +128,32 @@ public class MainActivity extends AppCompatActivity {
 
     private void reload() {
         arus_kas.clear();
-        show_data();
-        show_total();
+
+        data_query = "SELECT *, STRFTIME('%d-%m-%Y', tanggal) AS tanggall FROM " + Koneksi.TABLE_NAME;
+        total_query = "SELECT SUM(jumlah)," +
+                "(SELECT SUM(jumlah) FROM " + Koneksi.TABLE_NAME + " WHERE status = 'Masuk') as jumlah_masuk," +
+                "(SELECT SUM(jumlah) FROM " + Koneksi.TABLE_NAME + " WHERE status = 'Keluar') as jumlah_keluar" +
+                " FROM " + Koneksi.TABLE_NAME;
+
+        if (filter) {
+            data_query = "SELECT *, STRFTIME('%d-%m-%Y', tanggal) AS tanggall FROM " + Koneksi.TABLE_NAME +
+                            " WHERE (tanggal >= '" + tanggal_dari + "' ) AND (tanggal <= '" + tanggal_sampai + "')";
+
+            total_query = "SELECT SUM(jumlah)," +
+                    "(SELECT SUM(jumlah) FROM " + Koneksi.TABLE_NAME + " WHERE status = 'Masuk' AND (tanggal >= '" + tanggal_dari + "' ) AND (tanggal <= '" + tanggal_sampai + "')) as jumlah_masuk," +
+                    "(SELECT SUM(jumlah) FROM " + Koneksi.TABLE_NAME + " WHERE status = 'Keluar' AND (tanggal >= '" + tanggal_dari + "' ) AND (tanggal <= '" + tanggal_sampai + "')) as jumlah_keluar" +
+                    " FROM " + Koneksi.TABLE_NAME;
+        }
+
+        show_data(data_query);
+        show_total(total_query);
 
         swipeRefresh.setRefreshing(false);
     }
 
-    private void show_data() {
+    private void show_data(String query) {
         SQLiteDatabase db = koneksi.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT *, STRFTIME('%d-%m-%Y', tanggal) AS tanggall FROM " + Koneksi.TABLE_NAME, null);
+        Cursor cursor = db.rawQuery(query, null);
 
         if (cursor != null && cursor.moveToFirst()) {
             do {
@@ -132,15 +179,9 @@ public class MainActivity extends AppCompatActivity {
         list_transaksi.setAdapter(simple_katanya);
     }
 
-    private void show_total() {
+    private void show_total(String query) {
         SQLiteDatabase db = koneksi.getReadableDatabase();
-
-        Cursor cursor = db.rawQuery(
-            "SELECT SUM(jumlah)," +
-                    "(SELECT SUM(jumlah) FROM " + Koneksi.TABLE_NAME + " WHERE status = 'Masuk') as jumlah_masuk," +
-                    "(SELECT SUM(jumlah) FROM " + Koneksi.TABLE_NAME + " WHERE status = 'Keluar') as jumlah_keluar" +
-                    " FROM " + Koneksi.TABLE_NAME, null
-        );
+        Cursor cursor = db.rawQuery(query, null);
 
         if (cursor != null) cursor.moveToFirst();
 

@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
 
         swipeRefresh = findViewById(R.id.refresh);
         swipeRefresh.setOnRefreshListener(this::reload);
-        swipeRefresh.setRefreshing(false);
 
         list_transaksi = findViewById(R.id.list_transaksi);
         list_transaksi.setOnItemClickListener((parent, view, position, id) -> {
@@ -57,7 +56,9 @@ public class MainActivity extends AppCompatActivity {
             dialog.getWindow().setLayout(
                     WindowManager.LayoutParams.MATCH_PARENT,
                     WindowManager.LayoutParams.WRAP_CONTENT
-            ); dialog.show();
+            );
+
+            dialog.show();
 
             dialog.findViewById(R.id.delete).setOnClickListener(v -> {
                 dialog.dismiss();

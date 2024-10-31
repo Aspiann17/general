@@ -62,7 +62,7 @@ public class UpdateActivity extends AppCompatActivity {
 
             DatePickerDialog date_picker = new DatePickerDialog(this, (view, year, month, dayOfMonth) -> {
                 NumberFormat DF = new DecimalFormat("00");
-                Rdate.setText(year + '-' + DF.format(month + 1) + '-' +  DF.format(dayOfMonth));
+                Rdate.setText(year + "-" + DF.format(month + 1) + "-" +  DF.format(dayOfMonth));
             }, tahun, bulan, tanggal);
             date_picker.show();
         });

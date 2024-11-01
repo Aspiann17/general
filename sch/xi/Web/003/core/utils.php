@@ -22,8 +22,15 @@ function is_set($key, $value) : bool {
     return false;
 }
 
-function alert(string $message) : void {
-    echo "<script>alert('$message')</script>";
+function alert(string $title, string $message) : void {
+    echo <<< EOD
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>$title</strong> $message
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    EOD;
 }
 
 function start() : void {
@@ -38,9 +45,8 @@ function check() : void {
     }
 }
 
-
 function dump() : void {
     echo "<pre>";
-    var_dump($_GET, $_POST);
+    var_dump($_GET, $_POST, $_SESSION);
     echo "</pre>";
 }

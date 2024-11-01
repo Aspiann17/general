@@ -23,23 +23,18 @@ final class Users {
         )->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function add(
-        string $username,
-        string $email,
-        string $password
-    ) : bool {
+    public function add(string $username, string $password) : bool {
 
         // Enkripsi Password
         $password = password_hash($password, PASSWORD_DEFAULT);
 
         $stmt = $this->db->prepare("
             INSERT INTO $this->table
-            (username, email, password)
-            VALUES (:username, :email, :password)"
+            (username, password)
+            VALUES (:username, :password)"
         );
 
         $stmt->bindParam(":username", $username, PDO::PARAM_STR);
-        $stmt->bindParam(":email", $email, PDO::PARAM_STR);
         $stmt->bindParam(":password", $password, PDO::PARAM_STR);
 
         try {
@@ -56,7 +51,7 @@ final class Users {
             // Menangani input duplikat
             if ($e->getCode() == "23000") {
 
-                $this->message = [
+                $this->message[] = [
                     "type" => "failed",
                     "message" => "Username Sudah Ada!",
                 ];
@@ -80,28 +75,28 @@ final class Users {
         
         // Memeriksa hasil query apakah ada
         if (is_null($hassword)) {
-            $this->message[] = array(
+            $this->message[] = [
                 "type" => "failed",
                 "message" => "Username Tidak Ada!"
-            );
+            ];
 
             return false;
         }
 
         // Varifikasi Password apakah sama dengan yang ada di database
         else if (!password_verify($password, $hassword)) {
-            $this->message[] = array(
+            $this->message[] = [
                 "type" => "failed",
                 "message" => "Password Salah!"
-            );
+            ];
 
             return false;
         }
 
-        $this->message[] = array(
+        $this->message[] = [
             "type" => "success",
             "message" => "Login Berhasil!"
-        );
+        ];
 
         return true;
     }
@@ -123,7 +118,6 @@ final class Users {
             -- DROP TABLE IF EXISTS $table;
             CREATE TABLE IF NOT EXISTS $table (
                 username VARCHAR(255) PRIMARY KEY,
-                email TEXT,
                 password TEXT NOT NULL
             );
         ");

@@ -1,8 +1,12 @@
-<?php require "core/init.php" ?>
+<?php
+
+require "core/init.php";
+if (is_set("login", true)) header("location: index.php");
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-
-<?php dump(); ?>
 
 <head>
     <?= template("chead") ?>
@@ -13,6 +17,11 @@
 </head>
 
 <body>
+
+    <?php foreach ($users->message as $m) : ?>
+        <?php alert("Register failed!", $m["message"]) ?>
+    <?php endforeach ?>
+
     <section class="h-200 mb-5">
         <div class="container h-100">
             <div class="row justify-content-sm-center h-100">
@@ -36,16 +45,6 @@
                                     <div class="invalid-feedback">
                                         Name is required
                                     </div>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="mb-2 text-muted" for="email">E-Mail Address</label>
-                                    <input id="email" type="email" class="form-control" name="email" value="" required>
-
-                                    <div class="invalid-feedback">
-                                        Email is invalid
-                                    </div>
-
                                 </div>
 
                                 <div class="mb-3">

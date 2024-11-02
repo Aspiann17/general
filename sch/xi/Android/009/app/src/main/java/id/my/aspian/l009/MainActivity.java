@@ -2,6 +2,7 @@ package id.my.aspian.l009;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -25,17 +26,20 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
-    Koneksi koneksi;
-    ArrayList<HashMap<String, String>> arus_kas = new ArrayList<>();
     ListView list_transaksi;
     SwipeRefreshLayout swipeRefresh;
-    public static String item_id = "";
-    public static String tanggal_dari, tanggal_sampai;
-    public static boolean filter = false;
     String data_query, total_query;
     TextView filter_indicator;
+
+    Koneksi koneksi;
+    ArrayList<HashMap<String, String>> arus_kas = new ArrayList<>();
+
+    public static String tanggal_dari, tanggal_sampai = "";
+    public static String item_id = "";
+    public static boolean filter = false;
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -63,12 +67,14 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        koneksi = new Koneksi(this);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         findViewById(R.id.add).setOnClickListener(v -> startActivity(new Intent(this, AddActivity.class)));
-
-        koneksi = new Koneksi(this);
+        filter_indicator = findViewById(R.id.filter_indicator);
+        filter_indicator.setVisibility(ListView.GONE);
 
         swipeRefresh = findViewById(R.id.refresh);
         swipeRefresh.setOnRefreshListener(() -> {
@@ -76,18 +82,13 @@ public class MainActivity extends AppCompatActivity {
             reload();
         });
 
-//        swipeRefresh.setOnRefreshListener(this::reload);
-
-        filter_indicator = findViewById(R.id.filter_indicator);
-        filter_indicator.setVisibility(ListView.GONE);
-
         list_transaksi = findViewById(R.id.list_transaksi);
         list_transaksi.setOnItemClickListener((parent, view, position, id) -> {
             item_id = ((TextView) view.findViewById(R.id.id)).getText().toString();
 
             Dialog dialog = new Dialog(this);
             dialog.setContentView(R.layout.list_menu);
-            dialog.getWindow().setLayout(
+            Objects.requireNonNull(dialog.getWindow()).setLayout(
                     WindowManager.LayoutParams.MATCH_PARENT,
                     WindowManager.LayoutParams.WRAP_CONTENT
             );
@@ -100,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                 AlertDialog.Builder alert = new AlertDialog.Builder(this);
                 alert.setTitle("Hapus Data? " + item_id);
                 alert.setMessage("Yakin ingin menghapus data ini?");
-                alert.setNegativeButton("False", (dialog1, which) -> toast("Ehe"));
+                alert.setNegativeButton("False", (dialog1, which) -> toast(this, "Ehe"));
                 alert.setPositiveButton("True", (dialog1, which) -> {
                     SQLiteDatabase db = koneksi.getWritableDatabase();
                     db.execSQL(String.format(
@@ -108,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                             Koneksi.TABLE_NAME, item_id
                     ));
 
-                    toast("Data " + item_id + " berhasil dihapus!");
+                    toast(this, "Data " + item_id + " berhasil dihapus!");
                     reload();
                 });
 
@@ -208,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
         if (cursor != null) cursor.close();
     }
 
-    public void toast(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    public static void toast(Context context, String message) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 }

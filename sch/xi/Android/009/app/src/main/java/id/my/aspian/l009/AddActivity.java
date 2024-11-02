@@ -37,13 +37,18 @@ public class AddActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.save).setOnClickListener(v -> {
+            String jumlah = Rvalue.getText().toString();
+            String keterangan = Rketerangan.getText().toString();
+
             if (status.isEmpty()) toast("Pilih Status!!");
-            else if (Rvalue.getText().toString().isEmpty()) toast("Isi Nilai");
-            else if (Rketerangan.getText().toString().isEmpty()) toast("Isi Keterangan");
+            else if (jumlah.isEmpty()) toast("Isi Nilai");
+            else if (keterangan.isEmpty()) toast("Isi Keterangan");
             else {
                 SQLiteDatabase db = koneksi.getWritableDatabase();
-                String[] param = {status, Rvalue.getText().toString(), Rketerangan.getText().toString()};
-                db.execSQL("INSERT INTO " + Koneksi.TABLE_NAME + " (status, jumlah, keterangan) VALUES (?, ?, ?)", param);
+                db.execSQL(
+                        "INSERT INTO " + Koneksi.TABLE_NAME + " (status, jumlah, keterangan) VALUES (?, ?, ?)",
+                        new String[] {status, jumlah, keterangan}
+                );
 
                 toast("Data berhasil ditambahkan coyy!!!!");
                 finish();

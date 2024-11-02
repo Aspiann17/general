@@ -1,13 +1,13 @@
 package id.my.aspian.l009;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,6 +47,7 @@ public class UpdateActivity extends AppCompatActivity {
         Rdate = findViewById(R.id.date);
         Rstatus = findViewById(R.id.status);
 
+        date_picker(this, Rdate);
         findViewById(R.id.update).setOnClickListener(v -> update());
         Rstatus.setOnCheckedChangeListener((group, checkedId) -> {
             if (checkedId == R.id.masuk) status = "Masuk";
@@ -54,32 +55,25 @@ public class UpdateActivity extends AppCompatActivity {
         });
 
         init();
-
-        Rdate.setOnClickListener(v -> {
-            Calendar calendar = Calendar.getInstance();
-            DatePickerDialog date_picker = new DatePickerDialog(this, (view, year, month, dayOfMonth) -> {
-                NumberFormat DF = new DecimalFormat("00");
-                Rdate.setText(year + "-" + DF.format(month + 1) + "-" + DF.format(dayOfMonth));
-            }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-
-            date_picker.show();
-        });
     }
 
     public void update() {
-        if (status.isEmpty()) toast("Pilih Status!!");
-        else if (Rvalue.getText().toString().isEmpty()) toast("Isi Nilai");
-        else if (Rketerangan.getText().toString().isEmpty()) toast("Isi Keterangan");
-        else if (Rdate.getText().toString().isEmpty()) toast("Isi Keterangan");
+        String value = Rvalue.getText().toString();
+        String keterangan = Rketerangan.getText().toString();
+        String date = Rdate.getText().toString();
+
+        if (status.isEmpty()) MainActivity.toast(this, "Pilih Status!!");
+        else if (value.isEmpty()) MainActivity.toast(this, "Isi Nilai");
+        else if (keterangan.isEmpty()) MainActivity.toast(this, "Isi Keterangan");
+        else if (date.isEmpty()) MainActivity.toast(this, "Isi tanggal");
         else {
             SQLiteDatabase db = koneksi.getWritableDatabase();
-            String[] param = {
-                    status, Rvalue.getText().toString(), Rketerangan.getText().toString(),
-                    Rdate.getText().toString(), MainActivity.item_id
-            };
+            db.execSQL(
+                    "UPDATE " + Koneksi.TABLE_NAME + " SET status = ?, jumlah = ?, keterangan = ?, tanggal = ? WHERE id = ?",
+                    new String[] {status, value, keterangan, date}
+            );
 
-            db.execSQL("UPDATE " + Koneksi.TABLE_NAME + " SET status = ?, jumlah = ?, keterangan = ?, tanggal = ? WHERE id = ?", param);
-            toast("Data berhasil diubah?");
+            MainActivity.toast(this, "Data berhasil diubah");
             finish();
         }
     }
@@ -87,7 +81,7 @@ public class UpdateActivity extends AppCompatActivity {
     public void init() {
         SQLiteDatabase db = koneksi.getReadableDatabase();
         Cursor cursor = db.rawQuery(String.format(
-                "SELECT * FROM %s WHERE id = %s",
+                "SELECT * FROM %s WHERE id = '%s'",
                 Koneksi.TABLE_NAME, MainActivity.item_id
         ), null);
 
@@ -107,7 +101,16 @@ public class UpdateActivity extends AppCompatActivity {
         }
     }
 
-    public void toast(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    public static void date_picker(Context context, EditText object) {
+        Calendar calendar = Calendar.getInstance();
+        NumberFormat decimal_format = new DecimalFormat("00");
+
+        object.setOnClickListener(v -> {
+            DatePickerDialog date_dialog = new DatePickerDialog(context, (view, year, month, dayOfMonth) -> {
+                object.setText(year + "-" + decimal_format.format(month + 1) + "-" + decimal_format.format(dayOfMonth));
+            }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+
+            date_dialog.show();
+        });
     }
 }

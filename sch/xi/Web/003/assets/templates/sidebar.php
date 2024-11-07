@@ -24,7 +24,7 @@
         </div>
 
         <div class="sb-sidenav-footer">
-            <div class="small">Logged in as: <?= $_SESSION["username"] ?? "Guest" ?></div>
+            <div class="small">Logged in as: <?= $_SESSION["username"] ?? "Unknown" ?></div>
         </div>
     </nav>
 </div>

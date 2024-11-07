@@ -3,10 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <?= template("chead") ?>
-    <title>Penggajian</title>
-</head>
+<?= template("head", ["title" => "Penggajian - Dashboard"]) ?>
 
 <body class="sb-nav-fixed">
 

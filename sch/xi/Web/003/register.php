@@ -1,20 +1,19 @@
 <?php
 
 require "core/init.php";
-if (is_set("login", true)) header("location: index.php");
+if (is_set("login", true)) {
+    header("location: index.php");
+}
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <?= template("chead") ?>
-    <meta name="author" content="Muhamad Nauval Azhar">
-    <title>Register - Penggajian</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-</head>
+<?= template("head", [
+    "title" => "Penggajian - Register",
+    "author" => "Muhamad Nauval Azhar"
+]) ?>
 
 <body>
 

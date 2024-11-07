@@ -10,7 +10,7 @@ if (is_set("login", true)) {
 <!DOCTYPE html>
 <html lang="en">
 
-<?php if (!isset($_GET["theme"])): ?>
+<?php if (!isset($_GET["theme"])) : ?>
 
     <!-- https://github.com/nauvalazhar/bootstrap-5-login-page -->
 
@@ -97,9 +97,7 @@ if (is_set("login", true)) {
         <?= template("js") ?>
     </body>
 
-
-
-<?php elseif (is_set("theme", "1")): ?>
+<?php elseif (is_set("theme", "1")) : ?>
 
     <!-- https://github.com/bedimcode/animated-login-form -->
 

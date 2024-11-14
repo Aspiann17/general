@@ -23,17 +23,31 @@
 
                 <div class="mb-2">
                     <label for="" class="text-sm text-gray-500">Nama Produk</label>
-                    <input class="bg-gray-100 w-full" type="text" name="name">
+                    <input class="bg-gray-100 w-full" type="text" name="name" value="{{ old('name') }}">
+
+                    @error('name')
+                        <p class="text-sm text-red-500">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="mb-2">
                     <label for="" class="text-sm text-gray-500">Harga Produk</label>
-                    <input class="bg-gray-100 w-full" type="text" name="price">
+                    <input class="bg-gray-100 w-full" type="text" name="price" value="{{ old('price') }}">
+
+                    @error('price')
+                        <p class="text-sm text-red-500">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="mb-2">
                     <label class="text-sm text-gray-500">Deskrpsi Produk</label>
-                    <textarea class="bg-gray-100 w-full" type="text" name="description"></textarea>
+                    <textarea class="bg-gray-100 w-full" type="text" name="description">
+                        {{ old('description') }}
+                    </textarea>
+
+                    @error('description')
+                        <p class="text-sm text-red-500">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <button class="bg-blue-500 w-full p-3 text-gray-200" type="submit">Simpan Produk</button>
@@ -41,6 +55,14 @@
             </form>
         </section>
     </main>
+
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <?php flash()->flash('error', $error, [
+                'position' => 'bottom-right',
+            ]); ?>
+        @endforeach
+    @endif
 
 </body>
 

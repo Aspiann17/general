@@ -26,16 +26,30 @@
                 <div class="mb-2">
                     <label for="" class="text-sm text-gray-500">Nama Produk</label>
                     <input class="bg-gray-100 w-full" type="text" name="name" value="{{ $product->name }}">
+
+                    @error('name')
+                        <p class="text-sm text-red-500">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="mb-2">
                     <label for="" class="text-sm text-gray-500">Harga Produk</label>
                     <input class="bg-gray-100 w-full" type="text" name="price" value="{{ $product->price }}">
+
+                    @error('price')
+                        <p class="text-sm text-red-500">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="mb-2">
                     <label class="text-sm text-gray-500">Deskrpsi Produk</label>
-                    <textarea class="bg-gray-100 w-full" type="text" name="description">{{ $product->description }}</textarea>
+                    <textarea class="bg-gray-100 w-full" type="text" name="description">
+                        {{ $product->description }}
+                    </textarea>
+
+                    @error('description')
+                        <p class="text-sm text-red-500">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="flex justify-between gap-3">
@@ -63,6 +77,14 @@
             </form>
         </section>
     </main>
+
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <?php flash()->flash('error', $error, [
+                'position' => 'bottom-right',
+            ]); ?>
+        @endforeach
+    @endif
 
     <script>
         window.addEventListener("DOMContentLoaded", () => {

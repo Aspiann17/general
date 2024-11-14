@@ -12,10 +12,10 @@ class ProductController extends Controller
     {
         $products = Product::all();
 
-        flash()->options([
-            "timeout" => 61440,
-            "position" => "top-left"
-        ])->info("Halo!");
+        // flash()->options([
+        //     "timeout" => 61440,
+        //     "position" => "top-left"
+        // ])->info("Halo!");
 
         return view("product.index", [
             "products" => $products
@@ -29,6 +29,15 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            "name" => "required|unique:products|max:255",
+            "price" => "required|numeric",
+            "description" => "required|string"
+        ]);
+
+        // "name" => "required|unique:products|max:255",
+        // 'products' is table name
+
         $product = Product::create($request->all());
 
         flash()->success("$product->name berhasil ditambahkan");
@@ -50,6 +59,12 @@ class ProductController extends Controller
 
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            "name" => "required|string|max:255",
+            "price" => "required|numeric",
+            "description" => "required|string"
+        ]);
+
         $product = Product::findOrFail($id);
         $product->update($request->all());
 

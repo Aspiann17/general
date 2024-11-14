@@ -29,13 +29,13 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
-    ListView list_transaksi;
     SwipeRefreshLayout swipeRefresh;
-    String data_query, total_query;
-    TextView filter_indicator;
+    TextView filter_indicator, saldo, masuk, keluar;
+    ListView list_transaksi;
 
-    Koneksi koneksi;
     ArrayList<HashMap<String, String>> arus_kas = new ArrayList<>();
+    Koneksi koneksi;
+    String data_query, total_query;
 
     public static String tanggal_dari, tanggal_sampai = "";
     public static String item_id = "";
@@ -72,7 +72,14 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        findViewById(R.id.add).setOnClickListener(v -> startActivity(new Intent(this, AddActivity.class)));
+        findViewById(R.id.add).setOnClickListener(v -> {
+            startActivity(new Intent(this, AddActivity.class));
+        });
+
+        masuk = findViewById(R.id.pemasukan);
+        keluar = findViewById(R.id.pengeluaran);
+        saldo = findViewById(R.id.saldo);
+
         filter_indicator = findViewById(R.id.filter_indicator);
         filter_indicator.setVisibility(ListView.GONE);
 
@@ -193,20 +200,16 @@ public class MainActivity extends AppCompatActivity {
         SQLiteDatabase db = koneksi.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
-        if (cursor != null) cursor.moveToFirst();
+        if (cursor != null && cursor.moveToFirst()) {
+            double pemasukan = cursor.getDouble(1);
+            double pengeluaran = cursor.getDouble(2);
 
-        TextView masuk = findViewById(R.id.pemasukan);
-        TextView keluar = findViewById(R.id.pengeluaran);
-        TextView saldo = findViewById(R.id.saldo);
+            masuk.setText(String.valueOf(pemasukan));
+            keluar.setText(String.valueOf(pengeluaran));
+            saldo.setText(String.valueOf(pemasukan - pengeluaran));
 
-        double pemasukan = cursor != null ? cursor.getDouble(1) : 0;
-        double pengeluaran = cursor != null ? cursor.getDouble(2) : 0;
-
-        masuk.setText(String.valueOf(pemasukan));
-        keluar.setText(String.valueOf(pengeluaran));
-        saldo.setText(String.valueOf(pemasukan - pengeluaran));
-
-        if (cursor != null) cursor.close();
+            cursor.close();
+        }
     }
 
     public static void toast(Context context, String message) {

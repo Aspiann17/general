@@ -36,7 +36,7 @@ public class AddActivity extends AppCompatActivity {
             else if (checkedId == R.id.keluar) status = "Keluar";
         });
 
-        findViewById(R.id.save).setOnClickListener(v -> {
+        findViewById(R.id.simpan).setOnClickListener(v -> {
             String jumlah = Rvalue.getText().toString();
             String keterangan = Rketerangan.getText().toString();
 

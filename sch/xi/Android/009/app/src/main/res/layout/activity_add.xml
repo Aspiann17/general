@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     android:padding="20dp"
     tools:context=".AddActivity">
 
@@ -25,13 +26,15 @@
                 android:id="@+id/masuk"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Masuk" />
+                android:text="Masuk"
+                tools:ignore="HardcodedText" />
 
             <RadioButton
                 android:id="@+id/keluar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Keluar" />
+                android:text="Keluar"
+                tools:ignore="HardcodedText" />
 
         </RadioGroup>
 
@@ -53,7 +56,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Rp"
-                android:inputType="number" />
+                android:inputType="number"
+                tools:ignore="HardcodedText" />
 
             <EditText
                 android:id="@+id/keterangan"
@@ -62,15 +66,22 @@
                 android:gravity="top|start"
                 android:hint="Keterangan"
                 android:minLines="5"
-                android:maxLines="10" />
+                android:maxLines="10"
+                tools:ignore="HardcodedText" />
 
             <Button
-                android:id="@+id/save"
+                android:id="@+id/simpan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/blue"
+                android:backgroundTint="@color/primary"
                 android:text="Simpan"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                app:icon="@drawable/ic_add"
+                app:iconTint="@color/white"
+                app:iconGravity="end"
+                app:iconPadding="0dp"
+                style="@style/Widget.Material3.Button.ElevatedButton"
+                tools:ignore="HardcodedText" />
 
         </LinearLayout>
 

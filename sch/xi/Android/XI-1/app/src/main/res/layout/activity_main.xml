@@ -9,6 +9,14 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/primary"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
+        app:title="@string/app_name"
+        app:titleTextColor="@color/white" />
+
     <!-- Food -->
     <androidx.cardview.widget.CardView
         android:id="@+id/food_card"
@@ -42,19 +50,20 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:padding="2dp"
-                    android:text="Makanan"
-                    android:textColor="@color/black"
-                    android:textAppearance="?attr/textAppearanceHeadline6" />
+                    android:text="@string/none"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    android:textColor="@color/black" />
 
                 <TextView
+                    android:id="@+id/food_"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical|end"
                     android:padding="2dp"
                     android:text="@string/none"
-                    android:textColor="@color/black"
-                    android:textAppearance="?attr/textAppearanceBody2" />
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textColor="@color/black" />
 
             </LinearLayout>
 
@@ -95,9 +104,9 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:padding="2dp"
-                    android:text="Minuman"
-                    android:textColor="@color/black"
-                    android:textAppearance="?attr/textAppearanceHeadline6" />
+                    android:text="@string/none"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -106,8 +115,8 @@
                     android:gravity="center_vertical|end"
                     android:padding="2dp"
                     android:text="@string/none"
-                    android:textColor="@color/black"
-                    android:textAppearance="?attr/textAppearanceBody2" />
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textColor="@color/black" />
 
             </LinearLayout>
 

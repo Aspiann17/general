@@ -2,16 +2,15 @@ package id.my.aspian.u010;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
+import android.view.Window;
 import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     ListView list_category, list_transaction;
@@ -27,18 +26,22 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        // Toolbar
+        Window window = getWindow();
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.primary));
+
         list_transaction = findViewById(R.id.list_transaction);
 
-        Intent product_list = new Intent(this, ProductListActivity.class);
-
         findViewById(R.id.food_card).setOnClickListener(v -> {
-            product_list.putExtra("type", "food");
-            startActivity(product_list);
+            Intent intent = new Intent(this, ProductListActivity.class);
+            intent.putExtra("type", "food");
+            startActivity(intent);
         });
 
         findViewById(R.id.drink_card).setOnClickListener(v -> {
-            product_list.putExtra("type", "drink");
-            startActivity(product_list);
+            Intent intent = new Intent(this, ProductListActivity.class);
+            intent.putExtra("type", "drink");
+            startActivity(intent);
         });
     }
 }

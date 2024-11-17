@@ -1,54 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="50dp"
-    android:layout_gravity="center"
-    android:background="@color/white">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="@string/none"
-        android:textSize="50sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:textAlignment="center" />
-
-    <EditText
-        android:id="@+id/amount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Jumlah"
-        android:inputType="number"
-        android:textColor="#000000"
-        android:textColorHint="#A0A0A0" />
+    android:layout_gravity="center">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="20dp"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/close"
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:text="Close"/>
+        android:layout_gravity="center"
+        android:background="@color/white"
+        android:orientation="vertical">
 
         <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@color/primary" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/none"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
+            android:hint="Jumlah"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:textColor="#000000"
+            android:textColorHint="#A0A0A0" />
 
         <Button
             android:id="@+id/add"
-            android:layout_width="130dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tambah"/>
+            android:text="Tambah"
+            tools:ignore="HardcodedText" />
 
     </LinearLayout>
 
-</LinearLayout>
+</androidx.cardview.widget.CardView>

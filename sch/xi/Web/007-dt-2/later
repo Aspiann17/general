@@ -1,0 +1,2 @@
+// Kenapa pada database migration perubahannya dilakukan tiap
+// tahap dan tidak didrop dulu dan dibuat ulang.

@@ -16,9 +16,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
         return view('posts.index', [
-            'posts' => $posts
+            'posts' => Post::all()
         ]);
     }
 
@@ -50,9 +49,7 @@ class PostController extends Controller
 
         $creator->posts()->save($post);
 
-        flash()->success('Artikel berhasil ditambahkan');
-
-        return redirect()->route('posts.index')->with('success','miaw');
+        return redirect()->route('posts.index')->with('success','Artikel berhasil ditambahkan');
     }
 
     /**

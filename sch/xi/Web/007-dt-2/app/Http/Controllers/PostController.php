@@ -40,7 +40,7 @@ class PostController extends Controller
         ]);
 
         // add slug
-        $validated['slug'] = Str::slug($validated['title'], '_');
+        $validated['slug'] = Str::slug($validated['title'] . time(), '_');
 
         // get creator
         $creator = User::find(Auth::user()->id);
@@ -49,7 +49,7 @@ class PostController extends Controller
 
         $creator->posts()->save($post);
 
-        return redirect()->route('posts.index')->with('success','Artikel berhasil ditambahkan');
+        return redirect()->route('posts.index')->with('success', 'Artikel berhasil ditambahkan');
     }
 
     /**
@@ -57,7 +57,9 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view("posts.show", [
+            "post" => Post::find($id)
+        ]);
     }
 
     /**
@@ -73,7 +75,18 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        $validated = $request->validate([
+            "title" => "required|string",
+            "content" => "required|string"
+        ]);
+
+        $validated["slug"] = Str::slug($validated["title"] . "_" . time(), "_");
+
+        $post->update($validated);
+
+        return redirect()->route("posts.index")->with("success", "Data berhasil ditambahkan");
     }
 
     /**
@@ -81,6 +94,9 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $post->delete();
+
+        return redirect()->route('posts.index')->with('success', 'Data berhasil dihapus');
     }
 }

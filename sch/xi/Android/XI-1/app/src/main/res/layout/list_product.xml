@@ -100,7 +100,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="2dp"
-                    android:text="\u2605"
+                    android:text="@string/none"
                     android:textAlignment="textEnd"
                     android:textColor="@color/black"
                     android:textAppearance="?attr/textAppearanceBody2" />

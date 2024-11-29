@@ -15,7 +15,7 @@
                     Golongan
                 </a>
 
-                <a class="nav-link" href="register.php">
+                <a class="nav-link" href="penggajian.php">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     Penggajian
                 </a>

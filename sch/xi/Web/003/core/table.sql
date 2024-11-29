@@ -1,5 +1,5 @@
 -- User
-CREATE TABLE `users` (                 
+CREATE TABLE `users` (
     `username` varchar(255) NOT NULL,
     `email` text,
     `password` text NOT NULL,
@@ -8,7 +8,7 @@ CREATE TABLE `users` (
 
 -- Core
 CREATE TABLE golongan(
-    kode_golongan VARCHAR(5) PRIMARY KEY,
+    kode_golongan INTEGER PRIMARY KEY AUTO_INCREMENT,
     golongan VARCHAR(10),
     gaji_pokok BIGINT
 );

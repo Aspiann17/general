@@ -52,10 +52,7 @@ class ProductController extends Controller
         return view("product.show", ["product" => $product]);
     }
 
-    public function edit(string $id)
-    {
-        //
-    }
+    public function edit(string $id) {}
 
     public function update(Request $request, string $id)
     {
@@ -68,9 +65,8 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         $product->update($request->all());
 
-        flash()->success("Data berhasil diubah");
-
-        return redirect()->route("products.index");
+        // flash()->success("Data berhasil diubah");
+        return redirect()->route("products.index")->with('success', "Data berhasil diubah");
     }
 
     public function destroy(string $id)
@@ -79,7 +75,6 @@ class ProductController extends Controller
         $product->delete();
 
         flash()->success("Data telah berhasil dihapus!");
-
         return redirect()->route("products.index");
     }
 }

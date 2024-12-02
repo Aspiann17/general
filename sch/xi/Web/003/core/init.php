@@ -7,6 +7,7 @@ spl_autoload_register(function ($class) {
 
 require "koneksi.php";
 require "utils.php";
+require "vendor/autoload.php";
 
 // Start Sessions
 start();

@@ -14,7 +14,7 @@ php -S localhost:8000
 
 Database
 ```bash
-podman run -dp 3306:3306 --name sql -e MYSQL_ROOT_PASSWORD=ehe docker.io/percona:8
+podman run -dp 3306:3306 --name sql -e MYSQL_ROOT_PASSWORD=ehe docker.io/percona
 ```
 
 ## Link

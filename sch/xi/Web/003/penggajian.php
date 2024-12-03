@@ -3,12 +3,18 @@ require "core/init.php";
 check();
 
 $BULAN = [
-    "januari", "februari",
-    "maret", "april",
-    "mei", "juni",
-    "juli", "agustus",
-    "september", "oktober",
-    "november", "desember"
+    "januari",
+    "februari",
+    "maret",
+    "april",
+    "mei",
+    "juni",
+    "juli",
+    "agustus",
+    "september",
+    "oktober",
+    "november",
+    "desember"
 ];
 
 $stmt = $db->prepare("SELECT * FROM karyawan JOIN golongan ON karyawan.kode_golongan = golongan.kode_golongan");
@@ -19,6 +25,10 @@ $karyawan = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <!DOCTYPE html>
 <html lang="en">
 <?= template("head", ["title" => "Penggajian"]) ?>
+
+<script>
+    let gaji = []
+</script>
 
 <body class="sb-nav-fixed">
     <?= template("navbar") ?>
@@ -51,9 +61,13 @@ $karyawan = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <select class="form-control mb-2" name="karyawan_id" id="karyawan_id">
 
                                 <?php foreach ($karyawan as $k) : ?>
-                                    <option value="<?=$k['nip']?>">
-                                        <?=$k['nama']?> (Golongan: <?=$k['golongan']?>)
+                                    <option value="<?= $k['nip'] ?>">
+                                        <?= $k['nama'] ?> (Golongan: <?= $k['golongan'] ?>)
                                     </option>
+
+                                    <script>
+                                        gaji["<?= $k["nip"] ?>"] = <?= $k["gaji_pokok"] ?>
+                                    </script>
                                 <?php endforeach ?>
 
                             </select>
@@ -61,7 +75,7 @@ $karyawan = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <input type="hidden" name="golongan" id="golongan" value="III/A">
 
                             <label for="gaji_pokok">Gaji Pokok</label>
-                            <input type="number" name="gaji_pokok" id="gaji_pokok" class="form-control mb-2">
+                            <input type="number" name="gaji_pokok" value="2000" id="gaji_pokok" class="form-control mb-2" disabled>
 
                             <label for="tunjangan_jabatan">Tunjangan Jabatan</label>
                             <select class="form-control mb-2" name="tunjangan_jabatan" id="tunjangan_jabatan">
@@ -80,13 +94,13 @@ $karyawan = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             </select>
 
                             <label for="tunjangan_anak">Tunjangan Anak</label><br>
-                            <input class="form-check-input" type="radio" name="tunjangan_anak" value="0" id="anak_0">
+                            <input checked disabled class="form-check-input" type="radio" name="tunjangan_anak" value="0" id="anak_0">
                             <label for="anak_0">Tidak ada</label>
 
-                            <input class="form-check-input" type="radio" name="tunjangan_anak" value="200000" id="anak_1">
+                            <input disabled class="form-check-input" type="radio" name="tunjangan_anak" value="200000" id="anak_1">
                             <label for="anak_1">1 Anak</label>
 
-                            <input class="form-check-input" type="radio" name="tunjangan_anak" value="400000" id="anak_2">
+                            <input disabled class="form-check-input" type="radio" name="tunjangan_anak" value="400000" id="anak_2">
                             <label for="anak_2">2 Anak</label>
 
                             <hr>
@@ -129,7 +143,7 @@ $karyawan = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 </tr>
                             </table>
 
-                            <button type="button" class="form-control btn btn-primary mt-1 text-white" onclick="hitung()">Hitung Pendapatan</button>
+                            <button id="calculate" type="button" class="form-control btn btn-primary mt-1 text-white" onclick="hitung()">Hitung Pendapatan</button>
                             <!-- <input type="submit" class="form-control btn btn-success mb-3 mt-1" value="Buat Slip"> -->
                         </form>
                     </div>
@@ -180,6 +194,58 @@ $karyawan = $stmt->fetchAll(PDO::FETCH_ASSOC);
             document.getElementById("pajak").value = "Rp." + (new Intl.NumberFormat().format(potongan));
             document.getElementById("gaji_bersih").value = "Rp." + (new Intl.NumberFormat().format(bersih));
         }
+    </script>
+
+    <script>
+        let tunjangan_jabatan = document.getElementById("tunjangan_jabatan")
+        let tunjangan_menikah = document.getElementById("tunjangan_nikah")
+        let tunjangan_anak = document.querySelector("input[name='tunjangan_anak']:checked")
+        let gaji_pokok = document.getElementById("gaji_pokok")
+        let golongan = document.getElementById("golongan")
+        let bersih = pendapatan = potongan = 0
+        const bpjs = 34000;
+
+        let output = [];
+
+        tunjangan_menikah.addEventListener("change", () => {
+            document.querySelectorAll("input[name='tunjangan_anak']").forEach((radio) => {
+                radio.disabled = tunjangan_menikah.value === "0"
+            })
+
+            document.getElementById("anak_0").checked = true
+        })
+
+        document.getElementById("calculate").addEventListener("click", () => {
+            gaji_pokok = parseInt(gaji_pokok.value) || 0
+            // golongan = golongan.value || 0
+            tunjangan_jabatan = parseInt(tunjangan_jabatan.value) || 0
+            tunjangan_menikah = parseInt(tunjangan_menikah.value) || 0
+            tunjangan_anak = parseInt(tunjangan_anak.value) || 0
+            pendapatan = Number(gaji_pokok + tunjangan_jabatan + tunjangan_menikah + tunjangan_anak)
+
+            switch (golongan.value.split("/")[0]) {
+                case "III":
+                    bersih = pendapatan - ((pendapatan * 0.05) + bpjs)
+                    break
+                case "IV":
+                    bersih = pendapatan - ((pendapatan * 0.15) + bpjs)
+                    break
+            }
+
+            [
+                ["gaji", gaji_pokok],
+                ["jabatan", tunjangan_jabatan],
+                ["nikah", tunjangan_menikah],
+                ["anak", tunjangan_anak],
+                ["bpjs", bpjs],
+                ["pajak", potongan],
+                ["gaji_bersih", bersih]
+            ].forEach(([key, value]) => {
+                output[key] = new Intl.NumberFormat("id-ID").format(value)
+            })
+
+            console.log(output)
+        })
     </script>
 </body>
 

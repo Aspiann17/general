@@ -18,7 +18,7 @@ CREATE TABLE karyawan (
     nama VARCHAR(50),
     alamat TEXT,
     jk VARCHAR(1),
-    kode_golongan VARCHAR(5),
+    kode_golongan INTEGER,
     FOREIGN KEY (`kode_golongan`) REFERENCES `golongan` (`kode_golongan`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 

@@ -47,7 +47,7 @@ $karyawan = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </div>
 
                     <div class="card-body">
-                        <form action="php/print_pdf.php" method="POST">
+                        <form action="" method="POST">
                             <label for="bulan">Bulan</label>
                             <select name="bulan" class="form-control mb-2" id="bulan">
                                 <?php foreach ($BULAN as $b) : ?>
@@ -144,7 +144,7 @@ $karyawan = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             </table>
 
                             <button id="calculate" type="button" class="form-control btn btn-primary mt-1 text-white" onclick="hitung()">Hitung Pendapatan</button>
-                            <!-- <input type="submit" class="form-control btn btn-success mb-3 mt-1" value="Buat Slip"> -->
+                            <button id="slip" type="submit" class="form-control btn btn-success mb-3 mt-1" name="action" value="dompdf" hidden>Buat Slip</button>
                         </form>
                     </div>
 
@@ -159,9 +159,13 @@ $karyawan = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?= template("js") ?>
     <script>
         function hitung() {
+            document.getElementById("slip").hidden = false
+            
             const formater = Intl.NumberFormat("id-ID", {
                 style: "currency",
-                currency: "IDR"
+                currency: "IDR",
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
             })
 
             // if it works don't touch it

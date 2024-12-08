@@ -5,8 +5,8 @@ spl_autoload_register(function ($class) {
     require_once __DIR__ . "/classes/$class.php";
 });
 
-require "koneksi.php";
-require "utils.php";
+require __DIR__ . "/koneksi.php";
+require __DIR__ . "/utils.php";
 require __DIR__ . "/../vendor/autoload.php";
 
 use Dompdf\Dompdf;

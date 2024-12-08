@@ -26,11 +26,11 @@ $karyawan = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <html lang="en">
 <?= template("head", ["title" => "Penggajian"]) ?>
 
-<script>
-    let gaji = []
-</script>
-
 <body class="sb-nav-fixed">
+    <script>
+        let gaji = []
+    </script>
+
     <?= template("navbar") ?>
 
     <div id="layoutSidenav">
@@ -42,7 +42,7 @@ $karyawan = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="container px-4 mt-4">
                 <h3>Penggajian Karyawan</h3><br>
                 <div class="card">
-                    <div class="card-header bg-secondary text-light">
+                    <div class="card-header bg-primary text-light">
                         Buat Slip Gaji
                     </div>
 
@@ -160,7 +160,7 @@ $karyawan = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <script>
         function hitung() {
             document.getElementById("slip").hidden = false
-            
+
             const formater = Intl.NumberFormat("id-ID", {
                 style: "currency",
                 currency: "IDR",
@@ -221,8 +221,11 @@ $karyawan = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </script>
 
     <script>
+        const karyawan_id = document.getElementById("karyawan_id")
+        const gaji_pokok = document.getElementById("gaji_pokok")
         const radio_anak = document.querySelectorAll("input[name='tunjangan_anak']")
-        let tunjangan_menikah = document.getElementById("tunjangan_nikah")
+        const tunjangan_menikah = document.getElementById("tunjangan_nikah")
+
         tunjangan_menikah.addEventListener("change", () => {
 
             // disable radio tunjangan anak jika belum menikah
@@ -235,14 +238,13 @@ $karyawan = $stmt->fetchAll(PDO::FETCH_ASSOC);
             document.getElementById("anak_0").checked = true
         })
 
-        // // mengambil value berdasarkan jumlah anak
-        // radio_anak.forEach((radio) => {
-        //     radio.checked = false
 
-        //     radio.addEventListener("click", () => {
-        //         tunjangan_anak = parseInt(radio.value)
-        //     })
-        // })
+        // mengatur agar gaji pokok berubah sesuai dengan karyawan
+        karyawan_id.addEventListener("change", () => {
+            gaji_pokok.value = gaji[karyawan_id.value] || 0
+        })
+
+        karyawan_id.dispatchEvent(new Event("change"))
     </script>
 </body>
 

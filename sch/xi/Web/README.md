@@ -14,11 +14,5 @@ php -S localhost:8000
 
 Database
 ```bash
-podman run -dp 3306:3306 --name sql -e MYSQL_ROOT_PASSWORD=ehe docker.io/percona
+podman run -dp 3306:3306 --name sql -e MYSQL_ROOT_PASSWORD=root docker.io/percona:latest
 ```
-
-## Link
-https://github.com/twbs/bootstrap/releases/download/v5.3.3/bootstrap-5.3.3-dist.zip
-
-# Code
-- [PHP RFC: Argument Unpacking](https://wiki.php.net/rfc/argument_unpacking)

@@ -75,7 +75,7 @@ $karyawan = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <input type="hidden" name="golongan" id="golongan" value="III/A">
 
                             <label for="gaji_pokok">Gaji Pokok</label>
-                            <input type="number" name="gaji_pokok" value="2000" id="gaji_pokok" class="form-control mb-2" disabled>
+                            <input value="2000" type="number" name="gaji_pokok" id="gaji_pokok" class="form-control mb-2" disabled>
 
                             <label for="tunjangan_jabatan">Tunjangan Jabatan</label>
                             <select class="form-control mb-2" name="tunjangan_jabatan" id="tunjangan_jabatan">
@@ -159,6 +159,13 @@ $karyawan = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?= template("js") ?>
     <script>
         function hitung() {
+            const formater = Intl.NumberFormat("id-ID", {
+                style: "currency",
+                currency: "IDR"
+            })
+
+            // if it works don't touch it
+            /// start
             let golongan = document.getElementById("golongan").value;
             let gapok = parseInt(document.getElementById("gaji_pokok").value);
             let tunjab = parseInt(document.getElementById("tunjangan_jabatan").value);
@@ -186,66 +193,52 @@ $karyawan = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 bersih = pendapatan - (potongan + bpjs);
             }
 
-            document.getElementById("gaji").value = "Rp." + (new Intl.NumberFormat().format(gapok));
-            document.getElementById("jabatan").value = "Rp." + (new Intl.NumberFormat().format(tunjab));
-            document.getElementById("nikah").value = "Rp." + (new Intl.NumberFormat().format(tunjangan1));
-            document.getElementById("anak").value = "Rp." + (new Intl.NumberFormat().format(tunjangan2));
-            document.getElementById("bpjs").value = "Rp." + (new Intl.NumberFormat().format(bpjs));
-            document.getElementById("pajak").value = "Rp." + (new Intl.NumberFormat().format(potongan));
-            document.getElementById("gaji_bersih").value = "Rp." + (new Intl.NumberFormat().format(bersih));
+            // document.getElementById("gaji").value = "Rp." + (new Intl.NumberFormat().format(gapok));
+            // document.getElementById("jabatan").value = "Rp." + (new Intl.NumberFormat().format(tunjab));
+            // document.getElementById("nikah").value = "Rp." + (new Intl.NumberFormat().format(tunjangan1));
+            // document.getElementById("anak").value = "Rp." + (new Intl.NumberFormat().format(tunjangan2));
+            // document.getElementById("bpjs").value = "Rp." + (new Intl.NumberFormat().format(bpjs));
+            // document.getElementById("pajak").value = "Rp." + (new Intl.NumberFormat().format(potongan));
+            // document.getElementById("gaji_bersih").value = "Rp." + (new Intl.NumberFormat().format(bersih));
+            /// end
+
+            [
+                ["gaji", gapok],
+                ["jabatan", tunjab],
+                ["nikah", tunjangan1],
+                ["anak", tunjangan2],
+                ["bpjs", bpjs],
+                ["pajak", potongan],
+                ["gaji_bersih", bersih]
+            ].forEach(([element_id, value]) => {
+                document.getElementById(element_id).value = formater.format(value)
+            })
         }
     </script>
 
     <script>
-        let tunjangan_jabatan = document.getElementById("tunjangan_jabatan")
+        const radio_anak = document.querySelectorAll("input[name='tunjangan_anak']")
         let tunjangan_menikah = document.getElementById("tunjangan_nikah")
-        let tunjangan_anak = document.querySelector("input[name='tunjangan_anak']:checked")
-        let gaji_pokok = document.getElementById("gaji_pokok")
-        let golongan = document.getElementById("golongan")
-        let bersih = pendapatan = potongan = 0
-        const bpjs = 34000;
-
-        let output = [];
-
         tunjangan_menikah.addEventListener("change", () => {
-            document.querySelectorAll("input[name='tunjangan_anak']").forEach((radio) => {
+
+            // disable radio tunjangan anak jika belum menikah
+            radio_anak.forEach((radio) => {
                 radio.disabled = tunjangan_menikah.value === "0"
             })
 
+            // mengatur agar radio 'Tidak ada' dipilih secara
+            // otomatis ketika status pernikahan berubah
             document.getElementById("anak_0").checked = true
         })
 
-        document.getElementById("calculate").addEventListener("click", () => {
-            gaji_pokok = parseInt(gaji_pokok.value) || 0
-            // golongan = golongan.value || 0
-            tunjangan_jabatan = parseInt(tunjangan_jabatan.value) || 0
-            tunjangan_menikah = parseInt(tunjangan_menikah.value) || 0
-            tunjangan_anak = parseInt(tunjangan_anak.value) || 0
-            pendapatan = Number(gaji_pokok + tunjangan_jabatan + tunjangan_menikah + tunjangan_anak)
+        // // mengambil value berdasarkan jumlah anak
+        // radio_anak.forEach((radio) => {
+        //     radio.checked = false
 
-            switch (golongan.value.split("/")[0]) {
-                case "III":
-                    bersih = pendapatan - ((pendapatan * 0.05) + bpjs)
-                    break
-                case "IV":
-                    bersih = pendapatan - ((pendapatan * 0.15) + bpjs)
-                    break
-            }
-
-            [
-                ["gaji", gaji_pokok],
-                ["jabatan", tunjangan_jabatan],
-                ["nikah", tunjangan_menikah],
-                ["anak", tunjangan_anak],
-                ["bpjs", bpjs],
-                ["pajak", potongan],
-                ["gaji_bersih", bersih]
-            ].forEach(([key, value]) => {
-                output[key] = new Intl.NumberFormat("id-ID").format(value)
-            })
-
-            console.log(output)
-        })
+        //     radio.addEventListener("click", () => {
+        //         tunjangan_anak = parseInt(radio.value)
+        //     })
+        // })
     </script>
 </body>
 

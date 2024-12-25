@@ -1,3 +1,6 @@
+# Important
+- https://stackoverflow.com/questions/64382564/how-i-fix-nothing-to-show-in-my-vector-asset-in-android-studio
+
 # Style
 ## Atribut Style
 Semisal saya memiliki beberapa/banyak edit text seperti dibawah 

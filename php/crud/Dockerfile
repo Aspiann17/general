@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     php8.2 \
     php8.2-sqlite3 \
     apache2 \
-    libapache2-mod-php8.2 \
+    libapache2-mod-php8.2 && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /var/www/html/*
 
